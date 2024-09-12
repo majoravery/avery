@@ -3,7 +3,7 @@
 </div>
 
 <style>
-	.smiley {
+	div.smiley {
 		display: block;
 		height: 100%;
 		overflow: visible;
@@ -17,21 +17,22 @@
 		animation-name: rotate;
 		animation-timing-function: linear;
 		border-radius: 50%;
+		bottom: 0;
 		clip-path: circle(50% at 50% 50%);
 		cursor: crosshair;
-		position: relative;
-		bottom: 0;
-		right: 0;
+		height: 100%;
 		left: 0;
+		position: relative;
+		right: 0;
 		top: 0;
 		width: 100%;
-		height: 100%;
 	}
 
 	div.head::before {
 		content: '';
 		background-image: url('/images/smiley.png');
 		background-position: center;
+		background-repeat: no-repeat;
 		background-size: contain;
 		bottom: 0;
 		height: 100%;
@@ -42,7 +43,7 @@
 		width: 100%;
 	}
 
-	div.head::before:hover {
+	div.head:hover {
 		animation-play-state: paused;
 	}
 

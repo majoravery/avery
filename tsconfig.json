@@ -10,7 +10,7 @@
 		"sourceMap": true,
 		"strict": true,
 		"moduleResolution": "bundler",
-		"rootDirs": [".", "./.svelte-kit/types"]
+		"rootDirs": [".", "./.svelte-kit/types", "./node_modules/gsap/types"]
 
 	}
 	// Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias

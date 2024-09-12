@@ -53,7 +53,7 @@
 	div.block {
 		background: rgb(255, 255, 255);
 		border-radius: var(--border-radius-l);
-		overflow: hidden;
+		/* overflow: hidden; */
 		padding: 1.5rem;
 		position: relative;
 	}
