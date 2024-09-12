@@ -1,21 +1,59 @@
-clock
+<script lang="ts">
+	import { time } from '$lib/stores/time';
 
-<!-- <div class="clocks">
-	<div class="clock">
+	let hourSin: string, minuteSin: string;
+	let hourFuk: string, minuteFuk: string;
+	let hourBer: string, minuteBer: string;
+
+	$: {
+		function getTimeInTimeZone(timeZone: string): string[] {
+			return new Intl.DateTimeFormat('en', {
+				timeZone,
+				hour: '2-digit',
+				minute: '2-digit',
+				hour12: false
+			})
+				.format($time)
+				.split(':');
+		}
+
+		const timeSin = getTimeInTimeZone('Asia/Singapore');
+		hourSin = timeSin[0];
+		minuteSin = timeSin[1];
+
+		const timeFuk = getTimeInTimeZone('Asia/Tokyo');
+		hourFuk = timeFuk[0];
+		minuteFuk = timeFuk[1];
+
+		const timeBer = getTimeInTimeZone('Europe/Berlin');
+		hourBer = timeBer[0];
+		minuteBer = timeBer[1];
+	}
+</script>
+
+<div class="clocks">
+	<div class={`clock ${parseInt(hourSin, 10) > 22 && parseInt(hourSin, 10) < 7 ? 'night' : 'day'}`}>
+		<span class="city">SIN</span>
 		<div class="time">
-			<span>11:53</span>
-			<span class="minute">53</span>
+			<span class="hour">{hourSin}</span>
+			<span class="minute">{minuteSin}</span>
 		</div>
-		<span class="city">Singapore</span>
 	</div>
-	<div class="clock">
+	<div class={`clock ${parseInt(hourFuk, 10) > 18 && parseInt(hourFuk, 10) < 7 ? 'night' : 'day'}`}>
+		<span class="city">FUK</span>
 		<div class="time">
-			<span class="hour">02:53</span>
-			<span class="minute">52</span>
+			<span class="hour">{hourFuk}</span>
+			<span class="minute">{minuteFuk}</span>
 		</div>
-		<span class="city">Fukuoka</span>
 	</div>
-</div> -->
+	<div class={`clock ${parseInt(hourBer, 10) > 18 && parseInt(hourBer, 10) < 7 ? 'night' : 'day'}`}>
+		<span class="city">BER</span>
+		<div class="time">
+			<span class="hour">{hourBer}</span>
+			<span class="minute">{minuteBer}</span>
+		</div>
+	</div>
+</div>
 
 <style>
 	div.clocks {
@@ -25,20 +63,33 @@ clock
 	}
 
 	div.clock {
-		background-color: var(--color-filler);
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 		border-radius: var(--border-radius-s);
 		padding: 0.5rem;
 		width: 100%;
 	}
 
-	div.time span {
+	div.clock.day {
+		background-color: var(--color-filler);
+		color: var(--color-background);
+	}
+
+	div.clock.night {
+		background-color: var(--color-background);
+		color: var(--color-filler);
+	}
+
+	span.hour,
+	span.minute {
 		display: block;
 		font-family: 'JetBrains Mono', monospace;
 		font-optical-sizing: auto;
-		font-weight: 300;
 		font-size: 2rem;
-		line-height: 1.8rem;
 		font-style: normal;
+		font-weight: 300;
+		line-height: 1.8rem;
 		text-align: center;
 	}
 
@@ -46,8 +97,8 @@ clock
 		display: block;
 		font-family: 'JetBrains Mono', monospace;
 		font-optical-sizing: auto;
-		font-weight: 300;
 		font-style: normal;
+		font-weight: 300;
 		text-align: center;
 	}
 </style>
