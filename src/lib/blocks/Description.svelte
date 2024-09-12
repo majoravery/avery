@@ -19,5 +19,6 @@
 		font-weight: 400;
 		font-style: normal;
 		font-size: 0.85rem;
+		line-height: 1.1rem;
 	}
 </style>

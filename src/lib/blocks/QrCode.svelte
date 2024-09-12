@@ -11,6 +11,7 @@
 		content: '';
 		background-image: url('images/qr.png');
 		background-position: center;
+		background-repeat: no-repeat;
 		background-size: contain;
 		bottom: 0;
 		left: 0;

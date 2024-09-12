@@ -6,7 +6,7 @@
 function* genSquare() {
 	while (true) {
 		yield 'Marquee';
-		yield 'Note';
+		yield 'ProjectShowcase';
 	}
 }
 

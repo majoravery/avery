@@ -29,6 +29,7 @@ export class Grid {
 
 		this.flattenedGrid = this.initFlattenedGrid();
 		this.placedBlocks = this.placeBlocks(this.initialBlocks);
+		this.setStyleVars();
 	}
 
 	initFlattenedGrid(): Set<number> {
@@ -200,5 +201,21 @@ export class Grid {
 		});
 
 		return canBlockFit;
+	}
+
+	setStyleVars() {
+		const root = document.documentElement;
+		if (!root) throw new Error('document.documentElement not found');
+
+		// All in rem units
+		const gridMargin = 2.4;
+		const gap = 0.25;
+
+		root.style.setProperty(
+			'--cell-unit-dimension',
+			`calc((100vw - ${gridMargin * 2}rem - ${gap * canvasDimensions.width - 2}rem) / ${canvasDimensions.width})`
+		);
+		root.style.setProperty('--grid-margin', `${gridMargin}rem`);
+		root.style.setProperty('--grid-gap', `${gap}rem`);
 	}
 }

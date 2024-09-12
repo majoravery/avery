@@ -16,7 +16,8 @@
 		box-sizing: border-box;
 		background-color: var(--color-background);
 		height: 100%;
-		padding: 40px;
+		min-height: 100vh;
+		padding: var(--grid-margin);
 		width: 100%;
 	}
 </style>

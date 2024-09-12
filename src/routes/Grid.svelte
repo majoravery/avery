@@ -9,12 +9,14 @@
 </script>
 
 <section>
+	<!-- The 3rem subtracted from min-height accounts for the vertical block padding -->
 	{#each blocks as block}
 		<div
 			class="block"
 			style:grid-column={`${block.x} / span ${block.width}`}
 			style:grid-row={`${block.y} / span ${block.height}`}
 			style:padding-bottom={`(${block.height} / ${block.width} * 100)%`}
+			style:min-height={`calc(${block.height} * var(--cell-unit-dimension) - 3rem)`}
 		>
 			{#if $isDebugMode}
 				width: {block.width}<br />
@@ -38,7 +40,7 @@
 
 		/* TODO: this needs to change depending on desktop or mobile */
 		display: grid;
-		gap: 0.25rem;
+		gap: var(--grid-gap);
 		grid-template-columns: var(--grid-columns);
 		grid-template-rows: var(--grid-rows);
 		height: var(--container-height);
@@ -50,7 +52,7 @@
 
 	div.block {
 		background: rgb(255, 255, 255);
-		border-radius: 0.75rem;
+		border-radius: var(--border-radius-l);
 		overflow: hidden;
 		padding: 1.5rem;
 		position: relative;
