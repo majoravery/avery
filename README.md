@@ -26,3 +26,14 @@ pnpm run build
 You can preview the production build with `pnpm run preview`.
 
 This app is deployed to averylim.com via [Render](todo-add-url), so simply pushing to the main branch will trigger the deployment.
+
+## Roadmap
+
+Language switcher
+
+- [ ] add locale to url
+- [ ] actually change language
+
+Weather
+
+- [ ] draw other weather svgs

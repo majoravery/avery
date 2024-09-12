@@ -1,19 +1,21 @@
-<div class="clocks">
+clock
+
+<!-- <div class="clocks">
 	<div class="clock">
 		<div class="time">
 			<span>11:53</span>
-			<!-- <span class="minute">53</span> -->
+			<span class="minute">53</span>
 		</div>
 		<span class="city">Singapore</span>
 	</div>
 	<div class="clock">
 		<div class="time">
 			<span class="hour">02:53</span>
-			<!-- <span class="minute">52</span> -->
+			<span class="minute">52</span>
 		</div>
 		<span class="city">Fukuoka</span>
 	</div>
-</div>
+</div> -->
 
 <style>
 	div.clocks {
