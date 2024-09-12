@@ -20,8 +20,11 @@ declare global {
 	}
 
 	interface Block extends Dimensions, Position {
-		displayOnMobile?: boolean;
+		type: BlockType;
+		// displayOnMobile?: boolean;
 	}
+
+	type BlockType = 'square' | 'wide' | 'tall' | 'long' | 'single';
 }
 
 export {};

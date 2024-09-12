@@ -46,7 +46,7 @@ export class Grid {
 					? this.getGridPositionForMultiCellBlock(block)
 					: this.getGridPositionForSingleCellBlock();
 			return {
-				...block, // width and height
+				...block, // type, width and height
 				...position // x and y
 			};
 		});
@@ -88,30 +88,30 @@ export class Grid {
 			n++;
 
 			gridPosition = this.getRandomPositionOnGrid();
-			if (isDebugMode) {
-				console.log(
-					`Trying to place ${block.width}x${block.height} block at ${gridPosition[0]}, ${gridPosition[0]}...`
-				);
-			}
+			// if (isDebugMode) {
+			// 	console.log(
+			// 		`Trying to place ${block.width}x${block.height} block at ${gridPosition[0]}, ${gridPosition[0]}...`
+			// 	);
+			// }
 
 			occupiedIndices = this.getBlockCells(block, gridPosition);
 			if (typeof occupiedIndices === 'boolean' && !occupiedIndices) {
-				if (isDebugMode) {
-					console.warn(
-						`Exceeded canvas boundaries when placing ${block.width}x${block.height} block (try: ${n})`
-					);
-				}
+				// if (isDebugMode) {
+				// 	console.warn(
+				// 		`Exceeded canvas boundaries when placing ${block.width}x${block.height} block (try: ${n})`
+				// 	);
+				// }
 				continue;
 			}
-			if (isDebugMode) {
-				console.log({ occupiedIndices });
-			}
+			// if (isDebugMode) {
+			// 	console.log({ occupiedIndices });
+			// }
 
 			// TODO: rewrite this so occupiedIndices is just number[]
 			canBlockFit = this.canBlockFitOnGrid(occupiedIndices as number[]);
-			if (isDebugMode) {
-				console.log({ canBlockFit });
-			}
+			// if (isDebugMode) {
+			// 	console.log({ canBlockFit });
+			// }
 
 			if (canBlockFit) {
 				(occupiedIndices as number[]).forEach((index) => this.flattenedGrid.delete(index));
