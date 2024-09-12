@@ -67,7 +67,7 @@
 		flex-direction: column;
 		justify-content: space-between;
 		border-radius: var(--border-radius-s);
-		padding: 0.5rem;
+		padding: 0.8rem 0.5rem;
 		width: 100%;
 	}
 

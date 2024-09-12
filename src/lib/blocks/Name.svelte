@@ -12,7 +12,7 @@
 	span {
 		color: var(--color-accent);
 		font-family: 'soriasoria';
-		font-size: 3rem;
+		font-size: 4rem;
 		line-height: 2rem;
 	}
 </style>

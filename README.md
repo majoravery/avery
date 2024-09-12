@@ -1,10 +1,10 @@
 # averylim.com
 
-<Description of site>
+[Description of site]
 
-<Screenshot of site>>
+[Screenshot of site]
 
-_As of <date of screenshot>_
+_As of [date of screenshot]_
 
 ## Developing
 
@@ -28,6 +28,8 @@ You can preview the production build with `pnpm run preview`.
 This app is deployed to averylim.com via [Render](todo-add-url), so simply pushing to the main branch will trigger the deployment.
 
 ## Roadmap
+
+- [ ] Render an SEO friendly page for SSR
 
 Language switcher
 
