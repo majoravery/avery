@@ -19,12 +19,39 @@ declare global {
 		y?: number;
 	}
 
+	type BlockType = 'square' | 'wide' | 'tall' | 'long' | 'single';
+	type BlockContent =
+		| 'Marquee'
+		| 'ProjectShowcase'
+		| 'Weather'
+		| 'Name'
+		| 'Clock'
+		| 'Stats'
+		| 'Description'
+		| 'Contact'
+		| 'Language'
+		| 'QrCode'
+		| 'Smiley'
+		| 'UseDesktop'
+		| 'Wave'
+		| 'Pattern'
+		| 'Filler';
+
 	interface Block extends Dimensions, Position {
 		type: BlockType;
-		// displayOnMobile?: boolean;
 	}
 
-	type BlockType = 'square' | 'wide' | 'tall' | 'long' | 'single';
+	interface BlockWithContent extends Block {
+		content: BlockContent;
+	}
+
+	interface Canvas extends Dimensions {
+		blocks: BlockWithContent[];
+	}
+
+	type Breakpoint = number;
+
+	type CanvasTypes = Record<Breakpoint, Canvas>;
 }
 
 export {};

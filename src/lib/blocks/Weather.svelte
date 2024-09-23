@@ -38,7 +38,7 @@
 		opacity: 0.9;
 		position: absolute;
 		top: -3rem;
-		width: var(--cell-unit-dimension);
+		width: var(--block-size);
 		z-index: 1;
 	}
 

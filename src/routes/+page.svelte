@@ -13,11 +13,25 @@
 
 <style>
 	main {
-		box-sizing: border-box;
 		background-color: var(--color-background);
+		box-sizing: border-box;
+		display: flex;
 		height: 100%;
+		justify-content: center;
 		min-height: 100vh;
-		padding: var(--grid-margin);
+		padding: 16px;
 		width: 100%;
+	}
+
+	@media (min-width: 480px) {
+		main {
+			padding: 24px;
+		}
+	}
+
+	@media (min-width: 768px) {
+		main {
+			padding: 36px;
+		}
 	}
 </style>

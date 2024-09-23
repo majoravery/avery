@@ -1,8 +1,6 @@
-import { CANVAS_DIMENSIONS_DESKTOP } from '$lib/constants';
 import { getRandomInt } from '$lib/utils';
-import { isDebugMode } from '$lib/stores/debugMode';
-
-const canvasDimensions = CANVAS_DIMENSIONS_DESKTOP;
+import { CANVAS_TYPES } from './constants';
+// import { isDebugMode } from '$lib/stores/debugMode';
 
 /**
  * Method:
@@ -18,29 +16,44 @@ const canvasDimensions = CANVAS_DIMENSIONS_DESKTOP;
  */
 
 export class Grid {
-	canvasDimensions: Dimensions;
-	flattenedGrid: Set<number>;
-	initialBlocks: Block[];
+	breakpoint: number;
+	canvas: Canvas;
+	flattenedGrid: Set<number> = new Set();
 	placedBlocks: Block[] = [];
 
-	constructor(canvasDimensions: Dimensions, initialBlocks: Block[]) {
-		this.canvasDimensions = canvasDimensions;
-		this.initialBlocks = initialBlocks;
+	constructor(breakpoint: number) {
+		this.breakpoint = breakpoint;
+		this.canvas = CANVAS_TYPES[breakpoint];
 
+		this.init();
+	}
+
+	init() {
 		this.flattenedGrid = this.initFlattenedGrid();
-		this.placedBlocks = this.placeBlocks(this.initialBlocks);
-		this.setStyleVars();
+		this.placedBlocks = this.placeBlocks(this.canvas.blocks);
 	}
 
 	initFlattenedGrid(): Set<number> {
 		const fg = new Set<number>();
-		for (let i = 0; i < canvasDimensions.width * canvasDimensions.height; i++) {
+		for (let i = 0; i < this.canvas.width * this.canvas.height; i++) {
 			fg.add(i);
 		}
 		return fg;
 	}
 
-	placeBlocks(blocks: Block[]) {
+	getCurrentBreakpoint(): number {
+		return this.breakpoint;
+	}
+
+	setBreakpoint(breakpoint: number): Grid {
+		this.breakpoint = breakpoint;
+		this.canvas = CANVAS_TYPES[breakpoint];
+
+		this.init();
+		return this;
+	}
+
+	placeBlocks(blocks: Block[]): Block[] {
 		return blocks.map((block) => {
 			const position =
 				block.width * block.height !== 1
@@ -74,7 +87,7 @@ export class Grid {
 	}
 
 	getGridPositionFromIndex(index: number): [number, number] {
-		return [index % this.canvasDimensions.width, Math.floor(index / this.canvasDimensions.width)];
+		return [index % this.canvas.width, Math.floor(index / this.canvas.width)];
 	}
 
 	getGridPositionForMultiCellBlock(block: Block): Position {
@@ -130,10 +143,7 @@ export class Grid {
 	}
 
 	getRandomPositionOnGrid(): [number, number] {
-		return [
-			getRandomInt(0, this.canvasDimensions.width - 1),
-			getRandomInt(0, this.canvasDimensions.height - 1)
-		];
+		return [getRandomInt(0, this.canvas.width - 1), getRandomInt(0, this.canvas.height - 1)];
 	}
 
 	// TODO: don't exactly know how this function works again but I'll just leave it for now
@@ -141,12 +151,12 @@ export class Grid {
 	getBlockCells(block: Block, gridPosition: [number, number]): boolean | number[] {
 		if (!gridPosition) throw new Error('getBlockCells: gridPosition not found');
 		if (!block) throw new Error('getBlockCells: block not found');
-		if (!canvasDimensions) throw new Error('getBlockCells: canvasDimensions not found');
+		if (!this.canvas) throw new Error('getBlockCells: canvasDimensions not found');
 
 		const [cursorX, cursorY] = gridPosition;
 
 		// Cursors for multi-cell blocks shouldn't start on last row or last column
-		if (cursorX >= canvasDimensions.width || cursorY >= canvasDimensions.height) {
+		if (cursorX >= this.canvas.width || cursorY >= this.canvas.height) {
 			return false;
 		}
 
@@ -157,16 +167,16 @@ export class Grid {
 		const occupiedIndices = [];
 
 		for (let w = 0; w < blockWidth; w++) {
-			const index = cursorY * canvasDimensions.width + cursorX + w;
+			const index = cursorY * this.canvas.width + cursorX + w;
 			// Since we're using a flat grid system, ensure that block doesn't "wrap" around
-			if (Math.floor(index / canvasDimensions.width) !== cursorY) {
+			if (Math.floor(index / this.canvas.width) !== cursorY) {
 				return false;
 			}
 			occupiedIndicesH.push(index);
 		}
 
 		for (let h = 0; h < blockHeight; h++) {
-			occupiedIndicesV.push((h + cursorY) * canvasDimensions.width + cursorX);
+			occupiedIndicesV.push((h + cursorY) * this.canvas.width + cursorX);
 		}
 
 		if (blockWidth > 1 && blockHeight > 1) {
@@ -184,7 +194,7 @@ export class Grid {
 		]);
 		let doesBlockFit = true;
 		occupiedIndicesSet.forEach((index) => {
-			doesBlockFit = index >= canvasDimensions.width * canvasDimensions.height ? false : true;
+			doesBlockFit = index >= this.canvas.width * this.canvas.height ? false : true;
 		});
 
 		return doesBlockFit && [...occupiedIndicesSet];
@@ -201,21 +211,5 @@ export class Grid {
 		});
 
 		return canBlockFit;
-	}
-
-	setStyleVars() {
-		const root = document.documentElement;
-		if (!root) throw new Error('document.documentElement not found');
-
-		// All in rem units
-		const gridMargin = 2.4;
-		const gap = 0.25;
-
-		root.style.setProperty(
-			'--cell-unit-dimension',
-			`calc((100vw - ${gridMargin * 2}rem - ${gap * canvasDimensions.width - 2}rem) / ${canvasDimensions.width})`
-		);
-		root.style.setProperty('--grid-margin', `${gridMargin}rem`);
-		root.style.setProperty('--grid-gap', `${gap}rem`);
 	}
 }

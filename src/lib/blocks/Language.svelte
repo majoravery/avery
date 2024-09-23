@@ -42,6 +42,14 @@
 	const displayTutorial = writable(false);
 	const interacted = writable(false);
 
+	function setTutorialCssVar(blockDimension: number) {
+		const root = document.querySelector(':root') as HTMLElement;
+		root.style.setProperty('--tutorial-before-x', `${blockDimension * 0.3}px`);
+		root.style.setProperty('--tutorial-before-y', `${blockDimension * 0.6}px`);
+		root.style.setProperty('--tutorial-after-x', `${blockDimension * 0.7}px`);
+		root.style.setProperty('--tutorial-after-y', `${blockDimension * 0.5}px`);
+	}
+
 	function startToggle() {
 		let interval: NodeJS.Timeout;
 		const toggleLoop = () => {
@@ -94,7 +102,8 @@
 		width = getTextWidth(languages[activeLanguage].name);
 		radius = Math.ceil(Math.round(width / 2) / Math.tan(Math.PI / languages.length));
 
-		startToggle();
+		setTutorialCssVar(container.getBoundingClientRect().width);
+		setTimeout(startToggle, 2000);
 	});
 </script>
 
@@ -124,11 +133,11 @@
 
 	<div class="proxy"></div>
 
-	{#if $displayTutorial}
-		<div class="tutorial" transition:fade={{ duration: 100 }}>
-			<img src={drag} alt="Drag to change language" />
-		</div>
-	{/if}
+	<!-- {#if $displayTutorial} -->
+	<div class="tutorial" transition:fade={{ duration: 100 }}>
+		<img src={drag} alt="Drag to change language" />
+	</div>
+	<!-- {/if} -->
 </div>
 
 <style>
@@ -200,21 +209,21 @@
 		animation-fill-mode: forwards;
 		animation-name: swipe;
 		animation-timing-function: ease-in-out;
-		transform: translate3d(30px, 93px, 0) rotate(-15deg);
-		width: 2rem;
+		transform: translate3d(var(--tutorial-before-x), var(--tutorial-before-y), 0) rotate(-15deg);
+		width: 20%;
 	}
 
 	@keyframes swipe {
 		0% {
-			transform: translate3d(30px, 93px, 0) rotate(-15deg);
+			transform: translate3d(var(--tutorial-before-x), var(--tutorial-before-y), 0) rotate(-15deg);
 		}
 
 		98% {
-			transform: translate3d(90px, 77px, 0) rotate(-15deg);
+			transform: translate3d(var(--tutorial-after-x), var(--tutorial-after-y), 0) rotate(-15deg);
 		}
 
 		100% {
-			transform: translate3d(90px, 77px, 0) rotate(-15deg);
+			transform: translate3d(var(--tutorial-after-x), var(--tutorial-after-y), 0) rotate(-15deg);
 		}
 	}
 </style>
