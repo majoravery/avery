@@ -1,9 +1,15 @@
+<script lang="ts">
+	import Eyebrow from '$lib/components/Eyebrow.svelte';
+	import arrowTopRight from '$lib/svg/arrow-up-right.svg';
+</script>
+
 <div>
-	<span class="title">Project: photos grid</span>
-	<span class="arrow">-></span>
+	<Eyebrow>Project showcase</Eyebrow>
+	<!-- <span class="title">Project: photos grid</span> -->
+	<span class="arrow"><img src={arrowTopRight} alt="Visit website" /></span>
 </div>
 
-<img src="/images/photos.png" alt="Screenshot of photos.averylim.com" />
+<img class="screenshot" src="/images/photos.png" alt="Screenshot of photos.averylim.com" />
 
 <style>
 	div {
@@ -24,7 +30,11 @@
 		display: inline-block;
 	}
 
-	img {
+	span.arrow img {
+		width: 1rem;
+	}
+
+	img.screenshot {
 		bottom: -1.5rem;
 		left: 1.5rem;
 		position: absolute;

@@ -33,6 +33,7 @@ This app is deployed to averylim.com via [Render](todo-add-url), so simply pushi
 
 Language switcher
 
+- [ ] refine gsap draggable, make sure it's smooth
 - [ ] add locale to url
 - [ ] actually change language
 

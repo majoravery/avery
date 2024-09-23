@@ -1,6 +1,8 @@
-<div class="smiley">
+smiley
+
+<!-- <div class="smiley">
 	<div class="head" />
-</div>
+</div> -->
 
 <style>
 	div.smiley {

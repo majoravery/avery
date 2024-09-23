@@ -16,12 +16,7 @@ To use:
 /* TODO: i didnt check the other font formats in font squirrel yet they included it in the declarations... wakaranai */
 @font-face {
     font-family: 'soriasoria';
-    src: url('fonts/soria-font-webfont.eot');
-    src: url('fonts/soria-font-webfont.eot?#iefix') format('embedded-opentype'),
-        url('fonts/soria-font-webfont.woff2') format('woff2'),
-        url('fonts/soria-font-webfont.woff') format('woff'),
-        url('fonts/soria-font-webfont.ttf') format('truetype'),
-        url('fonts/soria-font-webfont.svg#soriasoria') format('svg');
+    src: url('fonts/soria-font-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }

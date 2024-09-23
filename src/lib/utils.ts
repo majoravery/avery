@@ -57,6 +57,18 @@ function shuffle(array: any[]) {
 	return ret;
 }
 
+/**
+ * Solution from https://stackoverflow.com/a/21015393/6693826
+ */
+export function getTextWidth(text: string, font = "500 1.2rem 'Inter', sans-serif"): number {
+	// Re-use canvas object for better performance
+	const canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement('canvas'));
+	const context = canvas.getContext('2d');
+	context.font = font;
+	const metrics = context.measureText(text);
+	return Math.ceil(metrics.width);
+}
+
 export const random = {
 	pick,
 	shuffle

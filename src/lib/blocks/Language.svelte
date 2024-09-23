@@ -1,13 +1,17 @@
 <!-- Slot machine implementation inspired by https://codepen.io/AdrianSandu/pen/MyBQYz -->
 
 <script lang="ts">
-	import { tweened } from 'svelte/motion';
-	import { cubicOut } from 'svelte/easing';
-	import { onMount } from 'svelte';
+	import { getTextWidth } from '$lib/utils';
+	import { gsap } from 'gsap';
 	import { isDebugLanguage } from '$lib/stores/debugMode';
+	import { onMount } from 'svelte';
+	import Draggable from 'gsap/dist/Draggable';
+	import drag from '$lib/images/drag.png';
+	import Eyebrow from '$lib/components/Eyebrow.svelte';
+	import { writable } from 'svelte/store';
+	import { fade } from 'svelte/transition';
 
-	let container: HTMLDivElement;
-	let activeLanguage = 0;
+	gsap.registerPlugin(Draggable);
 
 	const languages = [
 		{
@@ -28,56 +32,89 @@
 		}
 	];
 
-	const options = {
-		duration: 400,
-		easing: cubicOut
-	};
-	const rotateX = tweened(0, options);
-
+	let activeLanguage = 0;
+	let container: HTMLDivElement;
 	let height: number;
 	let radius: number;
 	let step = 360 / languages.length;
+	let width: number;
+
+	const displayTutorial = writable(false);
+	const interacted = writable(false);
+
+	function startToggle() {
+		let interval: NodeJS.Timeout;
+		const toggleLoop = () => {
+			displayTutorial.set(true); // Turn on for 2 seconds
+			setTimeout(() => {
+				displayTutorial.set(false); // Turn off after 2 seconds
+			}, 1200);
+		};
+
+		// Start the toggle loop
+		interval = setInterval(() => {
+			let touchedValue;
+			// Get the latest touched value
+			interacted.subscribe((value) => (touchedValue = value))();
+
+			// If touched is true, stop the loop
+			if (touchedValue) {
+				clearInterval(interval);
+				return;
+			}
+
+			toggleLoop(); // Turn on/off based on the timing
+		}, 6000); // 7 seconds (2 seconds on + 5 seconds off)
+
+		// Start the first toggle immediately
+		toggleLoop();
+	}
 
 	onMount(() => {
+		gsap.set('.language-selector', { transformPerspective: 600 });
+
+		Draggable.create('.proxy', {
+			type: 'x',
+			trigger: '.container',
+			onDrag: function () {
+				displayTutorial.set(false);
+				interacted.set(true);
+				gsap.set('.language-selector', { rotationY: this.x });
+			},
+			onDragEnd: function () {
+				const rotationY = gsap.utils.snap(360 / languages.length, this.x);
+				gsap.to('.language-selector', {
+					rotationY
+				});
+				activeLanguage = Math.abs(rotationY) / 90;
+			}
+		});
+
 		height = container.getBoundingClientRect().height / 6;
-		radius = Math.ceil(Math.round(height / 2) / Math.tan(Math.PI / languages.length));
+		width = getTextWidth(languages[activeLanguage].name);
+		radius = Math.ceil(Math.round(width / 2) / Math.tan(Math.PI / languages.length));
+
+		startToggle();
 	});
-
-	function prev() {
-		activeLanguage = activeLanguage < 0 ? languages.length - 1 : activeLanguage - 1;
-		rotateX.update((n) => n + step);
-	}
-
-	function next() {
-		activeLanguage = activeLanguage === languages.length - 1 ? 0 : activeLanguage + 1;
-		rotateX.update((n) => n - step);
-	}
 </script>
 
 <div class="container" class:debug={$isDebugLanguage} bind:this={container}>
-	<button class="prev" on:click={prev}>
-		<span>
-			<svg
-				height="800"
-				viewBox="0 0 330.002 330.002"
-				width="800"
-				xmlns="http://www.w3.org/2000/svg"
-			>
-				<path
-					d="m327.001 99.751c-4.971-6.628-14.374-7.971-21-3l-140.997 105.75-141.003-105.75c-6.628-4.971-16.029-3.626-21 3-4.971 6.627-3.627 16.03 3 21l150.004 112.5c2.667 2 5.833 3 9 3 3.166 0 6.333-1 9-3l149.996-112.5c6.627-4.97 7.971-14.372 3-21z"
-				/>
-			</svg>
-		</span>
-	</button>
+	<Eyebrow>Language</Eyebrow>
 
-	<div class="scroller-wrap">
+	<div
+		aria-valuenow={activeLanguage}
+		class="language-selector"
+		draggable="true"
+		role="slider"
+		tabindex="0"
+	>
 		<div class="scroller" style:height={`${height}px`}>
 			{#each languages as language, index}
 				<div
 					class="language"
 					class:active={activeLanguage === index}
 					style:height={`${height}px`}
-					style:transform={`rotateX(${$rotateX + step * index}deg) translateZ(${radius}px)`}
+					style:transform={`rotateY(${step * index}deg) translateZ(${radius}px)`}
 				>
 					{language.name}
 				</div>
@@ -85,113 +122,34 @@
 		</div>
 	</div>
 
-	<button class="next" on:click={next}>
-		<span>
-			<svg
-				height="800"
-				viewBox="0 0 330.002 330.002"
-				width="800"
-				xmlns="http://www.w3.org/2000/svg"
-			>
-				<path
-					d="m327.001 99.751c-4.971-6.628-14.374-7.971-21-3l-140.997 105.75-141.003-105.75c-6.628-4.971-16.029-3.626-21 3-4.971 6.627-3.627 16.03 3 21l150.004 112.5c2.667 2 5.833 3 9 3 3.166 0 6.333-1 9-3l149.996-112.5c6.627-4.97 7.971-14.372 3-21z"
-				/>
-			</svg>
-		</span>
-	</button>
+	<div class="proxy"></div>
+
+	{#if $displayTutorial}
+		<div class="tutorial" transition:fade={{ duration: 100 }}>
+			<img src={drag} alt="Drag to change language" />
+		</div>
+	{/if}
 </div>
 
 <style>
 	div.container {
 		height: 100%;
-		left: 0;
-		position: absolute;
-		top: 0;
-		width: 100%;
-		z-index: 5;
 	}
 
-	div.container::after {
-		content: '';
-		background: linear-gradient(rgb(255, 255, 255) 0%, transparent 50%, rgb(255, 255, 255) 100%);
-		bottom: 0;
-		height: 100%;
-		left: 0;
-		position: absolute;
-		right: 0;
-		top: 0;
-		width: 100%;
-	}
-
-	button.prev,
-	button.next {
-		cursor: pointer;
-		font-size: 0;
-		left: 0;
-		position: absolute;
-		right: 0;
-		width: 35%;
-		z-index: 2;
-		margin: auto;
-		border: none;
-		background: transparent;
-	}
-
-	button.prev {
-		top: 1rem;
-	}
-
-	button.next {
-		bottom: 1rem;
-	}
-
-	button.prev span,
-	button.next span {
-		background: rgb(255, 255, 255);
-		display: block;
-		padding: 0.1rem 0.25rem;
-
-		/* stolen from chester.how's nav */
-		border: 1px solid rgb(229, 229, 229);
-		border-radius: var(--border-radius-s);
-		/* box-shadow:
-			rgba(0, 0, 0, 0) 0 0 0 0,
-			rgba(0, 0, 0, 0) 0 0 0 0,
-			rgba(0, 0, 0, 0.1) 0 4px 6px -1px,
-			rgba(0, 0, 0, 0.1) 0 2px 4px -2px; */
-
-		transition: box-shadow 100ms ease-in-out;
-	}
-
-	button.prev span:active,
-	button.next span:active {
-		/* box-shadow:
-			rgba(0, 0, 0, 0) 0 0 0 0,
-			rgba(0, 0, 0, 0) 0 0 0 0,
-			rgba(0, 0, 0, 0.1) 0 0 0 0,
-			rgba(0, 0, 0, 0.1) 0 0 0 0; */
-	}
-
-	button.prev span svg {
-		transform: rotate(180deg);
-	}
-
-	button.prev span svg,
-	button.next span svg {
-		fill: var(--color-accent);
-		height: auto;
-		width: 30%;
-	}
-
-	div.scroller-wrap {
+	div.language-selector {
 		align-items: center;
 		box-sizing: border-box;
+		cursor: grab;
 		display: flex;
 		flex-direction: column;
 		height: 100%;
 		justify-content: center;
 		transform-style: preserve-3d;
 		width: 100%;
+	}
+
+	div.language-selector:active {
+		cursor: grabbing;
 	}
 
 	div.scroller {
@@ -222,5 +180,41 @@
 	}
 	div.container.debug div.language {
 		border: 1px solid black;
+	}
+
+	div.proxy {
+		display: none;
+	}
+
+	div.tutorial {
+		height: 100%;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
+
+	div.tutorial img {
+		animation-delay: 100ms;
+		animation-duration: 1000ms;
+		animation-fill-mode: forwards;
+		animation-name: swipe;
+		animation-timing-function: ease-in-out;
+		transform: translate3d(30px, 93px, 0) rotate(-15deg);
+		width: 2rem;
+	}
+
+	@keyframes swipe {
+		0% {
+			transform: translate3d(30px, 93px, 0) rotate(-15deg);
+		}
+
+		98% {
+			transform: translate3d(90px, 77px, 0) rotate(-15deg);
+		}
+
+		100% {
+			transform: translate3d(90px, 77px, 0) rotate(-15deg);
+		}
 	}
 </style>
