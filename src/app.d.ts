@@ -21,7 +21,7 @@ declare global {
 
 	type BlockType = 'square' | 'wide' | 'tall' | 'long' | 'single';
 	type BlockContent =
-		| 'Marquee'
+		| 'Recently'
 		| 'ProjectShowcase'
 		| 'Weather'
 		| 'Name'
@@ -52,6 +52,19 @@ declare global {
 	type Breakpoint = number;
 
 	type CanvasTypes = Record<Breakpoint, Canvas>;
+
+	interface Forecast {
+		date: string;
+		temp: number;
+		conditionCode: 'sunny' | 'cloudy' | 'fog' | 'rain' | 'storm' | 'snow' | 'sleet';
+		conditionText: string;
+	}
+
+	interface Weather {
+		city: string;
+		forecasts: Forecast[];
+		condition: { code: string; text: string };
+	}
 }
 
 export {};

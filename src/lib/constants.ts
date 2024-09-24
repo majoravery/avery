@@ -11,7 +11,7 @@ export const CANVAS_TYPES: CanvasTypes = {
 		width: 2,
 		height: 15,
 		blocks: [
-			{ ...BLOCKS.square, content: 'Marquee' },
+			{ ...BLOCKS.square, content: 'Recently' },
 			{ ...BLOCKS.square, content: 'ProjectShowcase' },
 			{ ...BLOCKS.tall, content: 'Weather' },
 			{ ...BLOCKS.long, content: 'Description' },
@@ -36,7 +36,7 @@ export const CANVAS_TYPES: CanvasTypes = {
 		width: 3,
 		height: 10,
 		blocks: [
-			{ ...BLOCKS.square, content: 'Marquee' },
+			{ ...BLOCKS.square, content: 'Recently' },
 			{ ...BLOCKS.square, content: 'ProjectShowcase' },
 			{ ...BLOCKS.wide, content: 'Description' },
 			{ ...BLOCKS.tall, content: 'Weather' },
@@ -60,7 +60,7 @@ export const CANVAS_TYPES: CanvasTypes = {
 		width: 4,
 		height: 8,
 		blocks: [
-			{ ...BLOCKS.square, content: 'Marquee' },
+			{ ...BLOCKS.square, content: 'Recently' },
 			{ ...BLOCKS.square, content: 'ProjectShowcase' },
 			{ ...BLOCKS.wide, content: 'Description' },
 			{ ...BLOCKS.tall, content: 'Weather' },
@@ -86,7 +86,7 @@ export const CANVAS_TYPES: CanvasTypes = {
 		width: 6,
 		height: 5,
 		blocks: [
-			{ ...BLOCKS.square, content: 'Marquee' },
+			{ ...BLOCKS.square, content: 'Recently' },
 			{ ...BLOCKS.square, content: 'ProjectShowcase' },
 			{ ...BLOCKS.wide, content: 'Description' },
 			{ ...BLOCKS.tall, content: 'Weather' },
@@ -110,7 +110,7 @@ export const CANVAS_TYPES: CanvasTypes = {
 		width: 8,
 		height: 4,
 		blocks: [
-			{ ...BLOCKS.square, content: 'Marquee' },
+			{ ...BLOCKS.square, content: 'Recently' },
 			{ ...BLOCKS.square, content: 'ProjectShowcase' },
 			{ ...BLOCKS.wide, content: 'Description' },
 			{ ...BLOCKS.tall, content: 'Weather' },

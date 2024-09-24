@@ -1,8 +1,14 @@
 <script lang="ts">
-	import Grid from './Grid.svelte';
 	import { theme } from '$lib/stores/theme';
+	import { weather } from '$lib/stores/weather';
+	import Grid from './Grid.svelte';
 
 	import '../styles.css';
+
+	// This might change in the future if we add more data into the loader function but for now... Weather.
+	export let data: Weather;
+
+	weather.set(data);
 </script>
 
 <main

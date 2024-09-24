@@ -1,32 +1,40 @@
 <script lang="ts">
 	import Eyebrow from '$lib/components/Eyebrow.svelte';
-	import sun from '$lib/images/sun.png';
+	import { weather } from '$lib/stores/weather';
+
+	const images = import.meta.glob('$lib/images/*.jpg');
+
+	function getDayOfWeek(dateStr: string) {
+		const date = new Date(dateStr);
+		return date.toLocaleDateString('en-SG', { weekday: 'short' });
+	}
+
+	const formattedWeather = $weather.forecasts.map((w) => ({
+		...w,
+		day: getDayOfWeek(w.date)
+	}));
 </script>
 
 <article>
 	<Eyebrow>Weather<br />Forecast</Eyebrow>
-	<div class="sun"><img src={sun} alt="Smiling sun" /></div>
+	<div class="sun">
+		<img
+			src={images[`$lib/images/weather/${$weather.condition.code}.png`]}
+			alt={$weather.condition.text}
+		/>
+	</div>
+	<div class="location">{$weather.city}</div>
 	<div class="forecasts">
 		<div class="forecast large">
-			<span class="day">Sun</span>
-			<span class="temp">32&deg;C</span>
+			<span class="day">{formattedWeather[0].day}</span>
+			<span class="temp">{formattedWeather[0].temp}&deg;C</span>
 		</div>
-		<div class="forecast">
-			<span class="day">Mon</span>
-			<span class="temp">34&deg;C</span>
-		</div>
-		<div class="forecast">
-			<span class="day">Tue</span>
-			<span class="temp">30&deg;C</span>
-		</div>
-		<div class="forecast">
-			<span class="day">Wed</span>
-			<span class="temp">28&deg;C</span>
-		</div>
-		<div class="forecast">
-			<span class="day">Thu</span>
-			<span class="temp">29&deg;C</span>
-		</div>
+		{#each formattedWeather.slice(1) as weather}
+			<div class="forecast">
+				<span class="day">{weather.day}</span>
+				<span class="temp">{weather.temp}&deg;C</span>
+			</div>
+		{/each}
 	</div>
 </article>
 
@@ -46,6 +54,15 @@
 		top: -4rem;
 		width: calc(var(--block-size) * 1.5);
 		z-index: 1;
+	}
+
+	div.location {
+		font-family: 'Inter', sans-serif;
+		font-optical-sizing: auto;
+		font-weight: 500;
+		font-style: normal;
+		font-size: 1rem;
+		text-align: right;
 	}
 
 	div.forecasts {

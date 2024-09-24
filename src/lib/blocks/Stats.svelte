@@ -1,20 +1,31 @@
-<script>
+<script lang="ts">
 	import Eyebrow from '$lib/components/Eyebrow.svelte';
+
+	function getTodaysDate() {
+		const today = new Date();
+		const day = String(today.getDate()).padStart(2, '0');
+		const month = today.toLocaleString('default', { month: 'short' });
+		const year = today.getFullYear();
+
+		return `${day} ${month} ${year}`;
+	}
+
+	const date = getTodaysDate();
 </script>
 
 <article>
-	<Eyebrow>Stats</Eyebrow>
+	<Eyebrow>Info</Eyebrow>
 	<div class="stats">
 		<div class="row">
-			<span class="label">Visitor</span>
+			<span class="label">Today's date</span>
+			<span class="value">{date}</span>
+		</div>
+		<div class="row">
+			<span class="label">Visitors</span>
 			<span class="value">1235</span>
 		</div>
 		<div class="row">
-			<span class="label">Page view</span>
-			<span class="value">1235</span>
-		</div>
-		<div class="row">
-			<span class="label">Visitor</span>
+			<span class="label">Page views</span>
 			<span class="value">1235</span>
 		</div>
 	</div>

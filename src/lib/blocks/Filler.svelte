@@ -1,7 +1,3 @@
-<script lang="ts">
-	import { theme } from '$lib/stores/theme';
-</script>
-
 <div />
 
 <style>

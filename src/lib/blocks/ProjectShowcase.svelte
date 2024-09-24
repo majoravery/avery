@@ -4,17 +4,17 @@
 	import photos from '$lib/images/photos.png';
 </script>
 
-<section>
+<article>
 	<div>
 		<Eyebrow>Project showcase</Eyebrow>
 		<span class="arrow"><img src={arrowTopRight} alt="Visit website" /></span>
 	</div>
 
 	<img class="screenshot" src={photos} alt="Screenshot of photos.averylim.com" />
-</section>
+</article>
 
 <style>
-	section {
+	article {
 		height: 100%;
 	}
 
@@ -32,7 +32,7 @@
 		width: 1rem;
 	}
 
-	section:hover span.arrow img {
+	article:hover span.arrow img {
 		animation-name: wheee;
 		animation-duration: 400ms;
 		animation-timing-function: ease-in-out;

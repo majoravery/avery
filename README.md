@@ -27,6 +27,10 @@ You can preview the production build with `pnpm run preview`.
 
 This app is deployed to averylim.com via [Render](todo-add-url), so simply pushing to the main branch will trigger the deployment.
 
+## Credits
+
+- Weather forecast by https://www.weatherapi.com/
+
 ## Roadmap
 
 - [ ] Render an SEO friendly page for SSR

@@ -1,4 +1,8 @@
-<div class="eyebrow"><slot /></div>
+<script lang="ts">
+	export let invert: boolean = false;
+</script>
+
+<div class="eyebrow" class:invert><slot /></div>
 
 <style>
 	div.eyebrow {
@@ -18,5 +22,9 @@
 		position: relative;
 		text-transform: uppercase;
 		z-index: 3;
+	}
+
+	div.eyebrow.invert {
+		color: rgb(255, 255, 255);
 	}
 </style>
