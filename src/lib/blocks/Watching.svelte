@@ -3,5 +3,5 @@
 </script>
 
 <article>
-	<Eyebrow>Contact</Eyebrow>
+	<Eyebrow>Watching</Eyebrow>
 </article>

@@ -3,5 +3,11 @@
 </script>
 
 <article>
-	<Eyebrow>Contact</Eyebrow>
+	<Eyebrow>Cooking</Eyebrow>
 </article>
+
+<style>
+	article {
+		display: flex;
+	}
+</style>

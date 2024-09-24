@@ -1,8 +1,7 @@
 <script lang="ts">
-	import Eyebrow from '$lib/components/Eyebrow.svelte';
 	import { weather } from '$lib/stores/weather';
-
-	const images = import.meta.glob('$lib/images/*.jpg');
+	import Eyebrow from '$lib/components/Eyebrow.svelte';
+	import sun from '$lib/images/weather/sun.png';
 
 	function getDayOfWeek(dateStr: string) {
 		const date = new Date(dateStr);
@@ -16,14 +15,10 @@
 </script>
 
 <article>
-	<Eyebrow>Weather<br />Forecast</Eyebrow>
+	<Eyebrow>Weather forecast<br />({$weather.city})</Eyebrow>
 	<div class="sun">
-		<img
-			src={images[`$lib/images/weather/${$weather.condition.code}.png`]}
-			alt={$weather.condition.text}
-		/>
+		<img src={sun} alt={$weather.condition.text} />
 	</div>
-	<div class="location">{$weather.city}</div>
 	<div class="forecasts">
 		<div class="forecast large">
 			<span class="day">{formattedWeather[0].day}</span>
@@ -54,15 +49,6 @@
 		top: -4rem;
 		width: calc(var(--block-size) * 1.5);
 		z-index: 1;
-	}
-
-	div.location {
-		font-family: 'Inter', sans-serif;
-		font-optical-sizing: auto;
-		font-weight: 500;
-		font-style: normal;
-		font-size: 1rem;
-		text-align: right;
 	}
 
 	div.forecasts {

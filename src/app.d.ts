@@ -21,21 +21,23 @@ declare global {
 
 	type BlockType = 'square' | 'wide' | 'tall' | 'long' | 'single';
 	type BlockContent =
-		| 'Recently'
-		| 'ProjectShowcase'
-		| 'Weather'
-		| 'Name'
 		| 'Clock'
-		| 'Stats'
-		| 'Description'
 		| 'Contact'
+		| 'ListeningTo'
+		| 'Reading'
+		| 'Watching'
+		| 'Description'
+		| 'Filler'
 		| 'Language'
-		| 'QrCode'
-		| 'Smiley'
-		| 'UseDesktop'
-		| 'Wave'
+		| 'Name'
 		| 'Pattern'
-		| 'Filler';
+		| 'ProjectShowcase'
+		| 'QrCode'
+		| 'Recently'
+		| 'Stats'
+		| 'Cooking'
+		| 'Wave'
+		| 'Weather';
 
 	interface Block extends Dimensions, Position {
 		type: BlockType;
