@@ -1,7 +1,8 @@
 <script lang="ts">
+	import { t } from '$lib/stores/locale';
 	import Eyebrow from '$lib/components/Eyebrow.svelte';
 </script>
 
 <article>
-	<Eyebrow>What I've been up to</Eyebrow>
+	<Eyebrow>{$t('recently.title')}</Eyebrow>
 </article>

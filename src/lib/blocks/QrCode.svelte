@@ -1,9 +1,10 @@
 <script lang="ts">
+	import { t } from '$lib/stores/locale';
 	import qr from '$lib/images/qr.png';
 </script>
 
 <div>
-	<img src={qr} alt="Scan at your own expense" />
+	<img src={qr} alt={$t('qrCode.alt')} />
 </div>
 
 <style>

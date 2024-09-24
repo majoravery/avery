@@ -1,9 +1,10 @@
 <script lang="ts">
+	import { t } from '$lib/stores/locale';
 	import wave from '$lib/images/wave-emoji.png';
 </script>
 
 <div>
-	<img src={wave} alt="Hello!" />
+	<img src={wave} alt={$t('wave.alt')} />
 </div>
 
 <style>

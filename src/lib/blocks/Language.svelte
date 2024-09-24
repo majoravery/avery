@@ -5,8 +5,9 @@
 	import { getTextWidth } from '$lib/utils';
 	import { gsap } from 'gsap';
 	import { isDebugLanguage } from '$lib/stores/debugMode';
-	import { language } from '$lib/stores/language';
+	import { locale, LOCALES } from '$lib/stores/locale';
 	import { onMount } from 'svelte';
+	import { t } from '$lib/stores/locale';
 	import { writable } from 'svelte/store';
 	import drag from '$lib/images/drag.png';
 	import Draggable from 'gsap/dist/Draggable';
@@ -14,36 +15,17 @@
 
 	gsap.registerPlugin(Draggable);
 
-	const languages = [
-		{
-			name: 'English',
-			id: 'en'
-		},
-		{
-			name: '中文',
-			id: 'cn'
-		},
-		{
-			name: 'Deutsch',
-			id: 'de'
-		},
-		{
-			name: '日本語',
-			id: 'jp'
-		}
-	];
-
-	let activeLanguageIndex = languages.findIndex((lang) => lang.id === $language);
+	let activeLanguageIndex = LOCALES.findIndex((lang) => lang.id === $locale);
 	let container: HTMLDivElement;
 	let height: number;
 	let radius: number;
-	let step = 360 / languages.length;
+	let step = 360 / LOCALES.length;
 	let width: number;
 
 	const displayTutorial = writable(false);
 	const interacted = writable(false);
 
-	function startToggle() {
+	function startTutorialGuide() {
 		let interval: NodeJS.Timeout;
 		const toggleLoop = () => {
 			displayTutorial.set(true); // Turn on for 2 seconds
@@ -72,35 +54,47 @@
 	}
 
 	onMount(() => {
-		gsap.set('.language-selector', { transformPerspective: 600 });
+		gsap.set('.language-selector', {
+			rotationY: -step * activeLanguageIndex,
+			transformPerspective: 600
+		});
 
 		Draggable.create('.proxy', {
 			type: 'x',
 			trigger: '.container',
+			dragResistance: 0.55,
 			onDrag: function () {
 				displayTutorial.set(false);
 				interacted.set(true);
 				gsap.set('.language-selector', { rotationY: this.x });
 			},
 			onDragEnd: function () {
-				const rotationY = gsap.utils.snap(360 / languages.length, this.x);
+				const rotationY = gsap.utils.snap(step, this.x);
 				gsap.to('.language-selector', {
 					rotationY
 				});
-				activeLanguageIndex = Math.abs(rotationY) / 90;
+
+				activeLanguageIndex =
+					rotationY > 0
+						? // Drag to previous language
+							((360 - (rotationY % 360)) / 90) % LOCALES.length
+						: // Drag to next language
+							(Math.abs(rotationY) / 90) % LOCALES.length;
+
+				locale.set(LOCALES[activeLanguageIndex].id);
 			}
 		});
 
 		height = container.getBoundingClientRect().height / 6;
-		width = getTextWidth(languages[activeLanguageIndex].name);
-		radius = Math.ceil(Math.round(width / 2) / Math.tan(Math.PI / languages.length));
+		width = getTextWidth(LOCALES[activeLanguageIndex].name);
+		radius = Math.ceil(Math.round(width / 2) / Math.tan(Math.PI / LOCALES.length));
 
-		setTimeout(startToggle, 2000);
+		setTimeout(startTutorialGuide, 2000);
 	});
 </script>
 
 <div class="container" class:debug={$isDebugLanguage} bind:this={container}>
-	<Eyebrow>Language</Eyebrow>
+	<Eyebrow>{$t('language.title')}</Eyebrow>
 	<div
 		aria-valuenow={activeLanguageIndex}
 		class="language-selector"
@@ -108,12 +102,8 @@
 		role="slider"
 		tabindex="0"
 	>
-		<div
-			class="scroller"
-			style:height={`${height}px`}
-			style:transform={`rotateY(-${step * activeLanguageIndex}deg)`}
-		>
-			{#each languages as language, index}
+		<div class="scroller" style:height={`${height}px`}>
+			{#each LOCALES as language, index}
 				<div
 					class="language"
 					class:active={activeLanguageIndex === index}
@@ -130,7 +120,7 @@
 
 	{#if $displayTutorial}
 		<div class="tutorial" transition:fade={{ duration: 100 }}>
-			<img src={drag} alt="Drag to change language" />
+			<img src={drag} alt={$t('language.tutorialAlt')} />
 		</div>
 	{/if}
 </div>

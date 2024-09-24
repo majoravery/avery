@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '$lib/stores/locale';
 	import Eyebrow from '$lib/components/Eyebrow.svelte';
 	import arrowTopRight from '$lib/svg/arrow-up-right.svg';
 	import photos from '$lib/images/photos.png';
@@ -6,11 +7,15 @@
 
 <article>
 	<div>
-		<Eyebrow>Project showcase</Eyebrow>
-		<span class="arrow"><img src={arrowTopRight} alt="Visit website" /></span>
+		<Eyebrow>{$t('projectShowcase.title')}</Eyebrow>
+		<span class="arrow"><img src={arrowTopRight} alt={$t('projectShowcase.linkAlt')} /></span>
 	</div>
 
-	<img class="screenshot" src={photos} alt="Screenshot of photos.averylim.com" />
+	<img
+		class="screenshot"
+		src={photos}
+		alt={$t('projectShowcase.imageAlt', { website: 'photos.averylim.com' })}
+	/>
 </article>
 
 <style>

@@ -5,7 +5,9 @@ declare global {
 		// interface Error {}
 		// interface Locals {}
 		// interface PageData {}
-		// interface PageState {}
+		interface PageState {
+			locale: string;
+		}
 		// interface Platform {}
 	}
 
@@ -27,19 +29,19 @@ declare global {
 	type BlockContent =
 		| 'Clock'
 		| 'Contact'
-		| 'ListeningTo'
-		| 'Reading'
-		| 'Watching'
+		| 'Cooking'
 		| 'Description'
 		| 'Filler'
+		| 'Info'
 		| 'Language'
+		| 'ListeningTo'
 		| 'Name'
 		| 'Pattern'
 		| 'ProjectShowcase'
 		| 'QrCode'
+		| 'Reading'
 		| 'Recently'
-		| 'Info'
-		| 'Cooking'
+		| 'Watching'
 		| 'Wave'
 		| 'Weather';
 
@@ -67,7 +69,6 @@ declare global {
 	}
 
 	interface Weather {
-		city: string;
 		forecasts: Forecast[];
 		condition: { code: string; text: string };
 	}

@@ -1,7 +1,14 @@
 import { WEATHER_API_KEY, WEATHER_API_URL } from '$env/static/private';
 
+const MAPPING_LOCATION: Record<string, string> = {
+	en: 'Singapore',
+	zh: 'Singapore',
+	de: 'Berlin',
+	jp: 'Fukuoka'
+};
+
 // See available conditions here https://www.weatherapi.com/docs/#weather-icons
-const CONDITIONS_MAPPING = {
+const MAPPING_CONDITIONS = {
 	sunny: [1000],
 	cloudy: [1003, 1006, 1009],
 	fog: [1030, 1135, 1147],
@@ -16,7 +23,7 @@ const CONDITIONS_MAPPING = {
 };
 
 export function getCondition(code: number): string {
-	for (const [key, items] of Object.entries(CONDITIONS_MAPPING)) {
+	for (const [key, items] of Object.entries(MAPPING_CONDITIONS)) {
 		if (items.includes(code)) {
 			return key; // Return the key if the value is found
 		}
@@ -26,10 +33,10 @@ export function getCondition(code: number): string {
 }
 
 // Using the fetch from Svelte load function
-export async function getForecast(fetch): Promise<Record<string, any>> {
+export async function getForecast(fetch, location: string): Promise<Record<string, any>> {
 	const options = {
 		key: WEATHER_API_KEY,
-		q: 'Fukuoka',
+		q: MAPPING_LOCATION[location],
 		days: '3',
 		aqi: 'no', // air quality index
 		alerts: 'no'

@@ -1,4 +1,6 @@
 import { getCondition, getForecast } from '$lib/weather';
+import { redirect } from '@sveltejs/kit';
+import { VALID_LOCALES } from '$lib/stores/locale.js';
 
 export const trailingSlash = 'always';
 
@@ -6,11 +8,15 @@ export const trailingSlash = 'always';
 let forecastResponse: Record<string, any>;
 
 export async function load({ fetch, params }): Promise<MainPageData> {
-	if (forecastResponse === undefined) {
-		forecastResponse = await getForecast(fetch);
+	if (!VALID_LOCALES.includes(params.lang)) {
+		redirect(307, '/en');
 	}
 
-	const { location, forecast } = forecastResponse;
+	if (forecastResponse === undefined) {
+		forecastResponse = await getForecast(fetch, params.lang);
+	}
+
+	const { forecast } = forecastResponse;
 	const forecastsRaw = forecast.forecastday;
 	const forecasts = forecastsRaw.map((f: any) => {
 		return {
@@ -22,7 +28,6 @@ export async function load({ fetch, params }): Promise<MainPageData> {
 	});
 
 	return {
-		city: location.name,
 		forecasts,
 		lang: params.lang,
 		condition: {

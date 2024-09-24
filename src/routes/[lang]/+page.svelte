@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { language } from '$lib/stores/language';
+	import { locale } from '$lib/stores/locale';
 	import { theme } from '$lib/stores/theme';
 	import { weather } from '$lib/stores/weather';
 	import Grid from './components/Grid.svelte';
@@ -9,7 +9,7 @@
 	export let data: MainPageData;
 
 	weather.set(data);
-	language.set(data.lang);
+	locale.set(data.lang);
 </script>
 
 <main

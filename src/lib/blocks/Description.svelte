@@ -1,15 +1,14 @@
 <script>
+	import { t } from '$lib/stores/locale';
 	import Eyebrow from '$lib/components/Eyebrow.svelte';
 </script>
 
 <div>
-	<Eyebrow>About me</Eyebrow>
+	<Eyebrow>{$t('description.title')}</Eyebrow>
 
-	<span
-		>Web engineer and creative developer, recently moved from Berlin back home to Singapore. I work
-		at <a href="https://www.soundcloud.com/" target="_blank">SoundCloud</a> and like to do a little
-		<a href="https://www.instagram.com/kopitiamclub" target="_blank">cooking</a> every now and then.</span
-	>
+	<span>
+		{$t('description.writeup')}
+	</span>
 </div>
 
 <style>

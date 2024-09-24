@@ -34,12 +34,11 @@ This app is deployed to averylim.com via [Render](todo-add-url), so simply pushi
 ## Roadmap
 
 - [ ] Render an SEO friendly page for SSR
+- [ ] When going from smallest breakpoint to 480, the weather app seems to become the wide tile
 
 Language switcher
 
 - [ ] refine gsap draggable, make sure it's smooth
-- [ ] add locale to url
-- [ ] actually change language
 
 Weather
 

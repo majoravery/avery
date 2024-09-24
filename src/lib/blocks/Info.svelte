@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { t } from '$lib/stores/locale';
 	import Eyebrow from '$lib/components/Eyebrow.svelte';
 
 	function getTodaysDate() {
@@ -14,18 +15,18 @@
 </script>
 
 <article>
-	<Eyebrow>Info</Eyebrow>
+	<Eyebrow>{$t('info.title')}</Eyebrow>
 	<div class="info">
 		<div class="row">
-			<span class="label">Today's date</span>
+			<span class="label">{$t('info.todaysDate')} </span>
 			<span class="value">{date}</span>
 		</div>
 		<div class="row">
-			<span class="label">Visitors</span>
+			<span class="label">{$t('info.visitors')} </span>
 			<span class="value">1235</span>
 		</div>
 		<div class="row">
-			<span class="label">Page views</span>
+			<span class="label">{$t('info.pageViews')} </span>
 			<span class="value">1235</span>
 		</div>
 	</div>

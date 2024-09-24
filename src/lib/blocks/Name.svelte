@@ -1,5 +1,9 @@
+<script lang="ts">
+	import { t } from '$lib/stores/locale';
+</script>
+
 <div>
-	<h1>Avery Lim</h1>
+	<h1>{$t('name')}</h1>
 </div>
 
 <style>

@@ -1,11 +1,13 @@
 <script lang="ts">
+	import { t } from '$lib/stores/locale';
 	import { weather } from '$lib/stores/weather';
 	import Eyebrow from '$lib/components/Eyebrow.svelte';
 	import sun from '$lib/images/weather/sun.png';
 
 	function getDayOfWeek(dateStr: string) {
 		const date = new Date(dateStr);
-		return date.toLocaleDateString('en-SG', { weekday: 'short' });
+		const day = date.toLocaleDateString('en-SG', { weekday: 'short' }).toLowerCase();
+		return $t(`weather.${day}`);
 	}
 
 	const formattedWeather = $weather.forecasts.map((w) => ({
@@ -15,7 +17,7 @@
 </script>
 
 <article>
-	<Eyebrow>Weather forecast<br />({$weather.city})</Eyebrow>
+	<Eyebrow>{$t('weather.title')}<br />({$t('weather.location')})</Eyebrow>
 	<div class="sun">
 		<img src={sun} alt={$weather.condition.text} />
 	</div>

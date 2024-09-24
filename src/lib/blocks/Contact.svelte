@@ -1,21 +1,22 @@
 <script lang="ts">
-	import Eyebrow from '$lib/components/Eyebrow.svelte';
+	import { t } from '$lib/stores/locale';
 	import arrowTopRight from '$lib/svg/arrow-up-right.svg';
+	import Eyebrow from '$lib/components/Eyebrow.svelte';
 </script>
 
 <article>
-	<Eyebrow>Contact</Eyebrow>
+	<Eyebrow>{$t('contact.title')}</Eyebrow>
 	<div class="contacts">
 		<div class="contact">
 			<a href="mailto:vivianaverylim@gmail.com">
-				<span class="method">Email</span>
-				<span class="arrow"><img src={arrowTopRight} alt="Email me" /></span>
+				<span class="method">{$t('contact.email')}</span>
+				<span class="arrow"><img src={arrowTopRight} alt="{$t('contact.emailAlt')}}" /></span>
 			</a>
 		</div>
 		<div class="contact">
 			<a href="https://www.linkedin.com/in/avery-lim/" target="_blank">
-				<span class="method">LinkedIn</span>
-				<span class="arrow"><img src={arrowTopRight} alt="Stalk my work history" /></span>
+				<span class="method">{$t('contact.linkedIn')}</span>
+				<span class="arrow"><img src={arrowTopRight} alt="{$t('contact.linkedInAlt')}}" /></span>
 			</a>
 		</div>
 	</div>
