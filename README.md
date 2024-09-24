@@ -30,7 +30,6 @@ This app is deployed to averylim.com via [Render](todo-add-url), so simply pushi
 ## Roadmap
 
 - [ ] Render an SEO friendly page for SSR
-- [ ] Extract grid css from Grid.svelte into its own file?
 
 Language switcher
 

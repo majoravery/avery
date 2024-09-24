@@ -5,6 +5,8 @@
 	import { onMount } from 'svelte';
 	import Block from './Block.svelte';
 
+	import './grid.css';
+
 	const breakpoints = Object.keys(CANVAS_TYPES).map((k) => parseInt(k, 10));
 
 	let grid: Grid;
@@ -75,17 +77,9 @@
 {/if}
 
 <style>
-	:root {
-		--block-size: 150px;
-		--block-padding: 1.5rem;
-		--grid-gap: 0.25rem;
-	}
-
 	section {
 		display: inline-grid;
 		gap: var(--grid-gap);
-		grid-template-rows: repeat(15, minmax(var(--block-size), calc((100vw - 32px) / 2)));
-		grid-template-columns: repeat(2, minmax(var(--block-size), calc((100vw - 32px) / 2)));
 	}
 
 	div.block {
@@ -98,59 +92,5 @@
 		padding: var(--block-padding);
 		position: relative;
 		width: 100%;
-	}
-
-	@media (min-width: 480px) {
-		:root {
-			font-size: 16px;
-		}
-
-		section {
-			grid-template-rows: repeat(10, var(--block-size));
-			grid-template-columns: repeat(3, var(--block-size));
-		}
-	}
-
-	@media (min-width: 768px) {
-		section {
-			grid-template-rows: repeat(8, var(--block-size));
-			grid-template-columns: repeat(4, var(--block-size));
-		}
-	}
-
-	@media (min-width: 1024px) {
-		section {
-			grid-template-rows: repeat(5, var(--block-size));
-			grid-template-columns: repeat(6, var(--block-size));
-		}
-	}
-
-	@media (min-width: 1280px) {
-		section {
-			grid-template-rows: repeat(4, var(--block-size));
-			grid-template-columns: repeat(8, var(--block-size));
-		}
-	}
-
-	@media (min-width: 1400px) {
-		:root {
-			font-size: 18px;
-		}
-
-		section {
-			grid-template-rows: repeat(4, 170px);
-			grid-template-columns: repeat(8, 170px);
-		}
-	}
-
-	@media (min-width: 1680px) {
-		:root {
-			font-size: 20px;
-		}
-
-		section {
-			grid-template-rows: repeat(4, 190px);
-			grid-template-columns: repeat(8, 190px);
-		}
 	}
 </style>
