@@ -1,38 +1,39 @@
 <!-- Slot machine implementation inspired by https://codepen.io/AdrianSandu/pen/MyBQYz -->
 
 <script lang="ts">
+	import { fade } from 'svelte/transition';
 	import { getTextWidth } from '$lib/utils';
 	import { gsap } from 'gsap';
 	import { isDebugLanguage } from '$lib/stores/debugMode';
+	import { language } from '$lib/stores/language';
 	import { onMount } from 'svelte';
-	import Draggable from 'gsap/dist/Draggable';
-	import drag from '$lib/images/drag.png';
-	import Eyebrow from '$lib/components/Eyebrow.svelte';
 	import { writable } from 'svelte/store';
-	import { fade } from 'svelte/transition';
+	import drag from '$lib/images/drag.png';
+	import Draggable from 'gsap/dist/Draggable';
+	import Eyebrow from '$lib/components/Eyebrow.svelte';
 
 	gsap.registerPlugin(Draggable);
 
 	const languages = [
 		{
 			name: 'English',
-			id: 'EN'
+			id: 'en'
 		},
 		{
 			name: '中文',
-			id: 'CN'
+			id: 'cn'
 		},
 		{
 			name: 'Deutsch',
-			id: 'DE'
+			id: 'de'
 		},
 		{
 			name: '日本語',
-			id: 'JP'
+			id: 'jp'
 		}
 	];
 
-	let activeLanguage = 0;
+	let activeLanguageIndex = languages.findIndex((lang) => lang.id === $language);
 	let container: HTMLDivElement;
 	let height: number;
 	let radius: number;
@@ -86,12 +87,12 @@
 				gsap.to('.language-selector', {
 					rotationY
 				});
-				activeLanguage = Math.abs(rotationY) / 90;
+				activeLanguageIndex = Math.abs(rotationY) / 90;
 			}
 		});
 
 		height = container.getBoundingClientRect().height / 6;
-		width = getTextWidth(languages[activeLanguage].name);
+		width = getTextWidth(languages[activeLanguageIndex].name);
 		radius = Math.ceil(Math.round(width / 2) / Math.tan(Math.PI / languages.length));
 
 		setTimeout(startToggle, 2000);
@@ -101,17 +102,21 @@
 <div class="container" class:debug={$isDebugLanguage} bind:this={container}>
 	<Eyebrow>Language</Eyebrow>
 	<div
-		aria-valuenow={activeLanguage}
+		aria-valuenow={activeLanguageIndex}
 		class="language-selector"
 		draggable="true"
 		role="slider"
 		tabindex="0"
 	>
-		<div class="scroller" style:height={`${height}px`}>
+		<div
+			class="scroller"
+			style:height={`${height}px`}
+			style:transform={`rotateY(-${step * activeLanguageIndex}deg)`}
+		>
 			{#each languages as language, index}
 				<div
 					class="language"
-					class:active={activeLanguage === index}
+					class:active={activeLanguageIndex === index}
 					style:height={`${height}px`}
 					style:transform={`rotateY(${step * index}deg) translateZ(${radius}px)`}
 				>

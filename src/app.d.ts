@@ -9,6 +9,10 @@ declare global {
 		// interface Platform {}
 	}
 
+	interface MainPageData extends Weather {
+		lang: string;
+	}
+
 	interface Dimensions {
 		height: number;
 		width: number;

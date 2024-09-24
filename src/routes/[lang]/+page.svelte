@@ -1,14 +1,15 @@
 <script lang="ts">
+	import { language } from '$lib/stores/language';
 	import { theme } from '$lib/stores/theme';
 	import { weather } from '$lib/stores/weather';
-	import Grid from './Grid.svelte';
+	import Grid from './components/Grid.svelte';
 
-	import '../styles.css';
+	import '$lib/styles.css';
 
-	// This might change in the future if we add more data into the loader function but for now... Weather.
-	export let data: Weather;
+	export let data: MainPageData;
 
 	weather.set(data);
+	language.set(data.lang);
 </script>
 
 <main

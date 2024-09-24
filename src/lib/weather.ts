@@ -25,7 +25,8 @@ export function getCondition(code: number): string {
 	throw new Error(`getCondition: condition ${code} not found`);
 }
 
-export async function getForecast(): Promise<Record<string, any>> {
+// Using the fetch from Svelte load function
+export async function getForecast(fetch): Promise<Record<string, any>> {
 	const options = {
 		key: WEATHER_API_KEY,
 		q: 'Fukuoka',

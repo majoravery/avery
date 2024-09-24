@@ -5,7 +5,7 @@
 	import { onMount } from 'svelte';
 	import Block from './Block.svelte';
 
-	import './grid.css';
+	import '$lib/grid.css';
 
 	const breakpoints = Object.keys(CANVAS_TYPES).map((k) => parseInt(k, 10));
 
