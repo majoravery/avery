@@ -1,30 +1,27 @@
-<div />
+<script lang="ts">
+	import wave from '$lib/images/wave-emoji.png';
+</script>
+
+<div>
+	<img src={wave} alt="Hello!" />
+</div>
 
 <style>
 	div {
-		/* filter: grayscale(1); */
 		height: 100%;
 		overflow: visible;
 		position: relative;
+		width: 100%;
+	}
+
+	img {
+		cursor: grab;
+		height: auto;
 		transform-origin: right bottom;
 		width: 100%;
 	}
 
-	div::before {
-		content: '';
-		background-image: url('images/wave-emoji.png');
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: contain;
-		bottom: 0;
-		cursor: grab;
-		left: 0;
-		position: absolute;
-		right: 0;
-		top: 0;
-	}
-
-	div:hover {
+	img:hover {
 		animation: shake 700ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 	}
 

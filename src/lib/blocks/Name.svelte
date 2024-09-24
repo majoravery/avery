@@ -1,5 +1,5 @@
 <div>
-	<span>Avery Lim</span>
+	<h1>Avery Lim</h1>
 </div>
 
 <style>
@@ -9,10 +9,12 @@
 		height: 100%;
 	}
 
-	span {
+	h1 {
 		color: var(--color-accent);
 		font-family: 'soriasoria';
 		font-size: 4rem;
+		font-weight: normal;
 		line-height: 2rem;
+		margin-bottom: 0.5rem;
 	}
 </style>

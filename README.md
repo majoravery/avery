@@ -40,3 +40,7 @@ Language switcher
 Weather
 
 - [ ] draw other weather svgs
+
+ProjectShowcase
+
+- [ ] use an animated gif of scrolling down the page

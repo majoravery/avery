@@ -10,7 +10,7 @@
 	const breakpoints = Object.keys(CANVAS_TYPES).map((k) => parseInt(k, 10));
 
 	let grid: Grid;
-	let blocks: Grid['blocks'];
+	let blocks: Block[];
 
 	// Returns the lower breakpoint in the range that width fits in
 	// Thanks ChatGPT

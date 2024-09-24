@@ -1,4 +1,10 @@
-<div />
+<script lang="ts">
+	import qr from '$lib/images/qr.png';
+</script>
+
+<div>
+	<img src={qr} alt="Scan at your own expense" />
+</div>
 
 <style>
 	div {
@@ -7,16 +13,8 @@
 		width: 100%;
 	}
 
-	div::before {
-		content: '';
-		background-image: url('images/qr.png');
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: contain;
-		bottom: 0;
-		left: 0;
-		position: absolute;
-		right: 0;
-		top: 0;
+	img {
+		height: auto;
+		width: 100%;
 	}
 </style>

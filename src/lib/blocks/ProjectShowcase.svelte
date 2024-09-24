@@ -1,29 +1,26 @@
 <script lang="ts">
 	import Eyebrow from '$lib/components/Eyebrow.svelte';
 	import arrowTopRight from '$lib/svg/arrow-up-right.svg';
+	import photos from '$lib/images/photos.png';
 </script>
 
-<div>
-	<Eyebrow>Project showcase</Eyebrow>
-	<!-- <span class="title">Project: photos grid</span> -->
-	<span class="arrow"><img src={arrowTopRight} alt="Visit website" /></span>
-</div>
+<section>
+	<div>
+		<Eyebrow>Project showcase</Eyebrow>
+		<span class="arrow"><img src={arrowTopRight} alt="Visit website" /></span>
+	</div>
 
-<img class="screenshot" src="/images/photos.png" alt="Screenshot of photos.averylim.com" />
+	<img class="screenshot" src={photos} alt="Screenshot of photos.averylim.com" />
+</section>
 
 <style>
+	section {
+		height: 100%;
+	}
+
 	div {
 		display: flex;
 		justify-content: space-between;
-	}
-
-	span.title {
-		font-family: 'Inter', sans-serif;
-		font-optical-sizing: auto;
-		font-weight: 400;
-		font-style: normal;
-		font-size: 0.85rem;
-		color: #a6a6a6;
 	}
 
 	span.arrow {
@@ -31,14 +28,33 @@
 	}
 
 	span.arrow img {
+		transform-origin: center;
 		width: 1rem;
 	}
 
+	section:hover span.arrow img {
+		animation-name: wheee;
+		animation-duration: 400ms;
+		animation-timing-function: ease-in-out;
+		animation-fill-mode: forwards;
+		animation-iteration-count: 1;
+	}
+
 	img.screenshot {
-		bottom: -1.5rem;
+		bottom: -4rem;
 		left: 1.5rem;
 		position: absolute;
 		right: 1.5rem;
 		width: calc(100% - 3rem);
+	}
+
+	@keyframes wheee {
+		0% {
+			transform: rotate(0deg);
+		}
+
+		100% {
+			transform: rotate(720deg);
+		}
 	}
 </style>

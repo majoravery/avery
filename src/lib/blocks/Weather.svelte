@@ -1,5 +1,11 @@
+<script lang="ts">
+	import Eyebrow from '$lib/components/Eyebrow.svelte';
+	import sun from '$lib/images/sun.png';
+</script>
+
 <article>
-	<div class="sun"><img src="/images/sun.png" alt="Smiling sun" /></div>
+	<Eyebrow>Weather<br />Forecast</Eyebrow>
+	<div class="sun"><img src={sun} alt="Smiling sun" /></div>
 	<div class="forecasts">
 		<div class="forecast large">
 			<span class="day">Sun</span>
@@ -34,11 +40,11 @@
 
 	/* TODO: improve */
 	img {
-		left: -3rem;
-		opacity: 0.9;
+		left: -4rem;
+		opacity: 0.5;
 		position: absolute;
-		top: -3rem;
-		width: var(--block-size);
+		top: -4rem;
+		width: calc(var(--block-size) * 1.5);
 		z-index: 1;
 	}
 

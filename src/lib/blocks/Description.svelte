@@ -1,4 +1,10 @@
+<script>
+	import Eyebrow from '$lib/components/Eyebrow.svelte';
+</script>
+
 <div>
+	<Eyebrow>About me</Eyebrow>
+
 	<span
 		>Web engineer and creative developer, recently moved from Berlin back home to Singapore. I work
 		at <a href="https://www.soundcloud.com/" target="_blank">SoundCloud</a> and like to do a little
@@ -10,6 +16,8 @@
 	div {
 		align-items: flex-end;
 		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 		height: 100%;
 	}
 
