@@ -15,7 +15,7 @@
 
 <article>
 	<Eyebrow>Info</Eyebrow>
-	<div class="stats">
+	<div class="info">
 		<div class="row">
 			<span class="label">Today's date</span>
 			<span class="value">{date}</span>
@@ -39,24 +39,16 @@
 		height: 100%;
 	}
 
-	div.stats {
-		display: flex;
-		flex-direction: column;
-	}
-
 	div.row {
+		align-items: center;
+		border-bottom: 1px solid var(--color-accent);
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
-		align-items: center;
-		padding: 0.2rem 0;
+		padding-bottom: 0.2rem;
 	}
 
 	div.row + div.row {
-		border-top: 1px solid var(--color-accent);
-	}
-
-	div.row:last-child {
-		padding-bottom: 0;
+		margin-top: 0.2rem;
 	}
 
 	span.label {

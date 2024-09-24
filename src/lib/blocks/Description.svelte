@@ -29,4 +29,13 @@
 		font-size: 0.85rem;
 		line-height: 1.1rem;
 	}
+
+	span a {
+		color: var(--color-accent);
+		text-decoration-style: dashed;
+	}
+
+	span a:hover {
+		text-decoration-style: solid;
+	}
 </style>

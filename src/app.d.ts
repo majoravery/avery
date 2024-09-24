@@ -34,7 +34,7 @@ declare global {
 		| 'ProjectShowcase'
 		| 'QrCode'
 		| 'Recently'
-		| 'Stats'
+		| 'Info'
 		| 'Cooking'
 		| 'Wave'
 		| 'Weather';

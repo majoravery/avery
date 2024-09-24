@@ -8,13 +8,13 @@
 	<div class="contacts">
 		<div class="contact">
 			<a href="mailto:vivianaverylim@gmail.com">
-				<span>Email</span>
+				<span class="method">Email</span>
 				<span class="arrow"><img src={arrowTopRight} alt="Email me" /></span>
 			</a>
 		</div>
 		<div class="contact">
 			<a href="https://www.linkedin.com/in/avery-lim/" target="_blank">
-				<span>LinkedIn</span>
+				<span class="method">LinkedIn</span>
 				<span class="arrow"><img src={arrowTopRight} alt="Stalk my work history" /></span>
 			</a>
 		</div>
@@ -30,15 +30,15 @@
 	}
 
 	div.contact {
-		border-bottom: 1px solid var(--color-background);
+		border-bottom: 1px solid var(--color-accent);
+		padding-bottom: 0.2rem;
 	}
 
 	div.contact + div.contact {
-		margin-top: 0.3rem;
+		margin-top: 0.2rem;
 	}
 
 	div.contact a {
-		color: rgb(0, 0, 0);
 		display: flex;
 		font-family: 'Inter', sans-serif;
 		font-optical-sizing: auto;
@@ -49,6 +49,10 @@
 		line-height: 1.1rem;
 		text-decoration: none;
 		width: 100%;
+	}
+
+	span.method {
+		color: var(--color-accent);
 	}
 
 	span.arrow {

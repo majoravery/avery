@@ -100,7 +100,6 @@
 
 <div class="container" class:debug={$isDebugLanguage} bind:this={container}>
 	<Eyebrow>Language</Eyebrow>
-
 	<div
 		aria-valuenow={activeLanguage}
 		class="language-selector"
@@ -133,6 +132,8 @@
 
 <style>
 	div.container {
+		display: flex;
+		flex-direction: column;
 		height: 100%;
 	}
 
