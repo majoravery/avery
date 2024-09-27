@@ -1,6 +1,11 @@
 <script lang="ts">
 	import { t } from '$lib/stores/locale';
 	import Eyebrow from '$lib/components/Eyebrow.svelte';
+	import { pageviews, visitors } from '$lib/stores/pageview';
+
+	function pad(number: number) {
+		return String(number).padStart(4, '0');
+	}
 
 	function getTodaysDate() {
 		const today = new Date();
@@ -23,11 +28,11 @@
 		</div>
 		<div class="row">
 			<span class="label">{$t('info.visitors')} </span>
-			<span class="value">1235</span>
+			<span class="value">{pad($visitors)}</span>
 		</div>
 		<div class="row">
 			<span class="label">{$t('info.pageViews')} </span>
-			<span class="value">1235</span>
+			<span class="value">{pad($pageviews)}</span>
 		</div>
 	</div>
 </article>

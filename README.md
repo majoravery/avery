@@ -33,10 +33,13 @@ This app is deployed to averylim.com via [Render](todo-add-url), so simply pushi
 
 ## Roadmap
 
+All
+
 - [ ] Render an SEO friendly page for SSR
 - [ ] When going from smallest breakpoint to 480, the weather app seems to become the wide tile
 - [ ] Find better fonts for everything
 - [ ] Pass image through filter of hard light + theme colour, then show colour on hover (see https://github.com/lowtechmag/solar/wiki/Solar-Web-Design#images)
+- [ ] Supabase insert is currently open to public, find a way to restrict
 
 Clock
 
@@ -52,6 +55,7 @@ Language switcher
 Weather
 
 - [ ] draw other weather svgs
+- [ ] implement caching
 
 ProjectShowcase
 

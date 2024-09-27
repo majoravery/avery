@@ -13,6 +13,8 @@ declare global {
 
 	interface MainPageData extends Weather {
 		lang: string;
+		pageViewCount: number;
+		visitorCount: number;
 	}
 
 	interface Dimensions {

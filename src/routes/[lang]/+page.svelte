@@ -1,15 +1,28 @@
 <script lang="ts">
 	import { locale } from '$lib/stores/locale';
+	import { onMount } from 'svelte';
 	import { theme } from '$lib/stores/theme';
 	import { weather } from '$lib/stores/weather';
 	import Grid from './components/Grid.svelte';
 
 	import '$lib/styles.css';
+	import { pageviews, visitors } from '$lib/stores/pageview';
 
 	export let data: MainPageData;
 
 	weather.set(data);
 	locale.set(data.lang);
+	pageviews.set(data.pageViewCount);
+	visitors.set(data.visitorCount);
+
+	onMount(async () => {
+		await fetch('/pageview', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+	});
 </script>
 
 <main
