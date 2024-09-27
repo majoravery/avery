@@ -3,19 +3,22 @@
 	import qr from '$lib/images/qr.png';
 </script>
 
-<div>
+<article>
 	<img src={qr} alt={$t('qrCode.alt')} />
-</div>
+</article>
 
 <style>
-	div {
+	article {
 		height: 100%;
-		position: relative;
 		width: 100%;
 	}
 
 	img {
 		height: auto;
 		width: 100%;
+	}
+
+	svg {
+		fill: var(--color-accent);
 	}
 </style>

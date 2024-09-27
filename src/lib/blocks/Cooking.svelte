@@ -7,7 +7,7 @@
 <article>
 	<Eyebrow>{$t('cooking.title')}</Eyebrow>
 	<div class="dish">
-		<img src={cooking} alt={$t('cooking.title')} />
+		<img src={cooking} alt={$t('cooking.alt')} />
 	</div>
 </article>
 

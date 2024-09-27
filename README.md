@@ -36,6 +36,7 @@ This app is deployed to averylim.com via [Render](todo-add-url), so simply pushi
 - [ ] Render an SEO friendly page for SSR
 - [ ] When going from smallest breakpoint to 480, the weather app seems to become the wide tile
 - [ ] Find better fonts for everything
+- [ ] Pass image through filter of hard light + theme colour, then show colour on hover (see https://github.com/lowtechmag/solar/wiki/Solar-Web-Design#images)
 
 Clock
 

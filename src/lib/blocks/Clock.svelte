@@ -74,7 +74,6 @@
 	});
 </script>
 
-<button on:click={next}>next</button>
 <div class="container">
 	<Eyebrow>{$t('clock.title')} ({$t('clock.location')})</Eyebrow>
 	<div class="clock" class:day={ampm === 'am'} class:night={ampm === 'pm'}>
@@ -117,15 +116,6 @@
 </div>
 
 <style>
-	button {
-		position: fixed;
-		bottom: 0;
-		left: 0;
-		margin: 2rem;
-	}
-
-	@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
-
 	div.container {
 		display: grid;
 		grid-template-rows: min-content auto;
@@ -197,8 +187,8 @@
 	div.second {
 		align-items: flex-end; /* dunno why this works and not center */
 		line-height: normal;
-		font-size: 4rem;
-		font-weight: 800;
+		font-size: 3.7rem;
+		font-weight: 500;
 		display: flex;
 		height: var(--card-height);
 		justify-content: center;
