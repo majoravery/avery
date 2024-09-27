@@ -21,20 +21,12 @@
 	}
 
 	span {
-		font-family: 'Inter', sans-serif;
-		font-optical-sizing: auto;
-		font-weight: 400;
-		font-style: normal;
-		font-size: 0.85rem;
-		line-height: 1.1rem;
-	}
-
-	span a {
-		color: var(--color-accent);
-		text-decoration-style: dashed;
-	}
-
-	span a:hover {
-		text-decoration-style: solid;
+		font-family: var(--bodyFontFamily);
+		font-optical-sizing: var(--bodyFontOptical);
+		font-size: var(--bodyFontSize);
+		font-style: var(--bodyFontStyle);
+		font-weight: var(--bodyFontWeight);
+		letter-spacing: var(--bodyLetterSpacing);
+		line-height: var(--bodyLineHeight);
 	}
 </style>

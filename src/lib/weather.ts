@@ -1,4 +1,4 @@
-import { WEATHER_API_KEY, WEATHER_API_URL } from '$env/static/private';
+import { WEATHER_API_KEY } from '$env/static/private';
 
 const MAPPING_LOCATION: Record<string, string> = {
 	en: 'Singapore',
@@ -43,7 +43,7 @@ export async function getForecast(fetch, location: string): Promise<Record<strin
 	};
 
 	const params = new URLSearchParams(options);
-	const url = `${WEATHER_API_URL}?${params}`;
+	const url = `https://api.weatherapi.com/v1/forecast.json?${params}`;
 
 	return await fetch(url).then((res) => res.json());
 }

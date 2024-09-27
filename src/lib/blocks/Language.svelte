@@ -160,11 +160,11 @@
 		box-sizing: border-box;
 		display: flex;
 		color: var(--color-background);
-		font-family: 'Inter', sans-serif;
-		font-optical-sizing: auto;
+		font-family: var(--bodyFontFamily);
+		font-optical-sizing: var(--bodyFontOptical);
 		font-size: 1.2rem;
-		font-style: normal;
-		font-weight: 500;
+		font-style: var(--bodyFontStyle);
+		font-weight: var(--bodyFontWeight);
 		justify-content: center;
 		position: absolute;
 		width: 100%;

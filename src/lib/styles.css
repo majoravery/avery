@@ -1,30 +1,68 @@
+/* Note: if you change any of the fonts here, remember to update getTextWidth in utils.ts */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
-/* 
-To use:
-<weight>: Use a value from 100 to 900
+/* for name */
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
 
-    font-family: "Inter", sans-serif;
-    font-family: "JetBrains Mono", monospace;
-    font-optical-sizing: auto;
-    font-weight: <weight>;
-    font-style: normal;
-  
+/* japanese */
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@100..700&display=swap');
+/* 
+  font-family: "M PLUS 1 Code", monospace;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
 */
 
-/* TODO: i didnt check the other font formats in font squirrel yet they included it in the declarations... wakaranai */
+/* chinese */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&display=swap');
+/* 
+  font-family: "Noto Sans SC", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+
+*/
+
+
 @font-face {
-    font-family: 'soriasoria';
-    src: url('/fonts/soria-font-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+    font-family: 'saans';
+    src: url('/fonts/Saans-TRIAL-Regular.woff2') format('woff2'),
+        url('/fonts/Saans-TRIAL-Regular.woff') format('woff'),
+        url('/fonts/Saans-TRIAL-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'RecklessNeue';
+    src: url('/fonts/RecklessNeueTRIAL-Thin.woff2') format('woff2'),
+        url('/fonts/RecklessNeueTRIAL-Thin.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'DenimINK Light';
+    src: url('/fonts/DenimINKTRIAL-Light.woff2') format('woff2'),
+        url('/fonts/DenimINKTRIAL-Light.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'DenimINK Regular';
+    src: url('/fonts/DenimINKTRIAL-Regular.woff2') format('woff2'),
+        url('/fonts/DenimINKTRIAL-Regular.woff') format('woff');
 }
 
 :root {
     --border-radius-s: 0.3rem;
     --border-radius-m: 0.5rem;
     --border-radius-l: 0.75rem;
+
+    --bodyFontFamily: 'Saans', sans-serif;
+    --bodyFontOptical-sizing: auto;
+    --bodyFontSize: 0.85rem;
+    --bodyFontStyle: normal;
+    --bodyFontWeight: 400;
+    --bodyLetterSpacing: 0.02rem;
+    --bodyLineHeight: 1.1rem;
 }
 
 body {

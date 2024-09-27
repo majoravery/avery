@@ -17,7 +17,7 @@
 </script>
 
 <article>
-	<Eyebrow>{$t('weather.title')}<br />({$t('weather.location')})</Eyebrow>
+	<Eyebrow>{$t('weather.title')} ({$t('weather.location')})</Eyebrow>
 	<div class="sun">
 		<img src={sun} alt={$weather.condition.text} />
 	</div>
@@ -81,12 +81,13 @@
 	}
 
 	span.day {
-		font-family: 'Inter', sans-serif;
-		font-optical-sizing: auto;
-		font-weight: 400;
-		font-style: normal;
-		font-size: 0.85rem;
-		line-height: 1.1rem;
+		font-family: var(--bodyFontFamily);
+		font-optical-sizing: var(--bodyFontOptical);
+		font-size: var(--bodyFontSize);
+		font-style: var(--bodyFontStyle);
+		font-weight: var(--bodyFontWeight);
+		letter-spacing: var(--bodyLetterSpacing);
+		line-height: var(--bodyLineHeight);
 	}
 
 	span.temp {

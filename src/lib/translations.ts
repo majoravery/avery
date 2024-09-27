@@ -1,8 +1,7 @@
 export const translations = {
 	en: {
-		'clock.singapore': 'Singapore',
-		'clock.fukuoka': 'Fukuoka',
-		'clock.berlin': 'Berlin',
+		'clock.title': 'Clock',
+		'clock.location': 'Singapore',
 		'contact.title': 'Contact',
 		'contact.email': 'Email',
 		'contact.emailAlt': 'Slide into my inbox',
@@ -40,9 +39,8 @@ export const translations = {
 		'weather.sun': 'Sun'
 	},
 	zh: {
-		'clock.singapore': '新加坡',
-		'clock.fukuoka': '福冈',
-		'clock.berlin': '柏林',
+		'clock.title': '时钟',
+		'clock.location': '新加坡',
 		'contact.title': '联系',
 		'contact.email': '电子邮件',
 		'contact.emailAlt': '发邮件给我',
@@ -80,9 +78,8 @@ export const translations = {
 		'weather.sun': '星期日'
 	},
 	de: {
-		'clock.singapore': 'Singapur',
-		'clock.fukuoka': 'Fukuoka',
-		'clock.berlin': 'Berlin',
+		'clock.title': 'Die Uhr',
+		'clock.location': 'Deutschland',
 		'contact.title': 'Kontakt',
 		'contact.email': 'E-Mail',
 		'contact.emailAlt': 'Schreib mir bitte',
@@ -120,9 +117,8 @@ export const translations = {
 		'weather.sun': 'So'
 	},
 	jp: {
-		'clock.singapore': 'シンガポール',
-		'clock.fukuoka': '福岡',
-		'clock.berlin': 'ベルリン',
+		'clock.title': '時計',
+		'clock.location': '日本',
 		'contact.title': '連絡先',
 		'contact.email': 'メール',
 		'contact.emailAlt': 'メールで連絡して',

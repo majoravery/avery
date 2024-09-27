@@ -1,104 +1,314 @@
+<!-- Flip clock animation inspired by Jan Kohlbach https://codepen.io/jankohlbach/pen/zYGaKLO?editors=0100 -->
 <script lang="ts">
+	import { locale, t } from '$lib/stores/locale';
 	import { time } from '$lib/stores/time';
+	import Eyebrow from '$lib/components/Eyebrow.svelte';
+	import { onMount } from 'svelte';
 
-	let hourSin: string, minuteSin: string;
-	let hourFuk: string, minuteFuk: string;
-	let hourBer: string, minuteBer: string;
+	let hourNew: string, minuteNew: string, ampm: string;
+	let hourPrev: string, minutePrev: string;
+	let hourFlip: boolean, minuteFlip: boolean;
+
+	let secondNew: string;
+	let secondPrev: string;
+	let secondFlip: boolean;
+
+	const MAPPING_TIMEZONE: Record<string, string> = {
+		en: 'Asia/Singapore',
+		zh: 'Asia/Singapore',
+		de: 'Europe/Berlin',
+		jp: 'Asia/Tokyo'
+	};
 
 	$: {
 		function getTimeInTimeZone(timeZone: string): string[] {
 			return new Intl.DateTimeFormat('en', {
 				timeZone,
-				hour: '2-digit',
+				hour: 'numeric',
 				minute: '2-digit',
-				hour12: false
+				second: '2-digit'
 			})
 				.format($time)
 				.split(':');
 		}
 
-		const timeSin = getTimeInTimeZone('Asia/Singapore');
-		hourSin = timeSin[0];
-		minuteSin = timeSin[1];
-
-		const timeFuk = getTimeInTimeZone('Asia/Tokyo');
-		hourFuk = timeFuk[0];
-		minuteFuk = timeFuk[1];
-
-		const timeBer = getTimeInTimeZone('Europe/Berlin');
-		hourBer = timeBer[0];
-		minuteBer = timeBer[1];
+		const time = getTimeInTimeZone(MAPPING_TIMEZONE[$locale]);
+		hourNew = time[0];
+		minuteNew = time[1];
+		secondNew = time[2].slice(0, 2); // removes "am" or "pm"
+		ampm = time[2].slice(3).toLowerCase(); // gets "am" or "pm"
 	}
+
+	// Thank you comma operator https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comma_operator
+	$: hourNew, minuteNew, secondNew, next();
+
+	function next() {
+		const hourChange = hourPrev !== hourNew;
+		const minuteChange = minutePrev !== minuteNew;
+		const secondChange = secondPrev !== secondNew;
+
+		hourFlip = hourChange;
+		minuteFlip = minuteChange;
+		secondFlip = secondChange;
+
+		setTimeout(() => {
+			if (hourFlip) {
+				hourFlip = false;
+				hourPrev = hourNew;
+			}
+			if (minuteFlip) {
+				minuteFlip = false;
+				minutePrev = minuteNew;
+			}
+			if (secondFlip) {
+				secondFlip = false;
+				secondPrev = secondNew;
+			}
+		}, 600);
+	}
+
+	onMount(() => {
+		hourPrev = hourNew;
+		minutePrev = minuteNew;
+		secondPrev = secondNew;
+	});
 </script>
 
-<div class="clocks">
-	<div class={`clock ${parseInt(hourSin, 10) > 22 && parseInt(hourSin, 10) < 7 ? 'night' : 'day'}`}>
-		<span class="city">SIN</span>
-		<div class="time">
-			<span class="hour">{hourSin}</span>
-			<span class="minute">{minuteSin}</span>
+<button on:click={next}>next</button>
+<div class="container">
+	<Eyebrow>{$t('clock.title')} ({$t('clock.location')})</Eyebrow>
+	<div class="clock" class:day={ampm === 'am'} class:night={ampm === 'pm'}>
+		<div class="hours">
+			<span class="ampm">{ampm}</span>
+			<div class="card hour" class:flip={hourFlip}>
+				{hourPrev}
+			</div>
+			<div class="card flap" />
+			<div class="card flap" />
+			<div class="card flap" />
 		</div>
-	</div>
-	<div class={`clock ${parseInt(hourFuk, 10) > 18 && parseInt(hourFuk, 10) < 7 ? 'night' : 'day'}`}>
-		<span class="city">FUK</span>
-		<div class="time">
-			<span class="hour">{hourFuk}</span>
-			<span class="minute">{minuteFuk}</span>
+		<div class="minutes">
+			<div class="minute" class:flip={minuteFlip}>
+				<div class="card top">{minutePrev}</div>
+				<div class="card bottom">{minutePrev}</div>
+				{#if minuteFlip}
+					<div class="card top-flip">{minuteNew}</div>
+					<div class="card bottom-flip">{minuteNew}</div>
+				{/if}
+			</div>
+			<div class="card flap" />
+			<div class="card flap" />
+			<div class="card flap" />
 		</div>
-	</div>
-	<div class={`clock ${parseInt(hourBer, 10) > 18 && parseInt(hourBer, 10) < 7 ? 'night' : 'day'}`}>
-		<span class="city">BER</span>
-		<div class="time">
-			<span class="hour">{hourBer}</span>
-			<span class="minute">{minuteBer}</span>
+		<div class="seconds">
+			<div class="second" class:flip={secondFlip}>
+				<div class="card top">{secondNew}</div>
+				<div class="card bottom">{secondPrev}</div>
+				{#if secondFlip}
+					<div class="card top-flip">{secondPrev}</div>
+					<div class="card bottom-flip">{secondNew}</div>
+				{/if}
+			</div>
+			<div class="card flap" />
+			<div class="card flap" />
+			<div class="card flap" />
 		</div>
 	</div>
 </div>
 
 <style>
-	div.clocks {
-		display: flex;
-		gap: var(--grid-gap);
+	button {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		margin: 2rem;
+	}
+
+	@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
+
+	div.container {
+		display: grid;
+		grid-template-rows: min-content auto;
+		flex-direction: column;
 		height: 100%;
 	}
 
 	div.clock {
+		--card-height: 85%;
+		align-items: center;
+		color: var(--color);
 		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		border-radius: var(--border-radius-s);
-		padding: 0.8rem 0.5rem;
-		width: 100%;
+		font-family: 'Inter Tight', sans-serif;
+		font-optical-sizing: auto;
+		font-style: normal;
+		gap: 0.5rem;
+		justify-content: center;
+		padding-top: 1rem;
 	}
 
 	div.clock.day {
-		background-color: var(--color-filler);
-		color: var(--color-background);
+		--background-color: var(--color-filler);
+		--box-shadow: rgba(0, 0, 0, 0) 0 0 0 0, rgba(0, 0, 0, 0) 0 0 0 0,
+			rgba(0, 0, 0, 0.1) 0 2px 2px -1px, rgba(0, 0, 0, 0.1) 0 2px 2px -1px;
+		--color: var(--color-accent);
 	}
 
 	div.clock.night {
-		background-color: var(--color-background);
-		color: var(--color-filler);
+		--background-color: var(--color-accent);
+		--box-shadow: rgba(0, 0, 0, 0) 0 0 0 0, rgba(0, 0, 0, 0) 0 0 0 0,
+			rgba(0, 0, 0, 0.5) 0 1.5px 1.5px -1px, rgba(0, 0, 0, 0.5) 0 1.5px 1.5px -1px;
+		--color: rgb(255, 255, 255);
 	}
 
-	span.hour,
-	span.minute {
-		display: block;
-		font-family: 'JetBrains Mono', monospace;
-		font-optical-sizing: auto;
-		font-size: 2rem;
-		font-style: normal;
-		font-weight: 300;
-		line-height: 1.8rem;
-		text-align: center;
+	span.ampm {
+		font-size: 0.6rem;
+		font-weight: 500;
+		left: 0.4rem;
+		line-height: normal;
+		position: absolute;
+		z-index: 11;
 	}
 
-	span.city {
-		display: block;
-		font-family: 'JetBrains Mono', monospace;
-		font-optical-sizing: auto;
-		font-style: normal;
-		font-weight: 300;
-		text-align: center;
+	div.clock.day span.ampm {
+		top: 0.4rem;
+	}
+
+	div.clock.night span.ampm {
+		bottom: 30%;
+	}
+
+	div.hours,
+	div.minutes,
+	div.seconds {
+		height: 100%;
+		position: relative;
+		width: 100%;
+	}
+
+	div.card {
+		background: var(--background-color);
+		border-radius: var(--border-radius-m);
+		box-shadow: var(--box-shadow);
+		width: 100%;
+	}
+
+	div.hour,
+	div.minute,
+	div.second {
+		align-items: flex-end; /* dunno why this works and not center */
+		line-height: normal;
+		font-size: 4rem;
+		font-weight: 800;
+		display: flex;
+		height: var(--card-height);
+		justify-content: center;
+		overflow: visible;
+		position: relative;
+		transform: rotateX(0deg);
+		z-index: 10;
+	}
+
+	/* Middle line */
+	div.hour:before,
+	div.minute:before,
+	div.second:before {
+		content: '';
+		background: rgb(255, 255, 255);
+		width: 100%;
+		height: 0.07rem;
+		top: 50%;
+		position: absolute;
+		z-index: 10;
+	}
+
+	/*
+		The following 4 divs are position absolute because they all need to be
+		layered on top of one another for the animation to work
+	*/
+	div.top,
+	div.bottom,
+	div.top-flip,
+	div.bottom-flip {
+		align-items: flex-end; /* dunno why this works and not center */
+		display: flex;
+		height: 100%;
+		justify-content: center;
+		position: absolute;
+	}
+
+	div.top {
+		/* color: green; */
+	}
+
+	div.bottom {
+		clip-path: inset(50% 0 0 0);
+		/* color: red; */
+	}
+
+	div.top-flip {
+		clip-path: inset(0 0 50% 0);
+		transform: rotateX(0deg);
+		/* color: yellow; */
+		box-shadow: none;
+	}
+
+	div.bottom-flip {
+		clip-path: inset(50% 0 0 0);
+		/* color: blue; */
+		transform: rotateX(-90deg);
+		box-shadow: none;
+	}
+
+	div.flip div.top-flip {
+		animation-name: flip-down-top;
+		animation-duration: 60ms;
+		animation-timing-function: ease-in-out;
+		animation-fill-mode: forwards;
+	}
+
+	div.flip div.bottom-flip {
+		animation-name: flip-down-bottom;
+		animation-delay: 60ms;
+		animation-duration: 60ms;
+		animation-timing-function: ease-in-out;
+		animation-fill-mode: forwards;
+	}
+
+	div.flap {
+		left: 0;
+		position: absolute;
+		top: 0;
+	}
+
+	:nth-child(1 of div.flap) {
+		height: 100%;
+	}
+
+	:nth-child(2 of div.flap) {
+		height: 95%;
+	}
+
+	:nth-child(3 of div.flap) {
+		height: 90%;
+	}
+
+	@keyframes flip-down-top {
+		from {
+			transform: rotateX(0deg);
+		}
+
+		to {
+			transform: rotateX(90deg);
+		}
+	}
+
+	@keyframes flip-down-bottom {
+		from {
+			transform: rotateX(-90deg);
+		}
+
+		to {
+			transform: rotateX(0deg);
+		}
 	}
 </style>

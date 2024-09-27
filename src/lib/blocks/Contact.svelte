@@ -41,13 +41,14 @@
 
 	div.contact a {
 		display: flex;
-		font-family: 'Inter', sans-serif;
-		font-optical-sizing: auto;
-		font-size: 0.85rem;
-		font-style: normal;
-		font-weight: 400;
+		font-family: var(--bodyFontFamily);
+		font-optical-sizing: var(--bodyFontOptical);
+		font-size: var(--bodyFontSize);
+		font-style: var(--bodyFontStyle);
+		font-weight: var(--bodyFontWeight);
 		justify-content: space-between;
-		line-height: 1.1rem;
+		letter-spacing: var(--bodyLetterSpacing);
+		line-height: var(--bodyLineHeight);
 		text-decoration: none;
 		width: 100%;
 	}
