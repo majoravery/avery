@@ -135,7 +135,7 @@ export const translations = {
 		'language.title': '言語',
 		'language.tutorialAlt': 'ドラッグして言語を変更',
 		'listeningTo.title': '聴いてる音楽',
-		name: 'エブリー・リム',
+		name: 'エブリー リム',
 		'projectShowcase.title': 'プロジェクトショーケース',
 		'projectShowcase.linkAlt': 'ウェブサイトを訪問',
 		'projectShowcase.imageAlt': '{{website}}のスクリーンショット',
