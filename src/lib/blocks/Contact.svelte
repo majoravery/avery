@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { t } from '$lib/stores/locale';
 	import arrowTopRight from '$lib/svg/arrow-up-right.svg';
-	import Eyebrow from '$lib/components/Eyebrow.svelte';
+	import Eyebrows from '$lib/components/Eyebrows.svelte';
 </script>
 
 <article>
-	<Eyebrow>{$t('contact.title')}</Eyebrow>
+	<Eyebrows>{$t('contact.title')}</Eyebrows>
 	<div class="contacts">
 		<div class="contact">
 			<a href="mailto:vivianaverylim@gmail.com">

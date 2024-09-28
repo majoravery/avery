@@ -40,6 +40,8 @@ All
 - [ ] Find better fonts for everything
 - [ ] Pass image through filter of hard light + theme colour, then show colour on hover (see https://github.com/lowtechmag/solar/wiki/Solar-Web-Design#images)
 - [ ] Supabase insert is currently open to public, find a way to restrict
+- [ ] Make sure everything is recalculated when resized
+- [ ] Sort out eyebrow arrow hover sitch
 
 Clock
 

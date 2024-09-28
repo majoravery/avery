@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { t } from '$lib/stores/locale';
-	import Eyebrow from '$lib/components/Eyebrow.svelte';
+	import Eyebrows from '$lib/components/Eyebrows.svelte';
 	import { pageviews, visitors } from '$lib/stores/pageview';
 
 	function pad(number: number) {
@@ -20,7 +20,7 @@
 </script>
 
 <article>
-	<Eyebrow>{$t('info.title')}</Eyebrow>
+	<Eyebrows>{$t('info.title')}</Eyebrows>
 	<div class="info">
 		<div class="row">
 			<span class="label">{$t('info.todaysDate')} </span>

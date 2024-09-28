@@ -1,19 +1,18 @@
 <script>
 	import { t } from '$lib/stores/locale';
-	import Eyebrow from '$lib/components/Eyebrow.svelte';
+	import Eyebrows from '$lib/components/Eyebrows.svelte';
 </script>
 
-<div>
-	<Eyebrow>{$t('description.title')}</Eyebrow>
+<article>
+	<Eyebrows>{$t('description.title')}</Eyebrows>
 
 	<span>
 		{$t('description.writeup')}
 	</span>
-</div>
+</article>
 
 <style>
-	div {
-		align-items: flex-end;
+	article {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;

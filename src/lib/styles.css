@@ -28,14 +28,6 @@
 
 */
 
-
-@font-face {
-    font-family: 'saans';
-    src: url('/fonts/Saans-TRIAL-Regular.woff2') format('woff2'),
-        url('/fonts/Saans-TRIAL-Regular.woff') format('woff'),
-        url('/fonts/Saans-TRIAL-Regular.ttf') format('truetype');
-}
-
 @font-face {
     font-family: 'RecklessNeue';
     src: url('/fonts/RecklessNeueTRIAL-Thin.woff2') format('woff2'),

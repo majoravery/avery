@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { t } from '$lib/stores/locale';
 	import { weather } from '$lib/stores/weather';
-	import Eyebrow from '$lib/components/Eyebrow.svelte';
+	import Eyebrows from '$lib/components/Eyebrows.svelte';
 	import sun from '$lib/images/weather/sun.png';
 
 	function getDayOfWeek(dateStr: string) {
@@ -17,7 +17,7 @@
 </script>
 
 <article>
-	<Eyebrow>{$t('weather.title')} ({$t('weather.location')})</Eyebrow>
+	<Eyebrows>{$t('weather.title')} ({$t('weather.location')})</Eyebrows>
 	<div class="sun">
 		<img src={sun} alt={$weather.condition.text} />
 	</div>

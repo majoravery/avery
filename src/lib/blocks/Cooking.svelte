@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { t } from '$lib/stores/locale';
-	import Eyebrow from '$lib/components/Eyebrow.svelte';
+	import Eyebrows from '$lib/components/Eyebrows.svelte';
 	import cooking from '$lib/images/cooking.png';
 </script>
 
 <article>
-	<Eyebrow>{$t('cooking.title')}</Eyebrow>
+	<Eyebrows>{$t('cooking.title')}</Eyebrows>
 	<div class="dish">
 		<img src={cooking} alt={$t('cooking.alt')} />
 	</div>

@@ -60,7 +60,10 @@ function shuffle(array: any[]) {
 /**
  * Solution from https://stackoverflow.com/a/21015393/6693826
  */
-export function getTextWidth(text: string, font = "500 1.2rem 'Inter', sans-serif"): number {
+export function getTextWidth(textEl: HTMLElement): number {
+	const text = textEl.textContent;
+	const font = window.getComputedStyle(textEl, null).getPropertyValue('font');
+
 	// Re-use canvas object for better performance
 	const canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement('canvas'));
 	const context = canvas.getContext('2d');

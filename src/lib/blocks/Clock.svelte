@@ -2,7 +2,7 @@
 <script lang="ts">
 	import { locale, t } from '$lib/stores/locale';
 	import { time } from '$lib/stores/time';
-	import Eyebrow from '$lib/components/Eyebrow.svelte';
+	import Eyebrows from '$lib/components/Eyebrows.svelte';
 	import { onMount } from 'svelte';
 
 	let hourNew: string, minuteNew: string, ampm: string;
@@ -75,7 +75,7 @@
 </script>
 
 <div class="container">
-	<Eyebrow>{$t('clock.title')} ({$t('clock.location')})</Eyebrow>
+	<Eyebrows>{$t('clock.title')} ({$t('clock.location')})</Eyebrows>
 	<div class="clock" class:day={ampm === 'am'} class:night={ampm === 'pm'}>
 		<div class="hours">
 			<span class="ampm">{ampm}</span>

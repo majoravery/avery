@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { t } from '$lib/stores/locale';
-	import Eyebrow from '$lib/components/Eyebrow.svelte';
+	import Eyebrows from '$lib/components/Eyebrows.svelte';
 </script>
 
 <article>
-	<Eyebrow>{$t('reading.title')}</Eyebrow>
+	<Eyebrows arrowAlt={$t('reading.linkAlt', { platform: 'Goodreads' })}>
+		{$t('reading.title')}
+	</Eyebrows>
 	<div class="book">
 		<div class="title">Let's Pretend This Never Happened</div>
 		<div class="author">{$t('reading.author', { author: 'Jenny Lawson' })}</div>

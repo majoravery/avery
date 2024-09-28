@@ -1,15 +1,34 @@
 <script lang="ts">
+	import { getTextWidth } from '$lib/utils';
+	import { onMount } from 'svelte';
 	import { t } from '$lib/stores/locale';
-	import Eyebrow from '$lib/components/Eyebrow.svelte';
+	import Eyebrows from '$lib/components/Eyebrows.svelte';
 	import listeningTo from '$lib/images/listening-to.png';
+
+	const title = 'LONGINESS REMIX';
+	const artist = 'SugLawd Familiar, CHICO CARLITO, Awich';
+
+	let artistEl: HTMLElement;
+
+	onMount(() => {
+		const artistWidth = getTextWidth(artistEl);
+
+		const root = document.querySelector(':root') as HTMLElement;
+		if (!root) {
+			throw new Error(`Couldn't get root element`);
+		}
+		root.style.setProperty('--artist-width', `${artistWidth}px`);
+	});
 </script>
 
 <article>
-	<Eyebrow>{$t('listeningTo.title')}</Eyebrow>
+	<Eyebrows arrowAlt={$t('listeningTo.linkAlt', { platform: 'YouTube' })}>
+		{$t('listeningTo.title')}
+	</Eyebrows>
 	<div class="album">
-		<div class="title">LONGINESS REMIX</div>
-		<div class="artist">SugLawd Familiar, CHICO CARLITO, Awich</div>
-		<img src={listeningTo} alt={$t('listeningTo.alt')} />
+		<div class="title">{title}</div>
+		<div class="artist" bind:this={artistEl} data-content={artist}>{artist}</div>
+		<img src={listeningTo} alt={`${title} - ${artist}`} />
 	</div>
 </article>
 
@@ -22,29 +41,26 @@
 
 	article:after {
 		content: '';
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		width: 100%;
-		height: 50%;
 		background-image: linear-gradient(to top, rgb(250, 250, 250), rgba(250, 250, 250, 0));
+		bottom: 0;
+		height: 70%;
+		left: 0;
+		position: absolute;
+		width: 100%;
 		z-index: 1;
 	}
 
 	div.album {
 		display: flex;
 		flex-direction: column;
-		justify-content: flex-end;
-		width: 100%;
 		height: 100%;
-	}
-
-	div.album img {
-		position: absolute;
-		width: 150%;
+		justify-content: flex-end;
+		position: relative;
+		width: 100%;
 	}
 
 	div.title {
+		color: var(--color-accent);
 		font-family: var(--bodyFontFamily);
 		font-optical-sizing: var(--bodyFontOptical);
 		font-size: var(--bodyFontSize);
@@ -52,40 +68,47 @@
 		font-weight: var(--bodyFontWeight);
 		letter-spacing: var(--bodyLetterSpacing);
 		line-height: var(--bodyLineHeight);
-		color: var(--color-accent);
-
-		white-space: nowrap;
 		z-index: 2;
 	}
 
 	div.artist {
+		animation: scroll 15s 2s linear infinite;
 		font-family: 'JetBrains Mono', monospace;
 		font-optical-sizing: auto;
-		font-weight: 400;
-		font-style: normal;
 		font-size: 0.7rem;
+		font-style: normal;
+		font-weight: 400;
 		line-height: 1.1rem;
-
+		transform: translate3d(0, 0, 0);
 		white-space: nowrap;
 		z-index: 2;
 	}
 
-	/* div.album {
-		position: absolute;
-		width: 100%;
-		top: 0;
-		left: 0;
-		height: 100%;
+	div.artist:before {
+		content: attr(data-content);
+		font: inherit;
+		padding-right: calc(var(--block-padding) * 2);
 	}
 
 	div.album img {
-		width: 100%;
-
-		position: absolute;
-		top: -75%;
 		bottom: -100%;
 		left: -100%;
-		right: -100%;
 		margin: auto;
-	} */
+		opacity: 0.4;
+		position: absolute;
+		right: -100%;
+		top: -75%;
+		width: 150%;
+	}
+
+	@keyframes scroll {
+		50%,
+		100% {
+			transform: translate3d(
+				calc((var(--block-padding) + var(--block-padding) + var(--artist-width)) * -1),
+				0,
+				0
+			);
+		}
+	}
 </style>

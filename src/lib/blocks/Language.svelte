@@ -11,13 +11,14 @@
 	import { writable } from 'svelte/store';
 	import drag from '$lib/images/drag.png';
 	import Draggable from 'gsap/dist/Draggable';
-	import Eyebrow from '$lib/components/Eyebrow.svelte';
+	import Eyebrows from '$lib/components/Eyebrows.svelte';
 
 	gsap.registerPlugin(Draggable);
 
 	let activeLanguageIndex = LOCALES.findIndex((lang) => lang.id === $locale);
 	let container: HTMLDivElement;
 	let height: number;
+	let languageEl: HTMLElement;
 	let radius: number;
 	let step = 360 / LOCALES.length;
 	let width: number;
@@ -86,7 +87,7 @@
 		});
 
 		height = container.getBoundingClientRect().height / 6;
-		width = getTextWidth(LOCALES[activeLanguageIndex].name);
+		width = getTextWidth(languageEl);
 		radius = Math.ceil(Math.round(width / 2) / Math.tan(Math.PI / LOCALES.length));
 
 		setTimeout(startTutorialGuide, 2000);
@@ -94,7 +95,7 @@
 </script>
 
 <div class="container" class:debug={$isDebugLanguage} bind:this={container}>
-	<Eyebrow>{$t('language.title')}</Eyebrow>
+	<Eyebrows>{$t('language.title')}</Eyebrows>
 	<div
 		aria-valuenow={activeLanguageIndex}
 		class="language-selector"
@@ -109,6 +110,7 @@
 					class:active={activeLanguageIndex === index}
 					style:height={`${height}px`}
 					style:transform={`rotateY(${step * index}deg) translateZ(${radius}px)`}
+					bind:this={languageEl}
 				>
 					{language.name}
 				</div>
