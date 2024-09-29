@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { derived } from 'svelte/store';
 	import { locale, t } from '$lib/stores/locale';
-	import { weather } from '$lib/stores/weather';
+	import { weathers } from '$lib/stores/weathers';
 	import Eyebrows from '$lib/components/Eyebrows.svelte';
 	import sun from '$lib/images/weather/sun.png';
 
@@ -11,34 +11,24 @@
 		return $t(`weather.${day}`);
 	}
 
-	const formattedWeather = derived(weather, ($weather) =>
-		$weather.forecasts.map((w) => ({
-			...w,
-			day: getDayOfWeek(w.date)
-		}))
-	);
-
-	$: {
-		fetch('/api/weather', {
-			method: 'POST',
-			body: JSON.stringify({ locale: $locale })
-		})
-			.then((res) => res.json())
-			.then(({ data }) => weather.set(data));
-	}
+	$: condition = $weathers[$locale].condition;
+	$: formattedWeather = $weathers[$locale].forecasts.map((w) => ({
+		...w,
+		day: getDayOfWeek(w.date)
+	}));
 </script>
 
 <article>
 	<Eyebrows>{$t('weather.title')} ({$t('weather.location')})</Eyebrows>
 	<div class="sun">
-		<img src={sun} alt={$weather?.condition?.text} />
+		<img src={sun} alt={condition.text} />
 	</div>
 	<div class="forecasts">
 		<div class="forecast large">
-			<span class="day">{$formattedWeather[0].day}</span>
-			<span class="temp">{$formattedWeather[0].temp}&deg;C</span>
+			<span class="day">{formattedWeather[0].day}</span>
+			<span class="temp">{formattedWeather[0].temp}&deg;C</span>
 		</div>
-		{#each $formattedWeather.slice(1) as weather}
+		{#each formattedWeather.slice(1) as weather}
 			<div class="forecast">
 				<span class="day">{weather.day}</span>
 				<span class="temp">{weather.temp}&deg;C</span>

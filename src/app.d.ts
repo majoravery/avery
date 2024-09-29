@@ -15,7 +15,7 @@ declare global {
 		locale: Locale;
 		pageViewCount: number;
 		visitorCount: number;
-		weather: Weather;
+		weathers: Record<Locale, Weather>;
 	}
 
 	interface Dimensions {

@@ -1,27 +1,18 @@
 <script lang="ts">
 	import { locale } from '$lib/stores/locale';
-	import { onMount } from 'svelte';
 	import { pageviews, visitors } from '$lib/stores/pageview';
 	import { theme } from '$lib/stores/theme';
-	import { weather } from '$lib/stores/weather';
+	import { weathers } from '$lib/stores/weathers';
 	import Grid from './components/Grid.svelte';
 
 	import '$lib/styles.css';
 
 	export let data: MainPageData;
 
-	weather.set(data.weather);
+	weathers.set(data.weathers);
 	locale.set(data.locale);
 	pageviews.set(data.pageViewCount);
 	visitors.set(data.visitorCount);
-
-	onMount(() => {
-		fetch('/api/pageview', {
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		});
-	});
 </script>
 
 <!-- <svelte:head>
