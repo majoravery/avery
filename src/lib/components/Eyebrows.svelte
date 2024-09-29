@@ -1,13 +1,13 @@
 <script lang="ts">
 	import arrowTopRight from '$lib/svg/arrow-up-right.svg';
 
-	export let invert: boolean = false;
+	export let standout: boolean = false;
 	export let arrowAlt: string | undefined = undefined;
 	export let isHover: boolean = false;
 </script>
 
 <div class="header" class:hover={isHover}>
-	<div class="eyebrow" class:invert><slot /></div>
+	<div class="eyebrow" class:standout><slot /></div>
 	{#if arrowAlt}
 		<span class="arrow">
 			<img src={arrowTopRight} alt={arrowAlt} />
@@ -40,8 +40,11 @@
 		z-index: 3;
 	}
 
-	div.eyebrow.invert {
-		color: rgb(255, 255, 255);
+	div.eyebrow.standout {
+		padding: 0.2rem 0.3rem;
+		background: var(--color-filler);
+		border-radius: var(--border-radius-s);
+		border: 1px solid var(--color-filler);
 	}
 
 	span.arrow {

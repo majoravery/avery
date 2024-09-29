@@ -42,17 +42,20 @@ All
 - [ ] Supabase insert is currently open to public, find a way to restrict
 - [ ] Make sure everything is recalculated when resized
 - [ ] Sort out eyebrow arrow hover sitch
+- [ ] improve mobile look
 
 Clock
 
 - [ ] Ensure day -> night/night -> day cards animate correctly
 - [ ] implement skeleton when changing locale
+- [ ] looks weird on mobile
 
 Language switcher
 
 - [ ] refine gsap draggable, make sure it's smooth
 - [ ] translate date too
 - [ ] limit the drag to 1 language at a time only because the radius isn't uniform
+- [ ] looks weir don mobile
 
 Weather
 
@@ -65,3 +68,7 @@ ProjectShowcase
 Info
 
 - [ ] Increase page view real time
+
+Listening To
+
+- [ ] artist does not scroll properly

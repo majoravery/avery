@@ -1,66 +1,64 @@
 :root {
     --block-size: 150px;
     --block-padding: 1rem;
+    --columns: 2;
     --grid-gap: 0.25rem;
+    --rows: 15;
 }
 
 section {
-    grid-template-rows: repeat(15, minmax(var(--block-size), calc((100vw - 32px) / 2)));
-    grid-template-columns: repeat(2, minmax(var(--block-size), calc((100vw - 32px) / 2)));
+    grid-template-rows: repeat(var(--rows), minmax(var(--block-size), calc((100vw - 32px) / 2)));
+    grid-template-columns: repeat(var(--columns), minmax(var(--block-size), calc((100vw - 32px) / 2)));
 }
 
 @media (min-width: 480px) {
     :root {
+        --columns: 3;
+        --rows: 10;
         font-size: 16px;
     }
 
     section {
-        grid-template-rows: repeat(10, var(--block-size));
-        grid-template-columns: repeat(3, var(--block-size));
+        grid-template-rows: repeat(var(--rows), var(--block-size));
+        grid-template-columns: repeat(var(--columns), var(--block-size));
     }
 }
 
 @media (min-width: 768px) {
-    section {
-        grid-template-rows: repeat(8, var(--block-size));
-        grid-template-columns: repeat(4, var(--block-size));
+    :root {
+        --columns: 4;
+        --rows: 8;
     }
 }
 
 @media (min-width: 1024px) {
-    section {
-        grid-template-rows: repeat(5, var(--block-size));
-        grid-template-columns: repeat(6, var(--block-size));
+    :root {
+        --columns: 6;
+        --rows: 5;
     }
 }
 
 @media (min-width: 1280px) {
-    section {
-        grid-template-rows: repeat(4, var(--block-size));
-        grid-template-columns: repeat(8, var(--block-size));
+    :root {
+        --columns: 8;
+        --rows: 4;
     }
 }
 
 @media (min-width: 1400px) {
     :root {
         --block-size: 170px;
+        --columns: 8;
+        --rows: 4;
         font-size: 18px;
-    }
-
-    section {
-        grid-template-rows: repeat(4, var(--block-size));
-        grid-template-columns: repeat(8, var(--block-size));
     }
 }
 
 @media (min-width: 1680px) {
     :root {
         --block-size: 190px;
+        --columns: 8;
+        --rows: 4;
         font-size: 20px;
-    }
-
-    section {
-        grid-template-rows: repeat(4, var(--block-size));
-        grid-template-columns: repeat(8, var(--block-size));
     }
 }

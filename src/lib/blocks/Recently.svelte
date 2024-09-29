@@ -55,7 +55,7 @@
 </script>
 
 <article>
-	<Eyebrows>{$t('recently.title')}</Eyebrows>
+	<Eyebrows standout>{$t('recently.title')}</Eyebrows>
 	<!-- <div class="container" bind:this={containerEl} /> -->
 	<div class="container">
 		<img src={recently} alt={$t('recently.title')} />
@@ -84,7 +84,7 @@
 		content: '';
 		height: 100%;
 		left: 0;
-		opacity: 0.3;
+		opacity: 0.2;
 		mix-blend-mode: screen;
 		position: absolute;
 		right: 0;
