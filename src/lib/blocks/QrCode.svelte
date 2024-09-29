@@ -1,10 +1,29 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { t } from '$lib/stores/locale';
-	import qr from '$lib/images/qr.png';
+
+	const IMAGES = [
+		'g', // if grandma had wheels
+		'h', // heman
+		'o', // jacques pepin omelette
+		'p', // potter puppet pals
+		'r' // rickroll
+	];
+	let img: string;
+
+	async function getImage() {
+		const file = IMAGES[Math.floor(Math.random() * IMAGES.length)];
+		const module = await import(`$lib/images/qr/${file}.png`);
+		img = module.default;
+	}
+
+	onMount(() => {
+		getImage();
+	});
 </script>
 
 <article>
-	<img src={qr} alt={$t('qrCode.alt')} />
+	<img src={img} alt={$t('qrCode.alt')} />
 </article>
 
 <style>
@@ -18,7 +37,15 @@
 		width: 100%;
 	}
 
-	svg {
-		fill: var(--color-accent);
+	article:before {
+		content: '';
+		background: var(--color-accent);
+		filter: brightness(90%);
+		height: calc(100% - var(--block-padding) - var(--block-padding));
+		left: var(--block-padding);
+		mix-blend-mode: screen;
+		position: absolute;
+		top: var(--block-padding);
+		width: calc(100% - var(--block-padding) - var(--block-padding));
 	}
 </style>

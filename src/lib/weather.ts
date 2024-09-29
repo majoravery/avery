@@ -13,7 +13,7 @@ const MAPPING_LOCATION: Record<string, string> = {
 const MAPPING_CONDITION_CODES: Record<ConditionCode, number[]> = {
 	sunny: [1000],
 	cloudy: [1003, 1006, 1009],
-	fog: [1030, 1135, 1147],
+	foggy: [1030, 1135, 1147],
 	rain: [
 		1063, 1150, 1153, 1168, 1171, 1180, 1183, 1186, 1189, 1192, 1195, 1198, 1201, 1240, 1243, 1246
 	],

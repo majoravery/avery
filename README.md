@@ -46,7 +46,7 @@ All
 Clock
 
 - [ ] Ensure day -> night/night -> day cards animate correctly
-- [ ] Refine am/pm position
+- [ ] implement skeleton when changing locale
 
 Language switcher
 
@@ -57,7 +57,7 @@ Language switcher
 Weather
 
 - [ ] draw other weather svgs
-- [ ] implement caching
+- [ ] implement skeleton when changing locale
 
 ProjectShowcase
 

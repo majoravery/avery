@@ -66,7 +66,7 @@ declare global {
 
 	type Locale = 'en' | 'zh' | 'de' | 'jp';
 
-	type ConditionCode = 'sunny' | 'cloudy' | 'fog' | 'rain' | 'storm' | 'snow' | 'sleet';
+	type ConditionCode = 'sunny' | 'cloudy' | 'foggy' | 'rain' | 'storm' | 'snow' | 'sleet';
 
 	interface Condition {
 		code: ConditionCode;

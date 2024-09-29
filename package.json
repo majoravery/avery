@@ -31,6 +31,9 @@
 	"type": "module",
 	"dependencies": {
 		"@supabase/supabase-js": "^2.45.4",
+		"@thi.ng/canvas": "^0.5.3",
+		"@thi.ng/pixel": "^7.3.4",
+		"@thi.ng/pixel-dither": "^1.1.144",
 		"gsap": "^3.12.5",
 		"nice-color-palettes": "^3.0.0"
 	}
