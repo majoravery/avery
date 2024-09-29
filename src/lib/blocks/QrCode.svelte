@@ -32,11 +32,6 @@
 		width: 100%;
 	}
 
-	img {
-		height: auto;
-		width: 100%;
-	}
-
 	article:before {
 		content: '';
 		background: var(--color-accent);
@@ -47,5 +42,10 @@
 		position: absolute;
 		top: var(--block-padding);
 		width: calc(100% - var(--block-padding) - var(--block-padding));
+	}
+
+	img {
+		height: auto;
+		width: 100%;
 	}
 </style>

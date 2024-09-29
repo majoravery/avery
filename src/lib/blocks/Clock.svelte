@@ -144,6 +144,7 @@
 	}
 
 	div.clock.night {
+		filter: brightness(150%);
 		--background-color: var(--color-accent);
 		--box-shadow: rgba(0, 0, 0, 0) 0 0 0 0, rgba(0, 0, 0, 0) 0 0 0 0,
 			rgba(0, 0, 0, 0.5) 0 1.5px 1.5px -1px, rgba(0, 0, 0, 0.5) 0 1.5px 1.5px -1px;

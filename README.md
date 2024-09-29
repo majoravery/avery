@@ -57,7 +57,6 @@ Language switcher
 Weather
 
 - [ ] draw other weather svgs
-- [ ] implement skeleton when changing locale
 
 ProjectShowcase
 
