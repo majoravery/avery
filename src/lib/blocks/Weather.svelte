@@ -1,9 +1,9 @@
 <script lang="ts">
+	import { derived } from 'svelte/store';
 	import { locale, t } from '$lib/stores/locale';
 	import { weather } from '$lib/stores/weather';
 	import Eyebrows from '$lib/components/Eyebrows.svelte';
 	import sun from '$lib/images/weather/sun.png';
-	import { derived } from 'svelte/store';
 
 	function getDayOfWeek(dateStr: string) {
 		const date = new Date(dateStr);
@@ -19,7 +19,7 @@
 	);
 
 	$: {
-		fetch('/weather', {
+		fetch('/api/weather', {
 			method: 'POST',
 			body: JSON.stringify({ locale: $locale })
 		})

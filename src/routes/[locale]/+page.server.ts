@@ -3,6 +3,7 @@ import { redirect } from '@sveltejs/kit';
 import { VALID_LOCALES } from '$lib/stores/locale';
 import * as supabase from '$lib/supabase.js';
 
+export const prerender = true;
 export const trailingSlash = 'always';
 
 export async function load({ params }): Promise<MainPageData> {
