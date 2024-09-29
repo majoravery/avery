@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { locale } from '$lib/stores/locale';
+	import { locale, t } from '$lib/stores/locale';
 	import { pageviews, visitors } from '$lib/stores/pageview';
 	import { theme } from '$lib/stores/theme';
 	import { weathers } from '$lib/stores/weathers';
@@ -13,12 +13,36 @@
 	locale.set(data.locale);
 	pageviews.set(data.pageViewCount);
 	visitors.set(data.visitorCount);
+
+	const url = 'https://averylim.com';
 </script>
 
-<!-- <svelte:head>
-	<title>Avery's dotcom</title>
-	<html lang={$locale} />
-</svelte:head> -->
+<svelte:head>
+	<title>{$t('site.title')}</title>
+	<meta name="description" content={$t('site.description')} />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<meta charset="UTF-8" />
+
+	<meta name="robots" content="index, follow" />
+
+	<link rel="canonical" href={url} />
+
+	<meta property="og:title" content={$t('site.title')} />
+	<meta property="og:description" content={$t('site.description')} />
+	<meta property="og:image" content="https://www.example.com/image.jpg" />
+	<meta property="og:url" content={url} />
+	<meta property="og:type" content="website" />
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={$t('site.title')} />
+	<meta name="twitter:description" content={$t('site.description')} />
+	<meta name="twitter:image" content="https://www.example.com/image.jpg" />
+
+	<!-- TODO: something to do with language? -->
+	<link rel="alternate" href="https://www.example.com/" hreflang="en-us" />
+</svelte:head>
 
 <main
 	style="--color-background: {$theme[0]}; --color-filler: {$theme[1]}; --color-accent: {$theme[2]}"
