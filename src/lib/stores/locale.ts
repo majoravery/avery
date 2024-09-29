@@ -3,7 +3,7 @@ import { derived, writable } from 'svelte/store';
 import { translations } from '$lib/translations';
 import { replaceState } from '$app/navigation';
 
-export const LOCALES = [
+export const LOCALES: { name: string; id: Locale }[] = [
 	{
 		name: 'English',
 		id: 'en'
@@ -22,7 +22,7 @@ export const LOCALES = [
 	}
 ];
 export const VALID_LOCALES = Object.values(LOCALES).map((locale) => locale.id);
-export const locale = writable<string>();
+export const locale = writable<Locale>();
 locale.subscribe((newLocale) => {
 	if (!browser) {
 		return;

@@ -77,13 +77,13 @@ export const translations = {
 		'wave.alt': '你好！',
 		'weather.title': '天气预报',
 		'weather.location': '新加坡',
-		'weather.mon': '星期一',
-		'weather.tue': '星期二',
-		'weather.wed': '星期三',
-		'weather.thu': '星期四',
-		'weather.fri': '星期五',
-		'weather.sat': '星期六',
-		'weather.sun': '星期日'
+		'weather.mon': '拜一',
+		'weather.tue': '拜二',
+		'weather.wed': '拜三',
+		'weather.thu': '拜四',
+		'weather.fri': '拜五',
+		'weather.sat': '拜六',
+		'weather.sun': '拜日'
 	},
 	de: {
 		'clock.title': 'Die Uhr',

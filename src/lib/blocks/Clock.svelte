@@ -74,7 +74,7 @@
 	});
 </script>
 
-<div class="container">
+<article>
 	<Eyebrows>{$t('clock.title')} ({$t('clock.location')})</Eyebrows>
 	<div class="clock" class:day={ampm === 'am'} class:night={ampm === 'pm'}>
 		<div class="hours">
@@ -113,10 +113,10 @@
 			<div class="card flap" />
 		</div>
 	</div>
-</div>
+</article>
 
 <style>
-	div.container {
+	article {
 		display: grid;
 		grid-template-rows: min-content auto;
 		flex-direction: column;

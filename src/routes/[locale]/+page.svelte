@@ -10,8 +10,8 @@
 
 	export let data: MainPageData;
 
-	weather.set(data);
-	locale.set(data.lang);
+	weather.set(data.weather);
+	locale.set(data.locale);
 	pageviews.set(data.pageViewCount);
 	visitors.set(data.visitorCount);
 
@@ -24,6 +24,11 @@
 		});
 	});
 </script>
+
+<!-- <svelte:head>
+	<title>Avery's dotcom</title>
+	<html lang={$locale} />
+</svelte:head> -->
 
 <main
 	style="--color-background: {$theme[0]}; --color-filler: {$theme[1]}; --color-accent: {$theme[2]}"

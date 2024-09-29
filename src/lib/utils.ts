@@ -57,6 +57,11 @@ function shuffle(array: any[]) {
 	return ret;
 }
 
+export const random = {
+	pick,
+	shuffle
+};
+
 /**
  * Solution from https://stackoverflow.com/a/21015393/6693826
  */
@@ -72,7 +77,10 @@ export function getTextWidth(textEl: HTMLElement): number {
 	return Math.ceil(metrics.width);
 }
 
-export const random = {
-	pick,
-	shuffle
-};
+export function convertDateToDdmmyyyy(date: Date) {
+	const day = String(date.getDate()).padStart(2, '0');
+	const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+	const year = date.getFullYear();
+
+	return `${day}${month}${year}`;
+}

@@ -40,6 +40,7 @@
 	}
 
 	div.contact a {
+		align-items: center;
 		display: flex;
 		font-family: var(--bodyFontFamily);
 		font-optical-sizing: var(--bodyFontOptical);
@@ -59,11 +60,12 @@
 
 	span.arrow {
 		display: inline-block;
+		line-height: var(--bodyFontSize);
 	}
 
 	span.arrow img {
 		transform-origin: center;
-		width: 1rem;
+		width: var(--bodyFontSize);
 	}
 
 	div.contact:hover span.arrow img {

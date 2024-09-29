@@ -20,6 +20,7 @@
 
 /* chinese */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&display=swap');
+
 /* 
   font-family: "Noto Sans SC", sans-serif;
   font-optical-sizing: auto;
@@ -27,6 +28,12 @@
   font-style: normal;
 
 */
+@font-face {
+    font-family: 'saans';
+    src: url('/fonts/Saans-TRIAL-Regular.woff2') format('woff2'),
+        url('/fonts/Saans-TRIAL-Regular.woff') format('woff'),
+        url('/fonts/Saans-TRIAL-Regular.ttf') format('truetype');
+}
 
 @font-face {
     font-family: 'RecklessNeue';

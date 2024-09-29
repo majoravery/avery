@@ -14,7 +14,72 @@ export async function addPageView(visitorId: string) {
 		.select();
 
 	if (error) {
-		throw new Error(`Error ${error.code}: ${error.message}`);
+		throw new Error(
+			`Error adding page view (code: ${error.code}): ${error.message}. ${error.details}`
+		);
+	}
+
+	return data;
+}
+
+export async function getPageView(): Promise<number> {
+	const { count, error } = await supabase
+		.from('page_views')
+		.select('*', { count: 'exact', head: true });
+
+	if (error) {
+		throw new Error(
+			`Error fetching page views (code: ${error.code}): ${error.message}. ${error.details}`
+		);
+	}
+
+	if (!count) {
+		throw new Error(`\`count\` is null`);
+	}
+
+	return count;
+}
+
+export async function getVisitors(): Promise<number> {
+	const { data, error } = await supabase
+		.from('page_views')
+		.select('visitor_id', { count: 'exact' });
+
+	if (error) {
+		throw new Error(
+			`Error fetching visitors (code: ${error.code}): ${error.message}. ${error.details}`
+		);
+	}
+
+	return new Set(data?.map((v) => v.visitor_id)).size;
+}
+
+export async function addWeather(weatherId: string, weather: Weather) {
+	const { data, error } = await supabase
+		.from('weather')
+		.insert({
+			id: weatherId,
+			weather: JSON.stringify(weather)
+		})
+		.select();
+
+	if (error) {
+		throw new Error(
+			`Error adding weather forecasts for ${weatherId} (code: ${error.code}): ${error.message}. ${error.details}`
+		);
+	}
+
+	return data;
+}
+
+// Gets today's forecasts
+export async function getWeather(weatherId: string): Promise<WeatherSpResponse> {
+	const { data, error } = await supabase.from('weather').select().eq('id', weatherId).maybeSingle();
+
+	if (error) {
+		throw new Error(
+			`Error getting weather ${weatherId} (code: ${error.code}): ${error.message}. ${error.details}`
+		);
 	}
 
 	return data;

@@ -23,7 +23,7 @@ export const CANVAS_TYPES: CanvasTypes = {
 			{ ...BLOCKS.single, content: 'QrCode' },
 			{ ...BLOCKS.single, content: 'ListeningTo' },
 			{ ...BLOCKS.single, content: 'Reading' },
-			{ ...BLOCKS.single, content: 'Watching' },
+			{ ...BLOCKS.single, content: 'Pattern' }, // was Watching. Switch back when ready?
 			{ ...BLOCKS.single, content: 'Cooking' },
 			{ ...BLOCKS.single, content: 'Wave' },
 			{ ...BLOCKS.single, content: 'Pattern' },
@@ -48,7 +48,7 @@ export const CANVAS_TYPES: CanvasTypes = {
 			{ ...BLOCKS.single, content: 'QrCode' },
 			{ ...BLOCKS.single, content: 'ListeningTo' },
 			{ ...BLOCKS.single, content: 'Reading' },
-			{ ...BLOCKS.single, content: 'Watching' },
+			{ ...BLOCKS.single, content: 'Pattern' }, // was Watching. Switch back when ready?
 			{ ...BLOCKS.single, content: 'Cooking' },
 			{ ...BLOCKS.single, content: 'Wave' },
 			{ ...BLOCKS.single, content: 'Pattern' },
@@ -72,7 +72,7 @@ export const CANVAS_TYPES: CanvasTypes = {
 			{ ...BLOCKS.single, content: 'QrCode' },
 			{ ...BLOCKS.single, content: 'ListeningTo' },
 			{ ...BLOCKS.single, content: 'Reading' },
-			{ ...BLOCKS.single, content: 'Watching' },
+			{ ...BLOCKS.single, content: 'Pattern' }, // was Watching. Switch back when ready?
 			{ ...BLOCKS.single, content: 'Cooking' },
 			{ ...BLOCKS.single, content: 'Wave' },
 			{ ...BLOCKS.single, content: 'Pattern' },
@@ -98,7 +98,7 @@ export const CANVAS_TYPES: CanvasTypes = {
 			{ ...BLOCKS.single, content: 'QrCode' },
 			{ ...BLOCKS.single, content: 'ListeningTo' },
 			{ ...BLOCKS.single, content: 'Reading' },
-			{ ...BLOCKS.single, content: 'Watching' },
+			{ ...BLOCKS.single, content: 'Pattern' }, // was Watching. Switch back when ready?
 			{ ...BLOCKS.single, content: 'Cooking' },
 			{ ...BLOCKS.single, content: 'Wave' },
 			{ ...BLOCKS.single, content: 'Pattern' },
@@ -122,7 +122,7 @@ export const CANVAS_TYPES: CanvasTypes = {
 			{ ...BLOCKS.single, content: 'QrCode' },
 			{ ...BLOCKS.single, content: 'ListeningTo' },
 			{ ...BLOCKS.single, content: 'Reading' },
-			{ ...BLOCKS.single, content: 'Watching' },
+			{ ...BLOCKS.single, content: 'Pattern' }, // was Watching. Switch back when ready?
 			{ ...BLOCKS.single, content: 'Cooking' },
 			{ ...BLOCKS.single, content: 'Wave' },
 			{ ...BLOCKS.single, content: 'Pattern' },

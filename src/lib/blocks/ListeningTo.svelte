@@ -59,6 +59,17 @@
 		width: 100%;
 	}
 
+	div.album img {
+		bottom: -100%;
+		left: -100%;
+		margin: auto;
+		opacity: 0.4;
+		position: absolute;
+		right: -100%;
+		top: -75%;
+		width: 150%;
+	}
+
 	div.title {
 		color: var(--color-accent);
 		font-family: var(--bodyFontFamily);
@@ -89,18 +100,6 @@
 		font: inherit;
 		padding-right: calc(var(--block-padding) * 2);
 	}
-
-	div.album img {
-		bottom: -100%;
-		left: -100%;
-		margin: auto;
-		opacity: 0.4;
-		position: absolute;
-		right: -100%;
-		top: -75%;
-		width: 150%;
-	}
-
 	@keyframes scroll {
 		50%,
 		100% {

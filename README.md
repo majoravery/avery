@@ -62,3 +62,7 @@ Weather
 ProjectShowcase
 
 - [ ] use an animated gif of scrolling down the page
+
+Info
+
+- [ ] Increase page view real time

@@ -6,15 +6,16 @@ declare global {
 		// interface Locals {}
 		// interface PageData {}
 		interface PageState {
-			locale: string;
+			locale: Locale;
 		}
 		// interface Platform {}
 	}
 
-	interface MainPageData extends Weather {
-		lang: string;
+	interface MainPageData {
+		locale: Locale;
 		pageViewCount: number;
 		visitorCount: number;
+		weather: Weather;
 	}
 
 	interface Dimensions {
@@ -55,24 +56,40 @@ declare global {
 		content: BlockContent;
 	}
 
+	type Breakpoint = number;
+
 	interface Canvas extends Dimensions {
 		blocks: BlockWithContent[];
 	}
 
-	type Breakpoint = number;
-
 	type CanvasTypes = Record<Breakpoint, Canvas>;
+
+	type Locale = 'en' | 'zh' | 'de' | 'jp';
+
+	type ConditionCode = 'sunny' | 'cloudy' | 'fog' | 'rain' | 'storm' | 'snow' | 'sleet';
+
+	interface Condition {
+		code: ConditionCode;
+		text: string;
+	}
 
 	interface Forecast {
 		date: string;
 		temp: number;
-		conditionCode: 'sunny' | 'cloudy' | 'fog' | 'rain' | 'storm' | 'snow' | 'sleet';
-		conditionText: string;
 	}
 
 	interface Weather {
+		condition: Condition;
 		forecasts: Forecast[];
-		condition: { code: string; text: string };
+	}
+
+	/**
+	 * Supabase responses
+	 */
+	interface WeatherSpResponse {
+		id: string;
+		created_at: string;
+		weather: string;
 	}
 }
 
