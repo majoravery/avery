@@ -29,6 +29,9 @@
 		await tick();
 		timeline
 			.from('div.block.name', { scale: 0.8, autoAlpha: 0, duration: 1 })
+			// Hiding this here because I set visibility: hidden otherwise it'll flash at the
+			// top before the grid loads
+			.set('footer', { visibility: 'visible' })
 			.delay(0.2)
 			.from('div.block:not(.name)', { scale: 0.8, autoAlpha: 0, duration: 1, stagger: 0.1 })
 			.from('footer', { autoAlpha: 0, y: '500%' });
@@ -122,8 +125,8 @@
 		font-weight: var(--bodyFontWeight);
 		letter-spacing: var(--bodyLetterSpacing);
 		line-height: var(--bodyLineHeight);
-		opacity: 0;
 		max-width: calc((var(--columns) * var(--block-size)) + (var(--columns) - 1) * var(--grid-gap));
+		visibility: hidden;
 		width: 100%;
 	}
 </style>

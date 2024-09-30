@@ -55,10 +55,6 @@ Language switcher
 - [ ] limit the drag to 1 language at a time only because the radius isn't uniform
 - [ ] looks weird on mobile
 
-Weather
-
-- [ ] draw other weather svgs
-
 ProjectShowcase
 
 - [ ] use an animated gif of scrolling down the page

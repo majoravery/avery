@@ -1,9 +1,7 @@
 <script lang="ts">
-	import { derived } from 'svelte/store';
 	import { locale, t } from '$lib/stores/locale';
 	import { weathers } from '$lib/stores/weathers';
 	import Eyebrows from '$lib/components/Eyebrows.svelte';
-	import sun from '$lib/images/weather/sun.png';
 
 	function getDayOfWeek(dateStr: string) {
 		const date = new Date(dateStr);
@@ -21,7 +19,9 @@
 <article>
 	<Eyebrows>{$t('weather.title')} ({$t('weather.location')})</Eyebrows>
 	<div class="sun">
-		<img src={sun} alt={condition.text} />
+		{#await import(`$lib/images/weather/${condition.code}.png`) then { default: src }}
+			<img {src} alt={condition.text} />
+		{/await}
 	</div>
 	<div class="forecasts">
 		<div class="forecast large">
@@ -50,7 +50,7 @@
 		left: -4rem;
 		opacity: 0.5;
 		position: absolute;
-		top: -4rem;
+		top: -3rem;
 		width: calc(var(--block-size) * 1.5);
 		z-index: 1;
 	}
