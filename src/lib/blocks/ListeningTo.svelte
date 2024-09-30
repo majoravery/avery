@@ -11,13 +11,21 @@
 	let artistEl: HTMLElement;
 
 	onMount(() => {
-		const artistWidth = getTextWidth(artistEl);
-
-		const root = document.querySelector(':root') as HTMLElement;
-		if (!root) {
-			throw new Error(`Couldn't get root element`);
+		function resizeHandler() {
+			const artistWidth = getTextWidth(artistEl);
+			const root = document.querySelector(':root') as HTMLElement;
+			if (!root) {
+				throw new Error(`Couldn't get root element`);
+			}
+			root.style.setProperty('--artist-width', `${artistWidth}px`);
 		}
-		root.style.setProperty('--artist-width', `${artistWidth}px`);
+
+		resizeHandler();
+		window.addEventListener('resize', resizeHandler);
+
+		return () => {
+			window.removeEventListener('resize', resizeHandler);
+		};
 	});
 </script>
 
