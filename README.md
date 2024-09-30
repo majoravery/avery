@@ -38,10 +38,8 @@ All
 - [ ] Render an SEO friendly page for SSR
   - [ ] I see a flash of it though
 - [ ] When going from smallest breakpoint to 480, the weather app seems to become the wide tile
-- [ ] Find better fonts for everything
 - [ ] Pass image through filter of hard light + theme colour, then show colour on hover (see https://github.com/lowtechmag/solar/wiki/Solar-Web-Design#images)
 - [ ] Supabase insert is currently open to public, find a way to restrict
-- [ ] Make sure everything is recalculated when resized
 - [ ] Sort out eyebrow arrow hover sitch
 - [ ] improve mobile look
 

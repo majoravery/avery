@@ -1,22 +1,29 @@
 <script lang="ts">
-	import { t } from '$lib/stores/locale';
+	import { locale, t } from '$lib/stores/locale';
 	import Eyebrows from '$lib/components/Eyebrows.svelte';
 	import { pageviews, visitors } from '$lib/stores/pageview';
+
+	const MAPPING_LOCALE: Record<string, string> = {
+		en: 'en-SG',
+		zh: 'zh-SG',
+		de: 'de',
+		jp: 'ja-JP'
+	};
 
 	function pad(number: number) {
 		return String(number).padStart(4, '0');
 	}
 
-	function getTodaysDate() {
+	function getTodaysDate(locale: Locale) {
 		const today = new Date();
 		const day = String(today.getDate()).padStart(2, '0');
-		const month = today.toLocaleString('default', { month: 'short' });
+		const month = today.toLocaleString(MAPPING_LOCALE[locale], { month: 'short' });
 		const year = today.getFullYear();
 
 		return `${day} ${month} ${year}`;
 	}
 
-	const date = getTodaysDate();
+	$: date = getTodaysDate($locale);
 </script>
 
 <article>
