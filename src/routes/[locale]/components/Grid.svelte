@@ -1,13 +1,20 @@
 <script lang="ts">
 	import { CANVAS_TYPES } from '$lib/constants';
 	import { Grid } from '$lib/grid';
+	import { gsap } from 'gsap';
 	import { isDebugMode } from '$lib/stores/debugMode';
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 	import Block from './Block.svelte';
 
 	import '$lib/grid.css';
 
 	const breakpoints = Object.keys(CANVAS_TYPES).map((k) => parseInt(k, 10));
+	const timeline = gsap.timeline({
+		defaults: {
+			duration: 1.1,
+			ease: 'power4.out'
+		}
+	});
 
 	let grid: Grid;
 	let blocks: Block[];
@@ -20,6 +27,16 @@
 		);
 	}
 
+	async function playEntranceAnimation() {
+		await tick();
+		timeline
+			.delay(1.5)
+			.from('div.block.name', { scale: 0.8, autoAlpha: 0, duration: 1 })
+			.delay(0.2)
+			.from('div.block:not(.name)', { scale: 0.8, autoAlpha: 0, duration: 1, stagger: 0.1 })
+			.from('footer', { y: '500%' });
+	}
+
 	onMount(() => {
 		const bp = getBreakpoint(window.innerWidth);
 		if (typeof bp !== 'number') {
@@ -28,6 +45,8 @@
 
 		grid = new Grid(bp);
 		blocks = grid.blocks;
+
+		playEntranceAnimation();
 
 		function resizeHandler() {
 			const bp = getBreakpoint(window.innerWidth);
@@ -57,7 +76,7 @@
 		<!-- The 3rem subtracted from min-height accounts for the vertical block padding -->
 		{#each blocks as block}
 			<div
-				class="block"
+				class={`block ${block.content.toLowerCase()}`}
 				style:grid-column={`${block.x} / span ${block.width}`}
 				style:grid-row={`${block.y} / span ${block.height}`}
 				style:padding-bottom={`(${block.height} / ${block.width} * 100)%`}

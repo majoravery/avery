@@ -20,7 +20,7 @@ export const translations = {
 		'info.pageViews': 'Page views',
 		'language.title': 'Language',
 		'language.tutorialAlt': 'Drag to change language',
-		'listeningTo.title': 'Listening To',
+		'listeningTo.title': 'Listening to',
 		'listeningTo.linkAlt': 'Listen on {{platform}}',
 		name: 'Avery Lim',
 		'projectShowcase.title': 'Project Showcase',

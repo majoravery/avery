@@ -54,7 +54,10 @@ export async function getVisitors(): Promise<number> {
 	return new Set(data?.map((v) => v.visitor_id)).size;
 }
 
-export async function addWeather(weatherId: string, weather: Weather) {
+export async function addWeather(
+	weatherId: string,
+	weather: Weather
+): Promise<WeatherSpResponse[]> {
 	const { data, error } = await supabase
 		.from('weather')
 		.insert({
@@ -63,13 +66,26 @@ export async function addWeather(weatherId: string, weather: Weather) {
 		})
 		.select();
 
+	if (error?.code === '23505') {
+		// This is a dirty fix for when the load function gets run twice somehow and tries to insert weather twice.
+		// Returning whatever was already just fetched...
+		return [
+			{
+				id: weatherId,
+				weather: JSON.stringify(weather),
+				created_at: '' // tbh you really don't need this on the site but I'll just leave it in anyway
+			}
+		];
+	}
+
+	// All other errors
 	if (error) {
 		throw new Error(
 			`Error adding weather forecasts for ${weatherId} (code: ${error.code}): ${error.message}. ${error.details}`
 		);
 	}
 
-	return data;
+	return data as WeatherSpResponse[];
 }
 
 // Gets today's forecasts

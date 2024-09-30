@@ -6,8 +6,10 @@
 	import Grid from './components/Grid.svelte';
 
 	import '$lib/styles.css';
+	import { onMount } from 'svelte';
 
 	export let data: MainPageData;
+	let serverEl: HTMLElement;
 
 	weathers.set(data.weathers);
 	locale.set(data.locale);
@@ -15,6 +17,10 @@
 	visitors.set(data.visitorCount);
 
 	const url = 'https://averylim.com';
+
+	onMount(() => {
+		serverEl.parentNode?.removeChild(serverEl);
+	});
 </script>
 
 <svelte:head>
@@ -49,6 +55,15 @@
 >
 	<Grid />
 
+	<article bind:this={serverEl} class="server-only">
+		<p>{$t('name')}</p>
+		<p>{$t('description.writeup')}</p>
+		<p>
+			I'm not quite sure how you've landed on this view, but you should probably upgrade your
+			browser or enable JavaScript because you're missin out on all the fun.
+		</p>
+	</article>
+
 	<footer>&copy; avery 2024 and all, will be adding credits in this area</footer>
 </main>
 
@@ -80,6 +95,7 @@
 		}
 	}
 
+	article.server-only p,
 	footer {
 		margin-top: calc(var(--margin) * 0.5);
 		color: var(--color-filler);
