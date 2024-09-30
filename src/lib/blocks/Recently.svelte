@@ -64,6 +64,7 @@
 
 <style>
 	article {
+		cursor: help;
 		height: 100%;
 		width: 100%;
 	}

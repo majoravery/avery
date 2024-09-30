@@ -45,7 +45,6 @@ All
 
 Clock
 
-- [ ] Ensure day -> night/night -> day cards animate correctly
 - [ ] implement skeleton when changing locale
 - [ ] looks weird on mobile
 
@@ -62,7 +61,3 @@ ProjectShowcase
 Info
 
 - [ ] Increase page view real time (not sure if poss because it's a static site. maybe a web worker might be helpful here?)
-
-Listening To
-
-- [ ] artist does not scroll properly on mobile

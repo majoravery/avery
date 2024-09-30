@@ -5,13 +5,9 @@
 	import Eyebrows from '$lib/components/Eyebrows.svelte';
 	import { onMount } from 'svelte';
 
-	let hourNew: string, minuteNew: string, ampm: string;
-	let hourPrev: string, minutePrev: string;
-	let hourFlip: boolean, minuteFlip: boolean;
-
-	let secondNew: string;
-	let secondPrev: string;
-	let secondFlip: boolean;
+	let hourNew: string, minuteNew: string, secondNew: string, ampm: string;
+	let hourPrev: string, minutePrev: string, secondPrev: string;
+	let hourFlip: boolean, minuteFlip: boolean, secondFlip: boolean;
 
 	const MAPPING_TIMEZONE: Record<string, string> = {
 		en: 'Asia/Singapore',
@@ -80,7 +76,12 @@
 		<div class="hours">
 			<span class="ampm">{ampm}</span>
 			<div class="card hour" class:flip={hourFlip}>
-				{hourPrev}
+				<div class="card top">{hourPrev}</div>
+				<div class="card bottom">{hourPrev}</div>
+				{#if hourFlip}
+					<div class="card top-flip">{hourNew}</div>
+					<div class="card bottom-flip">{hourNew}</div>
+				{/if}
 			</div>
 			<div class="card flap" />
 			<div class="card flap" />
@@ -134,6 +135,7 @@
 		gap: 0.5rem;
 		justify-content: center;
 		padding-top: 1rem;
+		transition: color 200ms ease-in-out;
 	}
 
 	div.clock.day {
@@ -144,11 +146,11 @@
 	}
 
 	div.clock.night {
-		filter: brightness(150%);
 		--background-color: var(--color-accent);
 		--box-shadow: rgba(0, 0, 0, 0) 0 0 0 0, rgba(0, 0, 0, 0) 0 0 0 0,
 			rgba(0, 0, 0, 0.5) 0 1.5px 1.5px -1px, rgba(0, 0, 0, 0.5) 0 1.5px 1.5px -1px;
 		--color: rgb(255, 255, 255);
+		filter: brightness(150%);
 	}
 
 	span.ampm {
@@ -165,7 +167,7 @@
 	}
 
 	div.clock.night span.ampm {
-		bottom: 30%;
+		bottom: 25%;
 	}
 
 	div.hours,
@@ -177,10 +179,13 @@
 	}
 
 	div.card {
-		background: var(--background-color);
+		background-color: var(--background-color);
 		border-radius: var(--border-radius-m);
 		box-shadow: var(--box-shadow);
 		width: 100%;
+		transition:
+			background-color 200ms ease-in-out,
+			box-shadow 200ms ease-in-out;
 	}
 
 	div.hour,
@@ -227,25 +232,18 @@
 		position: absolute;
 	}
 
-	div.top {
-		/* color: green; */
-	}
-
 	div.bottom {
 		clip-path: inset(50% 0 0 0);
-		/* color: red; */
 	}
 
 	div.top-flip {
 		clip-path: inset(0 0 50% 0);
 		transform: rotateX(0deg);
-		/* color: yellow; */
 		box-shadow: none;
 	}
 
 	div.bottom-flip {
 		clip-path: inset(50% 0 0 0);
-		/* color: blue; */
 		transform: rotateX(-90deg);
 		box-shadow: none;
 	}
