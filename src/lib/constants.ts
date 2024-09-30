@@ -1,3 +1,9 @@
+export const BLOCK_SIZES: Record<number, number> = {
+	0: 150,
+	1400: 170,
+	1680: 190
+};
+
 export const BLOCKS: Record<BlockType, Block> = {
 	square: { type: 'square', width: 2, height: 2 },
 	wide: { type: 'wide', width: 3, height: 1 },

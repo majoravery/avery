@@ -31,7 +31,6 @@ locale.subscribe((newLocale) => {
 	// Doing it manually because it seems I can't access $page from $app/stores?
 	const currentLocale = window.location.pathname.replaceAll('/', '');
 	if (newLocale && newLocale !== currentLocale) {
-		console.log(currentLocale, 'changing to', newLocale);
 		replaceState(`/${newLocale}/`, { locale: newLocale });
 	}
 });

@@ -1,4 +1,5 @@
 :root {
+    /* Take note if you change this to update the JS equivalent in constants.ts */
     --block-size: 150px;
     --block-padding: 1rem;
     --columns: 2;

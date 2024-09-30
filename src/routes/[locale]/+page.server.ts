@@ -1,4 +1,6 @@
 import { getLocaleWeather } from '$lib/weather.js';
+import { PALETTES } from '$lib/stores/theme';
+import { random } from '$lib/utils';
 import { redirect } from '@sveltejs/kit';
 import { VALID_LOCALES } from '$lib/stores/locale';
 import * as supabase from '$lib/supabase.js';
@@ -11,6 +13,11 @@ export async function load({ cookies, params, request }): Promise<MainPageData> 
 	if (!VALID_LOCALES.includes(params.locale as Locale)) {
 		redirect(307, '/en');
 	}
+
+	/**
+	 * Palette
+	 */
+	const palette = random.pick(PALETTES);
 
 	/**
 	 * Info
@@ -39,6 +46,7 @@ export async function load({ cookies, params, request }): Promise<MainPageData> 
 	return {
 		locale: params.locale as Locale,
 		pageViewCount,
+		palette,
 		visitorCount,
 		weathers
 	};

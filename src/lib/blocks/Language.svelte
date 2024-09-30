@@ -12,10 +12,12 @@
 	import drag from '$lib/images/drag.png';
 	import Draggable from 'gsap/dist/Draggable';
 	import Eyebrows from '$lib/components/Eyebrows.svelte';
+	import Block from '../../routes/[locale]/components/Block.svelte';
 
 	gsap.registerPlugin(Draggable);
 
 	let activeLanguageIndex = LOCALES.findIndex((lang) => lang.id === $locale);
+	let blockSize: number;
 	let container: HTMLDivElement;
 	let height: number;
 	let languageEl: HTMLElement;
@@ -54,7 +56,17 @@
 		toggleLoop();
 	}
 
+	// function getBlockSize() {
+
+	// }
+
 	onMount(() => {
+		const blockRect = document.querySelector('.block.language')?.getBoundingClientRect();
+		const containerRect = document.querySelector('.container.lang')?.getBoundingClientRect();
+
+		if (!blockRect) throw new Error('Could not find div.block.language');
+		if (!containerRect) throw new Error('Could not find .container.lang');
+
 		gsap.set('.language-selector', {
 			rotationY: -step * activeLanguageIndex,
 			transformPerspective: 600
@@ -63,6 +75,10 @@
 		Draggable.create('.proxy', {
 			type: 'x',
 			trigger: '.container',
+			bounds: {
+				minX: width / 2,
+				maxX: width
+			},
 			dragResistance: 0.55,
 			onDrag: function () {
 				displayTutorial.set(false);
@@ -94,7 +110,7 @@
 	});
 </script>
 
-<div class="container" class:debug={$isDebugLanguage} bind:this={container}>
+<div class="container lang" class:debug={$isDebugLanguage} bind:this={container}>
 	<Eyebrows>{$t('language.title')}</Eyebrows>
 	<div
 		aria-valuenow={activeLanguageIndex}
@@ -181,7 +197,13 @@
 	}
 
 	div.proxy {
-		display: none;
+		/* display: none; */
+		opacity: 0.7;
+		background: var(--color-filler);
+		height: 100%;
+		position: absolute;
+		width: 100%;
+		left: 0;
 	}
 
 	div.tutorial {

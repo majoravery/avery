@@ -83,6 +83,7 @@
 	}
 
 	span.day {
+		color: var(--color-accent);
 		font-family: var(--bodyFontFamily);
 		font-optical-sizing: var(--bodyFontOptical);
 		font-size: var(--bodyFontSize);
@@ -93,6 +94,7 @@
 	}
 
 	span.temp {
+		color: var(--color-accent);
 		font-family: 'JetBrains Mono', monospace;
 		font-optical-sizing: auto;
 		font-weight: 400;

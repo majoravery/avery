@@ -14,6 +14,7 @@ declare global {
 	interface MainPageData {
 		locale: Locale;
 		pageViewCount: number;
+		palette: Palette;
 		visitorCount: number;
 		weathers: Record<Locale, Weather>;
 	}
@@ -28,6 +29,8 @@ declare global {
 		y?: number;
 	}
 
+	type Palette: string[];
+	
 	type BlockType = 'square' | 'wide' | 'tall' | 'long' | 'single';
 	type BlockContent =
 		| 'Clock'

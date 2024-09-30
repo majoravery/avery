@@ -52,9 +52,8 @@ Clock
 Language switcher
 
 - [ ] refine gsap draggable, make sure it's smooth
-- [ ] translate date too
 - [ ] limit the drag to 1 language at a time only because the radius isn't uniform
-- [ ] looks weir don mobile
+- [ ] looks weird on mobile
 
 Weather
 
@@ -66,8 +65,8 @@ ProjectShowcase
 
 Info
 
-- [ ] Increase page view real time
+- [ ] Increase page view real time (not sure if poss because it's a static site. maybe a web worker might be helpful here?)
 
 Listening To
 
-- [ ] artist does not scroll properly
+- [ ] artist does not scroll properly on mobile

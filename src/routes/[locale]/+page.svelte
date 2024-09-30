@@ -1,25 +1,41 @@
 <script lang="ts">
+	import { gsap } from 'gsap';
 	import { locale, t } from '$lib/stores/locale';
 	import { pageviews, visitors } from '$lib/stores/pageview';
 	import { theme } from '$lib/stores/theme';
+	import { onMount, tick } from 'svelte';
 	import { weathers } from '$lib/stores/weathers';
 	import Grid from './components/Grid.svelte';
 
 	import '$lib/styles.css';
-	import { onMount } from 'svelte';
 
 	export let data: MainPageData;
-	let serverEl: HTMLElement;
+	const timeline = gsap.timeline({
+		defaults: {
+			duration: 1.1,
+			ease: 'power4.out'
+		}
+	});
 
 	weathers.set(data.weathers);
 	locale.set(data.locale);
 	pageviews.set(data.pageViewCount);
+	theme.set(data.palette);
 	visitors.set(data.visitorCount);
 
 	const url = 'https://averylim.com';
 
+	async function playEntranceAnimation() {
+		await tick();
+		timeline
+			.from('div.block.name', { scale: 0.8, autoAlpha: 0, duration: 1 })
+			.delay(0.2)
+			.from('div.block:not(.name)', { scale: 0.8, autoAlpha: 0, duration: 1, stagger: 0.1 })
+			.from('footer', { autoAlpha: 0, y: '500%' });
+	}
+
 	onMount(() => {
-		serverEl.parentNode?.removeChild(serverEl);
+		playEntranceAnimation();
 	});
 </script>
 
@@ -55,14 +71,14 @@
 >
 	<Grid />
 
-	<article bind:this={serverEl} class="server-only">
+	<noscript>
 		<p>{$t('name')}</p>
 		<p>{$t('description.writeup')}</p>
 		<p>
 			I'm not quite sure how you've landed on this view, but you should probably upgrade your
 			browser or enable JavaScript because you're missin out on all the fun.
 		</p>
-	</article>
+	</noscript>
 
 	<footer>&copy; avery 2024 and all, will be adding credits in this area</footer>
 </main>
@@ -95,7 +111,7 @@
 		}
 	}
 
-	article.server-only p,
+	noscript p,
 	footer {
 		margin-top: calc(var(--margin) * 0.5);
 		color: var(--color-filler);
@@ -106,6 +122,7 @@
 		font-weight: var(--bodyFontWeight);
 		letter-spacing: var(--bodyLetterSpacing);
 		line-height: var(--bodyLineHeight);
+		opacity: 0;
 		max-width: calc((var(--columns) * var(--block-size)) + (var(--columns) - 1) * var(--grid-gap));
 		width: 100%;
 	}
