@@ -1,10 +1,13 @@
 <script lang="ts">
 	import { t } from '$lib/stores/locale';
 	import Eyebrows from '$lib/components/Eyebrows.svelte';
+
+	export let expand: () => void;
 </script>
 
-<article>
-	<Eyebrows arrowAlt={$t('reading.linkAlt', { platform: 'Goodreads' })}>
+<!-- svelte-ignore a11y-no-noninteractive-element-interactions a11y-click-events-have-key-events -->
+<article on:click={expand}>
+	<Eyebrows>
 		{$t('reading.title')}
 	</Eyebrows>
 	<div class="book">
@@ -15,6 +18,7 @@
 
 <style>
 	article {
+		cursor: zoom-in;
 		display: flex;
 		height: 100%;
 		flex-direction: column;

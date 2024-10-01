@@ -41,6 +41,7 @@
 
 	div.contact a {
 		align-items: center;
+		cursor: ne-resize;
 		display: flex;
 		font-family: var(--bodyFontFamily);
 		font-optical-sizing: var(--bodyFontOptical);

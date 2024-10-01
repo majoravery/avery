@@ -35,13 +35,13 @@ This app is deployed to averylim.com via [Render](todo-add-url), so simply pushi
 
 All
 
-- [ ] Render an SEO friendly page for SSR
-  - [ ] I see a flash of it though
 - [ ] When going from smallest breakpoint to 480, the weather app seems to become the wide tile
 - [ ] Pass image through filter of hard light + theme colour, then show colour on hover (see https://github.com/lowtechmag/solar/wiki/Solar-Web-Design#images)
 - [ ] Supabase insert is currently open to public, find a way to restrict
 - [ ] Sort out eyebrow arrow hover sitch
-- [ ] improve mobile look
+- [ ] think about mobile entrance animation–how to make sure averylim is always displayed first
+- [ ] footer during animation makes site vertically scrollable
+- [ ] output a printable version of the site
 
 Clock
 

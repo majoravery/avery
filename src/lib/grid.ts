@@ -60,7 +60,7 @@ export class Grid {
 					? this.getGridPositionForMultiCellBlock(block)
 					: this.getGridPositionForSingleCellBlock();
 			return {
-				...block, // type, width and height
+				...block, // type, content, width and height
 				...position // x and y
 			};
 		});
@@ -70,7 +70,7 @@ export class Grid {
 		return this.placedBlocks;
 	}
 
-	getGridPositionForSingleCellBlock() {
+	getGridPositionForSingleCellBlock(): Position {
 		// Does not utilise canBlockFitOnGrid as randomly selecting
 		// leftover cells is simpler and more efficient
 		const flatCanvasIndices = [...this.flattenedGrid];
@@ -82,7 +82,8 @@ export class Grid {
 
 		return {
 			x: gridPosition[0] + 1,
-			y: gridPosition[1] + 1
+			y: gridPosition[1] + 1,
+			order: index
 		};
 	}
 
@@ -91,8 +92,8 @@ export class Grid {
 	}
 
 	getGridPositionForMultiCellBlock(block: Block): Position {
-		let occupiedIndices,
-			gridPosition: [number, number],
+		let occupiedIndices: boolean | number[] = [],
+			gridPosition: [number, number] = [0, 0],
 			canBlockFit,
 			n = 0;
 
@@ -138,7 +139,8 @@ export class Grid {
 		// TODO: find out why + 1?
 		return {
 			x: gridPosition[0] + 1,
-			y: gridPosition[1] + 1
+			y: gridPosition[1] + 1,
+			order: Array.isArray(occupiedIndices) ? occupiedIndices.sort((a, b) => a - b)[0] : -1
 		};
 	}
 

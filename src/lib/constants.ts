@@ -5,11 +5,11 @@ export const BLOCK_SIZES: Record<number, number> = {
 };
 
 export const BLOCKS: Record<BlockType, Block> = {
-	square: { type: 'square', width: 2, height: 2 },
-	wide: { type: 'wide', width: 3, height: 1 },
-	tall: { type: 'tall', width: 1, height: 2 },
-	long: { type: 'long', width: 2, height: 1 },
-	single: { type: 'single', width: 1, height: 1 }
+	square: { type: 'square', width: 2, height: 2, content: '' },
+	wide: { type: 'wide', width: 3, height: 1, content: '' },
+	tall: { type: 'tall', width: 1, height: 2, content: '' },
+	long: { type: 'long', width: 2, height: 1, content: '' },
+	single: { type: 'single', width: 1, height: 1, content: '' }
 } as const;
 
 export const CANVAS_TYPES: CanvasTypes = {

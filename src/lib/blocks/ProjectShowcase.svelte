@@ -2,9 +2,12 @@
 	import { t } from '$lib/stores/locale';
 	import Eyebrows from '$lib/components/Eyebrows.svelte';
 	import photos from '$lib/images/photos.png';
+
+	export let expand: () => void;
 </script>
 
-<article>
+<!-- svelte-ignore a11y-no-noninteractive-element-interactions a11y-click-events-have-key-events -->
+<article on:click={expand}>
 	<Eyebrows arrowAlt={$t('projectShowcase.linkAlt')}>
 		{$t('projectShowcase.title')}
 	</Eyebrows>
@@ -18,6 +21,7 @@
 
 <style>
 	article {
+		cursor: ne-resize;
 		height: 100%;
 	}
 

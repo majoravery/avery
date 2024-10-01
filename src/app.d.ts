@@ -27,10 +27,11 @@ declare global {
 	interface Position {
 		x?: number;
 		y?: number;
+		order?: number;
 	}
 
-	type Palette: string[];
-	
+	type Palette = string[];
+
 	type BlockType = 'square' | 'wide' | 'tall' | 'long' | 'single';
 	type BlockContent =
 		| 'Clock'
@@ -52,17 +53,25 @@ declare global {
 		| 'Weather';
 
 	interface Block extends Dimensions, Position {
+		content: BlockContent | string; // defining this as string for that initial definition... ugh
 		type: BlockType;
 	}
 
-	interface BlockWithContent extends Block {
-		content: BlockContent;
+	interface BlockExpansion {
+		expandedWidth: number;
+		expandedHeight: number;
 	}
+
+	interface BlockExpanded extends Block, BlockExpansion {}
+
+	type Expansions = {
+		[Partial<BlockContent>]: BlockExpansion;
+	};
 
 	type Breakpoint = number;
 
 	interface Canvas extends Dimensions {
-		blocks: BlockWithContent[];
+		blocks: Block[];
 	}
 
 	type CanvasTypes = Record<Breakpoint, Canvas>;

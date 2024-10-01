@@ -9,6 +9,7 @@
 	const artist = 'SugLawd Familiar, CHICO CARLITO, Awich';
 
 	let artistEl: HTMLElement;
+	export let expand: () => void;
 
 	onMount(() => {
 		function resizeHandler() {
@@ -29,8 +30,9 @@
 	});
 </script>
 
-<article>
-	<Eyebrows arrowAlt={$t('listeningTo.linkAlt', { platform: 'YouTube' })}>
+<!-- svelte-ignore a11y-no-noninteractive-element-interactions a11y-click-events-have-key-events -->
+<article on:click={expand}>
+	<Eyebrows>
 		{$t('listeningTo.title')}
 	</Eyebrows>
 	<div class="album">
@@ -42,6 +44,7 @@
 
 <style>
 	article {
+		cursor: zoom-in;
 		display: flex;
 		flex-direction: column;
 		height: 100%;
@@ -51,7 +54,7 @@
 		content: '';
 		background-image: linear-gradient(to top, rgb(250, 250, 250), rgba(250, 250, 250, 0));
 		bottom: 0;
-		height: 70%;
+		height: 80%;
 		left: 0;
 		position: absolute;
 		width: 100%;
@@ -75,7 +78,16 @@
 		position: absolute;
 		right: -100%;
 		top: -75%;
+		transform: scale(100%);
+		transition:
+			opacity 200ms ease-in-out,
+			transform 200ms ease-in-out;
 		width: 150%;
+	}
+
+	article:hover div.album img {
+		opacity: 1;
+		transform: scale(110%);
 	}
 
 	div.title {
@@ -87,10 +99,14 @@
 		font-weight: var(--bodyFontWeight);
 		letter-spacing: var(--bodyLetterSpacing);
 		line-height: var(--bodyLineHeight);
+		text-shadow:
+			1px 0px 5px var(--color-filler),
+			0px 1px 5px var(--color-filler);
 		z-index: 2;
 	}
 
 	div.artist {
+		/* TODO: delay the initial animation so it only plays after block appears */
 		animation: scroll 15s 2s linear infinite;
 		font-family: 'JetBrains Mono', monospace;
 		font-optical-sizing: auto;
@@ -108,6 +124,7 @@
 		font: inherit;
 		padding-right: calc(var(--block-padding) * 2);
 	}
+
 	@keyframes scroll {
 		50%,
 		100% {

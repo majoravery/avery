@@ -2,9 +2,12 @@
 	import { t } from '$lib/stores/locale';
 	import Eyebrows from '$lib/components/Eyebrows.svelte';
 	import cooking from '$lib/images/cooking.png';
+
+	export let expand: () => void;
 </script>
 
-<article>
+<!-- svelte-ignore a11y-no-noninteractive-element-interactions a11y-click-events-have-key-events -->
+<article on:click={expand}>
 	<Eyebrows>{$t('cooking.title')}</Eyebrows>
 	<div class="dish">
 		<div class="title">{$t('cooking.alt')}</div>
@@ -14,6 +17,7 @@
 
 <style>
 	article {
+		cursor: zoom-in;
 		display: flex;
 		flex-direction: column;
 		height: 100%;
@@ -23,7 +27,7 @@
 		content: '';
 		background-image: linear-gradient(to top, rgb(250, 250, 250), rgba(250, 250, 250, 0));
 		bottom: 0;
-		height: 30%;
+		height: 40%;
 		left: 0;
 		position: absolute;
 		width: 100%;
@@ -46,8 +50,16 @@
 		opacity: 0.4;
 		position: absolute;
 		right: -100%;
-		/* top: -75%; */
+		transform: scale(100%);
+		transition:
+			opacity 200ms ease-in-out,
+			transform 200ms ease-in-out;
 		width: 150%;
+	}
+
+	article:hover div.dish img {
+		opacity: 1;
+		transform: scale(110%);
 	}
 
 	div.title {
@@ -59,6 +71,9 @@
 		font-weight: var(--bodyFontWeight);
 		letter-spacing: var(--bodyLetterSpacing);
 		line-height: var(--bodyLineHeight);
+		text-shadow:
+			1px 0px 5px var(--color-filler),
+			0px 1px 5px var(--color-filler);
 		z-index: 2;
 	}
 </style>

@@ -1,7 +1,7 @@
 export const translations = {
 	en: {
 		'site.title': "Avery's dotcom",
-		'site.description': 'loremipsum',
+		'site.description': 'to be added',
 		'clock.title': 'Clock',
 		'clock.location': 'Singapore',
 		'contact.title': 'Contact',
@@ -13,7 +13,7 @@ export const translations = {
 		'cooking.alt': 'Chai tow kway',
 		'description.title': 'About Me',
 		'description.writeup':
-			"Web engineer who recently moved from Singapore to Fukuoka for a year-long career break. Big fan of cooking just about anything, hiking to high altitudes, going to music festivals, and working on creative projects. If you're keen to build something together, get in touch 💌",
+			"Web engineer and creative developer, recently moved from Singapore to Fukuoka for a year-long career break. Big fan of cooking just about anything, hiking to high altitudes, going to music festivals, and working on creative projects. If you're keen to build something together, get in touch 💌",
 		'info.title': 'Info',
 		'info.todaysDate': "Today's date",
 		'info.visitors': 'Visitors',
@@ -46,8 +46,8 @@ export const translations = {
 		'weather.sun': 'Sun'
 	},
 	zh: {
-		'site.title': 'loremipsum',
-		'site.description': 'loremipsum',
+		'site.title': 'Avery 的网站',
+		'site.description': 'to be added',
 		'clock.title': '时钟',
 		'clock.location': '新加坡',
 		'contact.title': '联系',
@@ -92,8 +92,8 @@ export const translations = {
 		'weather.sun': '拜日'
 	},
 	de: {
-		'site.title': 'loremipsum',
-		'site.description': 'loremipsum',
+		'site.title': "Avery's Seite",
+		'site.description': 'to be added',
 		'clock.title': 'Die Uhr',
 		'clock.location': 'Deutschland',
 		'contact.title': 'Kontakt',
@@ -138,8 +138,8 @@ export const translations = {
 		'weather.sun': 'So'
 	},
 	jp: {
-		'site.title': 'loremipsum',
-		'site.description': 'loremipsum',
+		'site.title': 'エブリのウェブサイト',
+		'site.description': 'to be added',
 		'clock.title': '時計',
 		'clock.location': '日本',
 		'contact.title': '連絡先',
@@ -160,7 +160,7 @@ export const translations = {
 		'language.tutorialAlt': 'ドラッグして言語を変更',
 		'listeningTo.title': '聴いてる音楽',
 		'listeningTo.linkAlt': '{{platform}} で聴いて',
-		name: 'エブリー リム',
+		name: 'エブリ リム',
 		'projectShowcase.title': 'プロジェクトショーケース',
 		'projectShowcase.linkAlt': 'ウェブサイトを訪問',
 		'projectShowcase.imageAlt': '{{website}}のスクリーンショット',

@@ -4,11 +4,12 @@
 	// import { onMount } from 'svelte';
 	// import { pixelCanvas2d } from '@thi.ng/canvas';
 	import { t } from '$lib/stores/locale';
-	import { theme } from '$lib/stores/theme';
+	// import { theme } from '$lib/stores/theme';
 	import Eyebrows from '$lib/components/Eyebrows.svelte';
 	import recently from '$lib/images/recently.jpg';
 
-	let containerEl: HTMLDivElement;
+	// let containerEl: HTMLDivElement;
+	export let expand: () => void;
 
 	// function hexToARGB(hex: string): number {
 	// 	// Remove the hash (#) if present
@@ -54,7 +55,8 @@
 	// });
 </script>
 
-<article>
+<!-- svelte-ignore a11y-no-noninteractive-element-interactions a11y-click-events-have-key-events -->
+<article on:click={expand}>
 	<Eyebrows standout>{$t('recently.title')}</Eyebrows>
 	<!-- <div class="container" bind:this={containerEl} /> -->
 	<div class="container">
@@ -85,13 +87,18 @@
 		content: '';
 		height: 100%;
 		left: 0;
-		opacity: 0.2;
+		opacity: 0.5;
 		mix-blend-mode: screen;
 		position: absolute;
 		right: 0;
 		top: 0;
+		transition: opacity 180ms ease-in-out;
 		width: 100%;
 		z-index: 1;
+	}
+
+	article:hover div.container:before {
+		opacity: 0;
 	}
 
 	img {
@@ -102,6 +109,12 @@
 		position: absolute;
 		right: 0;
 		top: 0;
+		transform: scale(100%);
+		transition: transform 180ms ease-in-out;
 		width: 100%;
+	}
+
+	article:hover img {
+		transform: scale(110%);
 	}
 </style>

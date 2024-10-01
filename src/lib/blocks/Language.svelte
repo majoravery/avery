@@ -12,12 +12,10 @@
 	import drag from '$lib/images/drag.png';
 	import Draggable from 'gsap/dist/Draggable';
 	import Eyebrows from '$lib/components/Eyebrows.svelte';
-	import Block from '../../routes/[locale]/components/Block.svelte';
 
 	gsap.registerPlugin(Draggable);
 
 	let activeLanguageIndex = LOCALES.findIndex((lang) => lang.id === $locale);
-	let blockSize: number;
 	let container: HTMLDivElement;
 	let height: number;
 	let languageEl: HTMLElement;
@@ -56,10 +54,6 @@
 		toggleLoop();
 	}
 
-	// function getBlockSize() {
-
-	// }
-
 	onMount(() => {
 		const blockRect = document.querySelector('.block.language')?.getBoundingClientRect();
 		const containerRect = document.querySelector('.container.lang')?.getBoundingClientRect();
@@ -74,11 +68,11 @@
 
 		Draggable.create('.proxy', {
 			type: 'x',
-			trigger: '.container',
-			bounds: {
-				minX: width / 2,
-				maxX: width
-			},
+			trigger: '.container.lang',
+			// bounds: {
+			// 	minX: width / 2,
+			// 	maxX: width
+			// },
 			dragResistance: 0.55,
 			onDrag: function () {
 				displayTutorial.set(false);
@@ -197,13 +191,13 @@
 	}
 
 	div.proxy {
-		/* display: none; */
-		opacity: 0.7;
+		display: none;
+		/* opacity: 0.7;
 		background: var(--color-filler);
 		height: 100%;
 		position: absolute;
 		width: 100%;
-		left: 0;
+		left: 0; */
 	}
 
 	div.tutorial {

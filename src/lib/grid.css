@@ -4,18 +4,22 @@
     --block-padding: 1rem;
     --columns: 2;
     --grid-gap: 0.25rem;
+    --grid-margin: 1rem;
+    /* Used by main */
     --rows: 15;
 }
 
 section {
-    grid-template-rows: repeat(var(--rows), minmax(var(--block-size), calc((100vw - 32px) / 2)));
-    grid-template-columns: repeat(var(--columns), minmax(var(--block-size), calc((100vw - 32px) / 2)));
+    /* Might come in handy for responsive font size: 150 < x < 222 */
+    grid-template-rows: repeat(var(--rows), minmax(var(--block-size), calc((100vw - var(--grid-margin) - var(--grid-margin)) / 2)));
+    grid-template-columns: repeat(var(--columns), minmax(var(--block-size), calc((100vw - var(--grid-margin) - var(--grid-margin)) / 2)));
 }
 
 @media (min-width: 480px) {
     :root {
         --columns: 3;
         --rows: 10;
+        --grid-margin: 1.5rem;
         font-size: 16px;
     }
 
@@ -29,6 +33,7 @@ section {
     :root {
         --columns: 4;
         --rows: 8;
+        --grid-margin: 2.25rem;
     }
 }
 

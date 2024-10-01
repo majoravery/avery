@@ -4,8 +4,9 @@
 	import { pageviews, visitors } from '$lib/stores/pageview';
 	import { theme } from '$lib/stores/theme';
 	import { onMount, tick } from 'svelte';
+	import { printThinkingFace } from '$lib/utils';
 	import { weathers } from '$lib/stores/weathers';
-	import Grid from './components/Grid.svelte';
+	import Grid from './Grid.svelte';
 
 	import '$lib/styles.css';
 
@@ -38,6 +39,7 @@
 	}
 
 	onMount(() => {
+		printThinkingFace();
 		playEntranceAnimation();
 	});
 </script>
@@ -83,13 +85,13 @@
 		</p>
 	</noscript>
 
-	<footer>&copy; avery 2024 and all, will be adding credits in this area</footer>
+	<footer>
+		<!-- &copy; avery 2024 and all, will be adding credits in this area -->
+	</footer>
 </main>
 
 <style>
 	main {
-		--margin: 16px;
-
 		background-color: var(--color-background);
 		box-sizing: border-box;
 		display: flex;
@@ -98,25 +100,12 @@
 		height: 100%;
 		justify-content: space-between;
 		min-height: 100vh;
-		padding: var(--margin);
+		padding: var(--grid-margin);
 		width: 100%;
-	}
-
-	@media (min-width: 480px) {
-		main {
-			--margin: 24px;
-		}
-	}
-
-	@media (min-width: 768px) {
-		main {
-			--margin: 36px;
-		}
 	}
 
 	noscript p,
 	footer {
-		margin-top: calc(var(--margin) * 0.5);
 		color: var(--color-filler);
 		font-family: var(--bodyFontFamily);
 		font-optical-sizing: var(--bodyFontOptical);
@@ -125,8 +114,24 @@
 		font-weight: var(--bodyFontWeight);
 		letter-spacing: var(--bodyLetterSpacing);
 		line-height: var(--bodyLineHeight);
-		max-width: calc((var(--columns) * var(--block-size)) + (var(--columns) - 1) * var(--grid-gap));
-		visibility: hidden;
 		width: 100%;
+	}
+
+	footer {
+		padding-top: var(--grid-margin);
+		margin-left: auto;
+		margin-right: auto;
+		visibility: hidden;
+	}
+
+	@media (min-width: 480px) {
+		noscript p,
+		footer {
+			padding-top: 0;
+			margin-top: calc(var(--grid-margin) * 0.5);
+			max-width: calc(
+				(var(--columns) * var(--block-size)) + (var(--columns) - 1) * var(--grid-gap)
+			);
+		}
 	}
 </style>
