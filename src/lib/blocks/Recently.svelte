@@ -102,16 +102,18 @@
 	}
 
 	img {
-		bottom: 0;
+		bottom: 8px;
+		border-radius: var(--border-radius-s);
 		filter: brightness(100%);
-		left: 0;
+		left: 8px;
 		mix-blend-mode: multiply;
 		position: absolute;
-		right: 0;
-		top: 0;
+		right: 8px;
+		top: 8px;
 		transform: scale(100%);
 		transition: transform 180ms ease-in-out;
-		width: 100%;
+		width: calc(100% - 16px);
+		height: calc(100% - 16px);
 	}
 
 	article:hover img {
