@@ -5,7 +5,7 @@
 	import { Grid } from '$lib/grid';
 	import { gsap } from 'gsap';
 	import { isDebugMode } from '$lib/stores/debugMode';
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 
 	import '$lib/grid.css';
 
@@ -20,6 +20,7 @@
 
 	let grid: Grid;
 	let blocks: Block[];
+	let expandableBlocks = Object.keys(MAPPING_EXPANSION);
 	let previouslyExpanded: BlockExpanded;
 
 	// Returns the lower breakpoint in the range that width fits in
@@ -32,13 +33,151 @@
 
 	function expand(block: Block): void {
 		// Blocks not defined in MAPPING_EXPANSION does not get to expand :-)
-		if (!Object.keys(MAPPING_EXPANSION).includes(block.content)) {
+		if (!expandableBlocks.includes(block.content)) {
 			return;
 		}
 
 		// Honestly this definition stuff is getting me winded trying to silence it so imma just leave it
 		const expandedBlock = { ...block, ...MAPPING_EXPANSION[block.content] };
 		expansion.set(expandedBlock);
+	}
+
+	function getBlockExpansion(expandingBlock: BlockExpanded): gsap.core.Timeline {
+		const blockSelector = expandingBlock.content.toLowerCase();
+
+		// TODO: HMR doesn't load with this, so make sure $expansion is set to null before HMR
+		const blockEl = document.querySelector(`.block.${blockSelector}`);
+
+		if (!blockEl) {
+			throw new Error(`Can't query block ${expandingBlock.content} to expand`);
+		}
+
+		const blockTl = gsap.timeline({
+			defaults: {
+				duration: 1.1,
+				ease: 'power4.out'
+			}
+		});
+
+		console.log(`.block.${blockSelector} .arrow-close`);
+		console.log(document.querySelector(`.block.${blockSelector} .arrow-close`));
+
+		blockTl
+			.addLabel('start', 0)
+			.set(`.block.${blockSelector}`, {
+				'--row-end-expanded': `span ${expandingBlock.expandedWidth}`,
+				'--column-end-expanded': `span ${expandingBlock.expandedHeight}`,
+				zIndex: 10
+			})
+			.set(`.block:not(.${blockSelector})`, {
+				pointerEvents: 'none'
+			})
+			// For expanded content
+			.set(`.block.${blockSelector} .extra`, {
+				opacity: 1
+			})
+			.call(() => {
+				let state = Flip.getState(gsap.utils.toArray('section.grid, div.block'));
+				blockEl.classList.add('expanded');
+				Flip.from(state, {
+					absolute: true
+				});
+			})
+			// There seems to be a bit of flashing here
+			.to(
+				`.block:not(.${blockSelector})`,
+				{
+					opacity: 0.4
+				},
+				'start'
+			)
+			.to(
+				`.block.${blockSelector} .preview`,
+				{
+					autoAlpha: 0,
+					duration: 0.25
+				},
+				'start'
+			)
+			.fromTo(
+				`.block.${blockSelector} .extra-content`,
+				{
+					autoAlpha: 0,
+					y: '25%',
+					duration: 0.9
+				},
+				{
+					autoAlpha: 1,
+					y: 0,
+					duration: 0.9
+				},
+				'-=0.5'
+			)
+			.fromTo(
+				`.block.${blockSelector} .extra-close`,
+				{
+					autoAlpha: 0,
+					x: '100%',
+					y: '-100%',
+					duration: 0.9
+				},
+				{
+					autoAlpha: 1,
+					x: 0,
+					y: 0,
+					duration: 0.9
+				}
+			);
+
+		// TODO: add event listener on grid to close block
+
+		return timeline;
+	}
+
+	function getBlockReversion(revertingBlock: BlockExpanded): gsap.core.Timeline {
+		const blockSelector = revertingBlock.content.toLowerCase();
+
+		const blockEl = document.querySelector(`.block.${blockSelector}`);
+
+		if (!blockEl) {
+			throw new Error(`Can't query block ${revertingBlock.content} to revert`);
+		}
+
+		const blockTl = gsap.timeline({
+			defaults: {
+				duration: 1.1,
+				ease: 'power4.out'
+			}
+		});
+
+		blockTl
+			.addLabel('start', 0)
+			// Reset
+			.set(`.block.${blockSelector}`, {
+				'--row-end-expanded': 'span 1',
+				'--column-end-expanded': 'span 1',
+				zIndex: 1
+			})
+			.set(`.block:not(.${blockSelector})`, {
+				pointerEvents: 'initial'
+			})
+			.call(() => {
+				let state = Flip.getState(gsap.utils.toArray('section.grid, div.block'));
+				blockEl.classList.toggle('expanded');
+				Flip.from(state, {
+					absolute: true
+				});
+			})
+			// There seems to be a bit of flashing here
+			.to(
+				`.block:not(.${blockSelector})`,
+				{
+					opacity: 1
+				},
+				'start'
+			);
+
+		return timeline;
 	}
 
 	onMount(() => {
@@ -74,43 +213,12 @@
 	});
 
 	$: {
-		// if (previouslyExpanded && previouslyExpanded.content !== $expansion?.content) {
-		// 	console.log('reverting previously expanded');
-		// 	gsap.fromTo(
-		// 		`.block.${previouslyExpanded.content.toLowerCase()}`,
-		// 		{
-		// 			'--width': previouslyExpanded.expandedWidth,
-		// 			'--height': previouslyExpanded.expandedHeight,
-		// 			duration: 1.1
-		// 		},
-		// 		{
-		// 			'--width': previouslyExpanded.width,
-		// 			'--height': previouslyExpanded.height,
-		// 			duration: 1.1
-		// 		}
-		// 	);
-		// }
+		timeline.clear();
 
+		console.log($expansion?.content);
 		if ($expansion) {
-			// TODO: HMR doesn't load with this, so make sure $expansion is set to null before HMR
-			const expandingBlock = document.querySelector(`.block.${$expansion.content.toLowerCase()}`);
-
-			if (!expandingBlock) {
-				throw new Error(`Can't query block ${$expansion.content} to expand`);
-			}
-
-			gsap.set(`.block.${$expansion.content.toLowerCase()}`, {
-				'--row-end-expanded': `span ${$expansion.expandedWidth}`,
-				'--column-end-expanded': `span ${$expansion.expandedHeight}`,
-				zIndex: 10
-			});
-
-			let state = Flip.getState(gsap.utils.toArray('section.grid, div.block'));
-			expandingBlock.classList.toggle('expanded');
-			Flip.from(state, {
-				absolute: true
-			});
-
+			timeline.clear();
+			timeline.add(getBlockExpansion($expansion));
 			previouslyExpanded = $expansion;
 		}
 	}
@@ -122,6 +230,7 @@
 		{#each blocks as block}
 			<div
 				class="block {block.content.toLowerCase()}"
+				class:expandable={expandableBlocks.includes(block.content)}
 				style:padding-bottom="({block.height} / {block.width} * 100)%"
 				style:min-height="calc({block.height} * var(--block-size) - 3rem)"
 				style="--column-start: {block.x}; --row-start: {block.y}; --column-end: span {block.width}; --row-end-expanded: span {block.height}; --column-end-expanded: span {block.width}; --row-end: span {block.height};"
@@ -134,7 +243,11 @@
 					y: {block.y}<br />
 				{:else}
 					{#await import(`$lib/blocks/${block.content}.svelte`) then { default: component }}
-						<svelte:component this={component} expand={() => expand(block)} />
+						<svelte:component
+							this={component}
+							expand={() => expand(block)}
+							expanded={$expansion?.content === block.content}
+						/>
 					{/await}
 				{/if}
 			</div>
@@ -167,7 +280,12 @@
 		width: 100%;
 	}
 
+	div.block.expandable {
+		cursor: zoom-in;
+	}
+
 	div.block.expanded {
+		cursor: zoom-out;
 		grid-column-end: var(--column-end-expanded);
 		grid-row-end: var(--row-end-expanded);
 	}

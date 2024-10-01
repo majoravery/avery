@@ -1,43 +1,21 @@
 <script lang="ts">
-	import arrowTopRight from '$lib/svg/arrow-up-right.svg';
+	import arrowUpRight from '$lib/svg/arrow-up-right.svg';
 
-	export let standout: boolean = false;
 	export let arrowAlt: string | undefined = undefined;
+	export let standout: boolean = false;
 	export let isHover: boolean = false;
 </script>
 
 <div class="header" class:hover={isHover}>
 	<div class="eyebrow" class:standout><slot /></div>
 	{#if arrowAlt}
-		<span class="arrow">
-			<img src={arrowTopRight} alt={arrowAlt} />
+		<span class="arrow-external">
+			<img src={arrowUpRight} alt={arrowAlt} />
 		</span>
 	{/if}
-	<span class="hover">hello </span>
 </div>
 
 <style>
-	span.hover {
-		display: none;
-		background-color: var(--color-background);
-		border-bottom-left-radius: var(--border-radius-m);
-		height: calc(var(--dimension) * 3);
-		position: absolute;
-		right: calc(var(--block-padding) * -1);
-		top: calc(var(--block-padding) * -1);
-		width: calc(var(--dimension) * 3);
-	}
-
-	/* span.hover:before {
-		content: '';
-		position: absolute;
-		background-color: red;
-		height: calc(var(--dimension) * 3);
-		width: calc(var(--dimension) * 3);
-		top: 0;
-		right: calc(var(--dimension) * 3);
-	} */
-
 	div.header {
 		--dimension: 14px;
 
@@ -72,34 +50,12 @@
 		padding: 0.2rem 0.3rem;
 	}
 
-	span.arrow {
+	span.arrow-external {
 		display: inline-block;
 		line-height: var(--dimension);
 	}
 
-	/* span.arrow:before {
-		content: '';
-		background-color: red;
-		position: absolute;
-		border-top-right-radius: var(--border-radius-m);
-		width: calc(var(--dimension) + var(--block-padding));
-		height: calc(var(--dimension) + var(--block-padding));
-		top: calc(var(--block-padding) * -1);
-		right: calc((var(--dimension) + var(--block-padding)) + var(--block-padding) * -1);
-	}
-
-	span.arrow:after {
-		content: '';
-		background-color: red;
-		position: absolute;
-		border-top-right-radius: var(--border-radius-m);
-		width: calc(var(--dimension) + var(--block-padding));
-		height: calc(var(--dimension) + var(--block-padding));
-		right: calc(var(--block-padding) * -1);
-		top: calc((var(--dimension) + var(--block-padding)) + var(--block-padding) * -1);
-	} */
-
-	span.arrow img {
+	span.arrow-external img {
 		transform-origin: center;
 		width: var(--dimension);
 	}

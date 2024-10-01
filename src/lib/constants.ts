@@ -4,6 +4,7 @@ export const BLOCK_SIZES: Record<number, number> = {
 	1680: 190
 };
 
+// TODO: smfh i dunno how i fucked up this typing again
 export const BLOCKS: Record<BlockType, Block> = {
 	square: { type: 'square', width: 2, height: 2, content: '' },
 	wide: { type: 'wide', width: 3, height: 1, content: '' },

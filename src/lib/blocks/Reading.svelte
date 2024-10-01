@@ -3,6 +3,7 @@
 	import Eyebrows from '$lib/components/Eyebrows.svelte';
 
 	export let expand: () => void;
+	export let expanded: boolean;
 </script>
 
 <!-- svelte-ignore a11y-no-noninteractive-element-interactions a11y-click-events-have-key-events -->

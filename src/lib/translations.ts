@@ -2,6 +2,7 @@ export const translations = {
 	en: {
 		'site.title': "Avery's dotcom",
 		'site.description': 'to be added',
+		'site.closePopUp': 'Close pop up',
 		'clock.title': 'Clock',
 		'clock.location': 'Singapore',
 		'contact.title': 'Contact',
@@ -48,6 +49,7 @@ export const translations = {
 	zh: {
 		'site.title': 'Avery 的网站',
 		'site.description': 'to be added',
+		'site.closePopUp': 'to be added',
 		'clock.title': '时钟',
 		'clock.location': '新加坡',
 		'contact.title': '联系',
@@ -94,6 +96,7 @@ export const translations = {
 	de: {
 		'site.title': "Avery's Seite",
 		'site.description': 'to be added',
+		'site.closePopUp': 'to be added',
 		'clock.title': 'Die Uhr',
 		'clock.location': 'Deutschland',
 		'contact.title': 'Kontakt',
@@ -140,6 +143,7 @@ export const translations = {
 	jp: {
 		'site.title': 'エブリのウェブサイト',
 		'site.description': 'to be added',
+		'site.closePopUp': 'to be added',
 		'clock.title': '時計',
 		'clock.location': '日本',
 		'contact.title': '連絡先',
