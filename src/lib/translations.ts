@@ -16,6 +16,7 @@ export const translations = {
 		'description.writeup':
 			"Web engineer and creative developer, recently moved from Singapore to Fukuoka for a year-long career break. Big fan of cooking just about anything, hiking to high altitudes, going to music festivals, and working on creative projects. If you're keen to build something together, get in touch 💌",
 		'info.title': 'Info',
+		'info.lastUpdated': 'Last updated',
 		'info.todaysDate': "Today's date",
 		'info.visitors': 'Visitors',
 		'info.pageViews': 'Page views',
@@ -63,6 +64,7 @@ export const translations = {
 		'description.writeup':
 			'网页工程师和创意开发者，最近从新加坡搬到福冈，打算休假一年。之前住在柏林，曾在SoundCloud和foodpanda工作。超爱做各种料理，喜欢爬山到高海拔，还喜欢参加音乐节。',
 		'info.title': '信息',
+		'info.lastUpdated': '最后更新',
 		'info.todaysDate': '今天的日期',
 		'info.visitors': '访客数量',
 		'info.pageViews': '页面浏览量',
@@ -110,6 +112,7 @@ export const translations = {
 		'description.writeup':
 			'Web-Ingenieur und kreativer Entwickler, vor Kurzem für eine einjährige Auszeit von Singapur nach Fukuoka gezogen. Zuvor in Berlin gelebt und bei SoundCloud und foodpanda gearbeitet. Ein großer Fan davon, fast alles zu kochen, in große Höhen zu wandern und auf Musikfestivals zu gehen.',
 		'info.title': 'Informationen',
+		'info.lastUpdated': 'Zuletzt aktualisiert',
 		'info.todaysDate': 'Heutiges Datum',
 		'info.visitors': 'Besucher',
 		'info.pageViews': 'Seitenaufrufe',
@@ -157,6 +160,7 @@ export const translations = {
 		'description.writeup':
 			'ウェブエンジニア兼クリエイティブデベロッパーで、最近シンガポールから福岡に引っ越して1年間のキャリアブレイク中です。以前はベルリンに住んでいて、SoundCloudやfoodpandaで働いていました。料理なら何でも大好きで、高い山を登るのも、音楽フェスに行くのも大好きです',
 		'info.title': '情報',
+		'info.lastUpdated': '最終更新',
 		'info.todaysDate': '今日の日付',
 		'info.visitors': '訪問者数',
 		'info.pageViews': 'ページビュー',

@@ -9,26 +9,31 @@
 		de: 'de',
 		jp: 'ja-JP'
 	};
+	const LAST_UPDATED = new Date('2 Oct 2024');
+	const TODAY = new Date();
 
 	function pad(number: number) {
 		return String(number).padStart(4, '0');
 	}
 
-	function getTodaysDate(locale: Locale) {
-		const today = new Date();
-		const day = String(today.getDate()).padStart(2, '0');
-		const month = today.toLocaleString(MAPPING_LOCALE[locale], { month: 'short' });
-		const year = today.getFullYear();
-
-		return `${day} ${month} ${year}`;
+	function getFormattedDate(date: Date, locale: Locale) {
+		return date.toLocaleString(MAPPING_LOCALE[locale], {
+			day: 'numeric',
+			month: 'long',
+			year: 'numeric'
+		});
 	}
 
-	$: date = getTodaysDate($locale);
+	$: date = getFormattedDate(TODAY, $locale);
 </script>
 
 <article>
 	<Eyebrows>{$t('info.title')}</Eyebrows>
 	<div class="info">
+		<div class="row">
+			<span class="label">{$t('info.lastUpdated')} </span>
+			<span class="value">{getFormattedDate(LAST_UPDATED, $locale)}</span>
+		</div>
 		<div class="row">
 			<span class="label">{$t('info.todaysDate')} </span>
 			<span class="value">{date}</span>
