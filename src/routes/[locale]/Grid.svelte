@@ -128,14 +128,6 @@
 				'start'
 			)
 			.addLabel('expand', 0.25)
-			// .to(
-			// 	blockSelector,
-			// 	{
-			// 		x: posAdj.x * stepSize,
-			// 		y: posAdj.y * stepSize
-			// 	},
-			// 	'expand'
-			// )
 			.call(
 				() => {
 					blockEl.classList.add('expanded');
@@ -216,12 +208,12 @@
 					autoAlpha: 1,
 					x: 0,
 					y: 0,
-					duration: 0.5
+					duration: 0.3
 				},
 				{
 					autoAlpha: 0,
-					x: '100%',
-					y: '-100%'
+					x: '-30%',
+					y: '30%'
 				},
 				'start'
 			)

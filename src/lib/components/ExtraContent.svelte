@@ -1,6 +1,6 @@
 <script lang="ts">
 	/**
-	 * For this to work, the .preview content in the block should be position absolute :-)
+	 * To not mess up content here, the .preview content in the block should be position absolute :-)
 	 */
 	import { t } from '$lib/stores/locale';
 	import arrowDownLeft from '$lib/svg/arrow-down-left.svg';
@@ -9,34 +9,34 @@
 	export let standout: boolean = false;
 </script>
 
-<div class="extra" class:visible={expanded} class:standout>
-	<!-- <span class="extra-close">
-		<img src={arrowDownLeft} alt={$t('site.closePopUp')} />
-	</span> -->
+<div class="extra" class:standout>
 	<div class="extra-content">
 		<slot />
 	</div>
 </div>
+<span class="extra-close" class:visible={expanded} class:standout>
+	<img src={arrowDownLeft} alt={$t('site.closePopUp')} />
+</span>
 
 <style>
 	div.extra {
-		--padding-top: calc(var(--eyebrow-height) + (var(--block-padding) / 2));
+		--extra-padding-top: calc(var(--eyebrow-height) + (var(--block-padding) / 2));
 
 		align-items: flex-end;
 		box-sizing: border-box;
 		display: flex;
-		height: calc(100% + var(--padding-top));
+		height: calc(100% + var(--extra-padding-top));
 		margin-bottom: calc(var(--block-padding) * -1);
 		opacity: 0;
 		overflow: hidden;
-		padding-top: var(--padding-top);
+		padding-top: var(--extra-padding-top);
 		position: absolute;
 		width: 100%;
 		z-index: 5;
 	}
 
 	div.extra.standout {
-		--padding-top: calc(var(--eyebrow-height) + var(--block-padding));
+		--extra-padding-top: calc(var(--eyebrow-height) + var(--block-padding));
 	}
 
 	div.extra:before {
@@ -56,7 +56,9 @@
 	}
 
 	div.extra.standout:before {
-		height: calc(var(--eyebrow-height) + var(--block-padding) + 0.5rem);
+		height: calc(
+			var(--eyebrow-height) + var(--block-padding) + (var(--eyebrow-standout-padding-x) * 2)
+		);
 	}
 
 	div.extra-content {
@@ -90,21 +92,24 @@
 		width: 100%;
 	}
 
-	/* span.extra-close {
+	span.extra-close {
 		cursor: zoom-out;
-		display: inline-block;
+		display: none;
 		line-height: var(--eyebrow-height);
 		padding: 1rem;
 		position: absolute;
 		right: -1rem;
-		background: salmon;
-		top: calc((var(--eyebrow-height) + 0.5rem) * 1);
+		top: calc(var(--block-padding) * -1);
 		z-index: 15;
-	} */
+	}
+
+	span.extra-close.visible {
+		display: inline-block;
+	}
 
 	/* Offsets the 1rem padding for interactive space with the standout padding in Eyebrows.svelte */
-	/* div.extra.standout span.extra-close {
-		top: -0.75rem;
+	span.extra-close.standout {
+		top: calc(var(--block-padding) * -1 + var(--eyebrow-standout-padding-x));
 	}
 
 	span.extra-close img {
@@ -128,5 +133,5 @@
 		100% {
 			transform: rotate(720deg);
 		}
-	} */
+	}
 </style>

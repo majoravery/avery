@@ -9,6 +9,7 @@
 <style>
 	:root {
 		--eyebrow-height: 14px;
+		--eyebrow-standout-padding-x: 0.2rem;
 	}
 
 	div.eyebrow {
@@ -34,6 +35,6 @@
 		background: var(--color-filler);
 		border: 1px solid var(--color-filler);
 		border-radius: var(--border-radius-s);
-		padding: 0.2rem 0.3rem;
+		padding: var(--eyebrow-standout-padding-x) 0.3rem;
 	}
 </style>
