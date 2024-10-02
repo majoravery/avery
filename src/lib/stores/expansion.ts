@@ -16,10 +16,6 @@ export const MAPPING_EXPANSION: Expansions = {
 
 export const expansion = writable<BlockExpanded | null>(undefined);
 
-expansion.subscribe((block: BlockExpanded | null) => {
-	console.log('currently setting...', block);
-});
-
 export function canBlockExpand(block: BlockExpanded, breakpoint: number): boolean {
 	// get canvas dimensions via breakpoint
 	const canvas = CANVAS_TYPES[breakpoint];

@@ -16,6 +16,7 @@
 	</div>
 
 	<ExtraContent {expanded} standout>
+		<img src={recently} alt={$t('recently.title')} />
 		<p>
 			Last week I packed up my life in Singapore and moved to Fukuoka with the intention of taking a
 			year long career break while living abroad again- some days I feel silly for quitting my job
@@ -30,6 +31,7 @@
 	article {
 		display: flex;
 		flex-direction: column;
+		position: relative;
 		height: 100%;
 		width: 100%;
 	}
@@ -37,14 +39,14 @@
 	div.photo {
 		background-color: var(--color-filler);
 		border-radius: var(--border-radius-s);
-		bottom: 8px;
-		height: calc(100% - 16px);
-		left: 8px;
+		bottom: -8px;
+		height: calc(100% + 16px);
+		left: -8px;
 		position: absolute;
-		right: 8px;
-		top: 8px;
+		right: -8px;
+		top: -8px;
 		transition: transform 180ms ease-in-out;
-		width: calc(100% - 16px);
+		width: calc(100% + 16px);
 	}
 
 	article:hover div.photo {

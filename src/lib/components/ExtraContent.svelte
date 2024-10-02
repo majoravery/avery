@@ -19,29 +19,35 @@
 	div.extra {
 		align-items: flex-end;
 		display: flex;
-		height: calc(100% - var(--block-padding) * 2);
+		height: 100%;
+		margin-bottom: calc(var(--block-padding) * -1);
 		opacity: 0;
 		overflow: hidden;
-		position: absolute;
-		width: calc(100% - var(--block-padding) * 2);
+		/* position: absolute; */
+		width: 100%;
 		z-index: 5;
 		/* maybe add visiblity: hidden? */
 	}
 
 	div.extra-content {
 		color: var(--color-accent);
-		display: flex;
-		flex-direction: column;
 		font-family: var(--bodyFontFamily);
 		font-optical-sizing: var(--bodyFontOptical);
 		font-size: var(--bodyFontSize);
 		font-style: var(--bodyFontStyle);
 		font-weight: var(--bodyFontWeight);
 		height: calc(100% - var(--eyebrow-height) * 2);
-		justify-content: flex-end;
 		letter-spacing: var(--bodyLetterSpacing);
 		line-height: var(--bodyLineHeight);
-		overflow: scroll;
+		padding-top: calc(var(--block-padding) * 3);
+		padding-bottom: var(--block-padding);
+		overflow-y: scroll;
+		width: 100%;
+	}
+
+	div.extra-content :global(img) {
+		border-radius: var(--border-radius-s);
+		width: 100%;
 	}
 
 	span.extra-close {

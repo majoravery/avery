@@ -3,7 +3,7 @@
 <style>
 	div {
 		background: repeating-linear-gradient(
-			40deg,
+			37deg,
 			rgb(255, 255, 255),
 			rgb(255, 255, 255) 12px,
 			var(--color-accent) 13px,

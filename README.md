@@ -43,6 +43,10 @@ All
 - [ ] footer during animation makes site vertically scrollable
 - [ ] output a printable version of the site
 
+Animations
+
+- [ ] Make sure you can click on expandable block only AFTER everything has loaded, similar to when a block is reverting
+
 Clock
 
 - [ ] implement skeleton when changing locale

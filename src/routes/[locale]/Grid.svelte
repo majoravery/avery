@@ -69,10 +69,16 @@
 		if (!blockEl) {
 			throw new Error(`Can't query block ${blockToExpand.content} to expand`);
 		}
+		const extraContentEls = document.querySelector(
+			`.block.${blockSelector} .extra-content`
+		)?.children;
+		if (!extraContentEls) {
+			throw new Error(`Can't query extra content of block ${blockToExpand.content}`);
+		}
 
 		const blockTl = gsap.timeline({
 			defaults: {
-				duration: 1.1,
+				duration: 1,
 				ease: 'power4.out'
 			}
 		});
@@ -123,16 +129,16 @@
 				'0.25'
 			)
 			.fromTo(
-				`.block.${blockSelector} .extra-content`,
+				extraContentEls,
 				{
 					autoAlpha: 0,
-					y: '25%',
-					duration: 0.9
+					y: '25%'
 				},
 				{
 					autoAlpha: 1,
 					y: 0,
-					duration: 0.9
+					duration: 1,
+					stagger: 0.15
 				},
 				'-=0.25'
 			)
@@ -141,14 +147,13 @@
 				{
 					autoAlpha: 0,
 					x: '100%',
-					y: '-100%',
-					duration: 0.9
+					y: '-100%'
 				},
 				{
 					autoAlpha: 1,
 					x: 0,
 					y: 0,
-					duration: 0.9
+					duration: 1
 				}
 			)
 			.call(() => {
@@ -184,15 +189,6 @@
 			.set(`.block:not(.${blockSelector})`, {
 				pointerEvents: 'initial'
 			})
-			.to(
-				`.block.${blockSelector} .extra-content`,
-				{
-					autoAlpha: 0,
-					y: '20%',
-					duration: 0.5
-				},
-				'start'
-			)
 			.fromTo(
 				`.block.${blockSelector} .extra-close`,
 				{
@@ -206,7 +202,20 @@
 					x: '100%',
 					y: '-100%'
 				},
-				'<0.4'
+				'start'
+			)
+			.fromTo(
+				`.block.${blockSelector} .extra-content`,
+				{
+					autoAlpha: 1,
+					y: 0,
+					duration: 0.5
+				},
+				{
+					autoAlpha: 0,
+					y: '20%'
+				},
+				'-=0.6'
 			)
 			.call(
 				() => {
@@ -216,7 +225,7 @@
 					});
 				},
 				undefined,
-				'<0.1'
+				'<0.5'
 			)
 			// There seems to be a bit of flashing here
 			.to(
@@ -224,18 +233,18 @@
 				{
 					opacity: 1
 				},
-				'-=0.5'
+				'<0.1'
 			)
 			.fromTo(
 				`.block.${blockSelector} .preview`,
 				{
-					autoAlpha: 0,
-					duration: 0.9
+					autoAlpha: 0
 				},
 				{
-					autoAlpha: 1
+					autoAlpha: 1,
+					duration: 1
 				},
-				'-=0.9'
+				'-=0.25'
 			)
 			.call(() => {
 				expansion.set(null);
