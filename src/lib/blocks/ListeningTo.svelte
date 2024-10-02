@@ -9,7 +9,6 @@
 	const artist = 'SugLawd Familiar, CHICO CARLITO, Awich';
 
 	let artistEl: HTMLElement;
-	export let expand: () => void;
 
 	onMount(() => {
 		function resizeHandler() {
@@ -30,15 +29,16 @@
 	});
 </script>
 
-<!-- svelte-ignore a11y-no-noninteractive-element-interactions a11y-click-events-have-key-events -->
-<article on:click={expand}>
+<article>
 	<Eyebrows>
 		{$t('listeningTo.title')}
 	</Eyebrows>
 	<div class="album">
-		<div class="title">{title}</div>
-		<div class="artist" bind:this={artistEl} data-content={artist}>{artist}</div>
-		<img src={listeningTo} alt={`${title} - ${artist}`} />
+		<div class="album-inner">
+			<div class="title">{title}</div>
+			<div class="artist" bind:this={artistEl} data-content={artist}>{artist}</div>
+			<img src={listeningTo} alt={`${title} - ${artist}`} />
+		</div>
 	</div>
 </article>
 
@@ -50,41 +50,74 @@
 	}
 
 	article:after {
-		content: '';
 		background-image: linear-gradient(to top, rgb(250, 250, 250), rgba(250, 250, 250, 0));
-		bottom: 0;
+		bottom: calc(var(--block-padding) * -1);
+		content: '';
 		height: 80%;
-		left: 0;
+		left: calc(var(--block-padding) * -1);
 		position: absolute;
-		width: 100%;
+		width: calc(100% + var(--block-padding) * 2);
 		z-index: 1;
 	}
 
 	div.album {
+		background-color: var(--color-filler);
+		bottom: 0;
 		display: flex;
 		flex-direction: column;
 		height: 100%;
 		justify-content: flex-end;
-		position: relative;
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+		transition: background-color 200ms ease-in-out;
 		width: 100%;
+	}
+
+	div.album:before {
+		background-color: var(--color-background);
+		bottom: 0;
+		content: '';
+		height: 100%;
+		left: 0;
+		mix-blend-mode: screen;
+		opacity: 0.5;
+		position: absolute;
+		right: 0;
+		top: 0;
+		transition: opacity 200ms ease-in-out;
+		width: 100%;
+		z-index: 1;
+	}
+
+	article:hover div.album:before {
+		opacity: 0;
+	}
+
+	div.album-inner {
+		padding: var(--block-padding);
 	}
 
 	div.album img {
 		bottom: -100%;
 		left: -100%;
 		margin: auto;
-		opacity: 0.4;
+		mix-blend-mode: multiply;
+		opacity: 0.8;
 		position: absolute;
 		right: -100%;
-		top: -75%;
+		top: -65%;
 		transform: scale(100%);
 		transition:
+			mix-blend-mode 200ms ease-in-out,
 			opacity 200ms ease-in-out,
 			transform 200ms ease-in-out;
-		width: 150%;
+		width: 130%;
 	}
 
 	article:hover div.album img {
+		mix-blend-mode: normal;
 		opacity: 1;
 		transform: scale(110%);
 	}
@@ -101,6 +134,7 @@
 		text-shadow:
 			1px 0px 5px var(--color-filler),
 			0px 1px 5px var(--color-filler);
+		position: relative;
 		z-index: 2;
 	}
 
@@ -115,6 +149,7 @@
 		line-height: 1.1rem;
 		transform: translate3d(0, 0, 0);
 		white-space: nowrap;
+		position: relative;
 		z-index: 2;
 	}
 
