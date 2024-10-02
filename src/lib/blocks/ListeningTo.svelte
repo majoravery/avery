@@ -51,17 +51,16 @@
 
 	article:after {
 		background-image: linear-gradient(to top, rgb(250, 250, 250), rgba(250, 250, 250, 0));
-		bottom: calc(var(--block-padding) * -1);
+		bottom: 0;
 		content: '';
 		height: 80%;
-		left: calc(var(--block-padding) * -1);
+		left: 0;
 		position: absolute;
-		width: calc(100% + var(--block-padding) * 2);
+		width: 100%;
 		z-index: 1;
 	}
 
 	div.album {
-		background-color: var(--color-filler);
 		bottom: 0;
 		display: flex;
 		flex-direction: column;
@@ -156,7 +155,7 @@
 	div.artist:before {
 		content: attr(data-content);
 		font: inherit;
-		padding-right: calc(var(--block-padding) * 2);
+		padding-right: calc(var(--block-padding) + var(--block-padding));
 	}
 
 	@keyframes scroll {

@@ -27,7 +27,7 @@
 		background-image: linear-gradient(to top, rgb(250, 250, 250), rgba(250, 250, 250, 0));
 		bottom: calc(var(--block-padding) * -1);
 		content: '';
-		height: 40%;
+		height: 50%;
 		left: calc(var(--block-padding) * -1);
 		position: absolute;
 		width: calc(100% + var(--block-padding) * 2);
@@ -35,7 +35,6 @@
 	}
 
 	div.dish {
-		background-color: var(--color-filler);
 		bottom: calc(var(--block-padding) * -1);
 		display: flex;
 		flex-direction: column;
