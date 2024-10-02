@@ -10,9 +10,9 @@
 </script>
 
 <div class="extra" class:visible={expanded} class:standout>
-	<span class="extra-close">
+	<!-- <span class="extra-close">
 		<img src={arrowDownLeft} alt={$t('site.closePopUp')} />
-	</span>
+	</span> -->
 	<div class="extra-content">
 		<slot />
 	</div>
@@ -20,35 +20,26 @@
 
 <style>
 	div.extra {
+		--padding-top: calc(var(--eyebrow-height) + (var(--block-padding) / 2));
+
 		align-items: flex-end;
+		box-sizing: border-box;
 		display: flex;
-		height: 100%;
+		height: calc(100% + var(--padding-top));
 		margin-bottom: calc(var(--block-padding) * -1);
 		opacity: 0;
 		overflow: hidden;
+		padding-top: var(--padding-top);
+		position: absolute;
 		width: 100%;
 		z-index: 5;
 	}
 
-	div.extra-content {
-		box-sizing: border-box;
-		color: var(--color-accent);
-		font-family: var(--bodyFontFamily);
-		font-optical-sizing: var(--bodyFontOptical);
-		font-size: var(--bodyFontSize);
-		font-style: var(--bodyFontStyle);
-		font-weight: var(--bodyFontWeight);
-		height: calc(100% - var(--eyebrow-height) * 2);
-		letter-spacing: var(--bodyLetterSpacing);
-		line-height: var(--bodyLineHeight);
-		padding-top: var(--block-padding);
-		margin-bottom: calc(var(--block-padding) * 2);
-		overflow-x: hidden;
-		overflow-y: scroll;
-		width: 100%;
+	div.extra.standout {
+		--padding-top: calc(var(--eyebrow-height) + var(--block-padding));
 	}
 
-	div.extra-content:before {
+	div.extra:before {
 		content: '';
 		background: linear-gradient(
 			180deg,
@@ -61,11 +52,32 @@
 		left: 0;
 		height: calc(var(--eyebrow-height) + var(--block-padding));
 		position: absolute;
-		z-index: 1;
+		z-index: 2;
 	}
 
-	div.extra.standout .extra-content:before {
+	div.extra.standout:before {
 		height: calc(var(--eyebrow-height) + var(--block-padding) + 0.5rem);
+	}
+
+	div.extra-content {
+		box-sizing: border-box;
+		color: var(--color-accent);
+		font-family: var(--bodyFontFamily);
+		font-optical-sizing: var(--bodyFontOptical);
+		font-size: var(--bodyFontSize);
+		font-style: var(--bodyFontStyle);
+		font-weight: var(--bodyFontWeight);
+		height: 100%;
+		letter-spacing: var(--bodyLetterSpacing);
+		line-height: var(--bodyLineHeight);
+		padding-bottom: var(--block-padding);
+		overflow-x: hidden;
+		overflow-y: scroll;
+		width: 100%;
+	}
+
+	div.extra.standout div.extra-content {
+		padding-top: 0.5rem;
 	}
 
 	div.extra-content :global(a) {
@@ -78,40 +90,26 @@
 		width: 100%;
 	}
 
-	span.extra-close {
+	/* span.extra-close {
 		cursor: zoom-out;
 		display: inline-block;
 		line-height: var(--eyebrow-height);
+		padding: 1rem;
 		position: absolute;
-		right: 0;
-		top: 0;
-		z-index: 5;
-	}
+		right: -1rem;
+		background: salmon;
+		top: calc((var(--eyebrow-height) + 0.5rem) * 1);
+		z-index: 15;
+	} */
 
-	div.extra.standout span.extra-close {
-		top: 0.25rem; /* See Eyebrows.svelte */
+	/* Offsets the 1rem padding for interactive space with the standout padding in Eyebrows.svelte */
+	/* div.extra.standout span.extra-close {
+		top: -0.75rem;
 	}
 
 	span.extra-close img {
-		transform-origin: center;
-	}
-
-	span.extra-close:after {
-		content: '';
-		height: 3rem;
-		position: absolute;
-		right: -1rem;
-		top: -1rem;
-		width: 3rem;
-	}
-
-	div.extra.standout span.extra-close:after {
-		content: '';
-		height: 3.25rem;
-		position: absolute;
-		right: -1rem;
-		top: -1.25rem;
-		width: 3rem;
+		pointer-events: none;
+		width: var(--eyebrow-height);
 	}
 
 	span.extra-close:hover img {
@@ -122,15 +120,6 @@
 		animation-iteration-count: 1;
 	}
 
-	span.extra-close img {
-		transform-origin: center;
-		width: var(--eyebrow-height);
-	}
-
-	div.extra.visible:hover span.extra-close {
-		transform: translate3d(-50%, 50%, 0);
-	}
-
 	@keyframes wheee {
 		0% {
 			transform: rotate(0deg);
@@ -139,5 +128,5 @@
 		100% {
 			transform: rotate(720deg);
 		}
-	}
+	} */
 </style>

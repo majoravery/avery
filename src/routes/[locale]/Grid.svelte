@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { CANVAS_TYPES } from '$lib/constants';
-	import { expansion, MAPPING_EXPANSION } from '$lib/stores/expansion';
+	import { getExpansionAdj, expansion, MAPPING_EXPANSION } from '$lib/stores/expansion';
 	import { Flip } from 'gsap/dist/Flip';
 	import { Grid } from '$lib/grid';
 	import { gsap } from 'gsap';
 	import { isDebugMode } from '$lib/stores/debugMode';
-	import { onMount, tick } from 'svelte';
+	import { onMount } from 'svelte';
 
 	import '$lib/grid.css';
 
@@ -47,8 +47,10 @@
 		// Honestly this definition stuff is getting me winded trying to silence it so imma just leave it
 		const expandedBlock = { ...block, ...MAPPING_EXPANSION[block.content] };
 
+		const posAdj = getExpansionAdj(expandedBlock, breakpoint);
+
 		timeline.clear();
-		timeline.add(getBlockExpansion(expandedBlock));
+		timeline.add(getBlockExpansion(expandedBlock, posAdj));
 	}
 
 	function revert(block: BlockExpanded): void {
@@ -62,19 +64,24 @@
 		timeline.add(getBlockReversion(block));
 	}
 
-	function getBlockExpansion(blockToExpand: BlockExpanded): gsap.core.Timeline {
-		const blockSelector = blockToExpand.content.toLowerCase();
+	/**
+	 *
+	 * @param blockToExpand
+	 * @param posAdj Position adjustment. Amount to shift block by in a { x: n, y: n } object if its expanded version exceeds grid.
+	 */
+	function getBlockExpansion(
+		blockToExpand: BlockExpanded,
+		posAdj: { x: number; y: number }
+	): gsap.core.Timeline {
+		const blockSelector = `.block.${blockToExpand.content.toLowerCase()}`;
+		const blockNotSelector = `.block:not(.${blockToExpand.content.toLowerCase()})`;
 
-		const blockEl = document.querySelector(`.block.${blockSelector}`);
-		if (!blockEl) {
-			throw new Error(`Can't query block ${blockToExpand.content} to expand`);
-		}
-		const extraContentEls = document.querySelector(
-			`.block.${blockSelector} .extra-content`
-		)?.children;
-		if (!extraContentEls) {
+		const blockEl = document.querySelector(blockSelector);
+		if (!blockEl) throw new Error(`Can't query block ${blockToExpand.content} to expand`);
+
+		const extraContentEls = document.querySelector(`${blockSelector} .extra-content`)?.children;
+		if (!extraContentEls)
 			throw new Error(`Can't query extra content of block ${blockToExpand.content}`);
-		}
 
 		const blockTl = gsap.timeline({
 			defaults: {
@@ -90,34 +97,45 @@
 			.call(() => {
 				expansion.set(blockToExpand);
 			})
-			.set(`.block.${blockSelector}`, {
+			.set(blockSelector, {
+				'--row-start-expanded': blockToExpand.y + posAdj.y,
+				'--column-start-expanded': blockToExpand.x + posAdj.x,
 				'--row-end-expanded': `span ${blockToExpand.expandedHeight}`,
 				'--column-end-expanded': `span ${blockToExpand.expandedWidth}`,
 				zIndex: 10
 			})
-			.set(`.block:not(.${blockSelector})`, {
+			.set(blockNotSelector, {
 				pointerEvents: 'none'
 			})
 			// For expanded content
-			.set(`.block.${blockSelector} .extra`, {
+			.set(`${blockSelector} .extra`, {
 				opacity: 1
 			})
 			// There seems to be a bit of flashing here
 			.to(
-				`.block:not(.${blockSelector})`,
+				blockNotSelector,
 				{
 					opacity: 0.4
 				},
 				'start'
 			)
 			.to(
-				`.block.${blockSelector} .preview`,
+				`${blockSelector} .preview`,
 				{
 					autoAlpha: 0,
 					duration: 0.25
 				},
 				'start'
 			)
+			.addLabel('expand', 0.25)
+			// .to(
+			// 	blockSelector,
+			// 	{
+			// 		x: posAdj.x * stepSize,
+			// 		y: posAdj.y * stepSize
+			// 	},
+			// 	'expand'
+			// )
 			.call(
 				() => {
 					blockEl.classList.add('expanded');
@@ -126,7 +144,7 @@
 					});
 				},
 				undefined,
-				'0.25'
+				'expand'
 			)
 			.fromTo(
 				extraContentEls,
@@ -143,7 +161,7 @@
 				'-=0.25'
 			)
 			.fromTo(
-				`.block.${blockSelector} .extra-close`,
+				`${blockSelector} .extra-close`,
 				{
 					autoAlpha: 0,
 					x: '100%',
@@ -157,23 +175,26 @@
 				}
 			)
 			.call(() => {
+				const closeBtn = blockEl?.querySelector('.extra-close');
+				if (!closeBtn)
+					throw new Error(`Can't query close button in block ${blockToExpand.content}`);
+
 				function closeExpandedBlock() {
 					revert(blockToExpand);
-					blockEl?.removeEventListener('click', closeExpandedBlock);
+					closeBtn?.removeEventListener('click', closeExpandedBlock);
 				}
-				blockEl?.addEventListener('click', closeExpandedBlock);
+				closeBtn.addEventListener('click', closeExpandedBlock);
 			});
 
 		return blockTl;
 	}
 
 	function getBlockReversion(blockToRevert: BlockExpanded): gsap.core.Timeline {
-		const blockSelector = blockToRevert.content.toLowerCase();
+		const blockSelector = `.block.${blockToRevert.content.toLowerCase()}`;
+		const blockNotSelector = `.block:not(.${blockToRevert.content.toLowerCase()})`;
 
-		const blockEl = document.querySelector(`.block.${blockSelector}`);
-		if (!blockEl) {
-			throw new Error(`Can't query block ${blockToRevert.content} to expand`);
-		}
+		const blockEl = document.querySelector(blockSelector);
+		if (!blockEl) throw new Error(`Can't query block ${blockToRevert.content} to expand`);
 
 		const blockTl = gsap.timeline({
 			defaults: {
@@ -186,11 +207,11 @@
 
 		blockTl
 			.addLabel('start', 0)
-			.set(`.block:not(.${blockSelector})`, {
+			.set(blockNotSelector, {
 				pointerEvents: 'initial'
 			})
 			.fromTo(
-				`.block.${blockSelector} .extra-close`,
+				`${blockSelector} .extra-close`,
 				{
 					autoAlpha: 1,
 					x: 0,
@@ -205,7 +226,7 @@
 				'start'
 			)
 			.fromTo(
-				`.block.${blockSelector} .extra-content`,
+				`${blockSelector} .extra-content`,
 				{
 					autoAlpha: 1,
 					y: 0,
@@ -229,14 +250,14 @@
 			)
 			// There seems to be a bit of flashing here
 			.to(
-				`.block:not(.${blockSelector})`,
+				blockNotSelector,
 				{
 					opacity: 1
 				},
 				'<0.1'
 			)
 			.fromTo(
-				`.block.${blockSelector} .preview`,
+				`${blockSelector} .preview`,
 				{
 					autoAlpha: 0
 				},
@@ -250,7 +271,7 @@
 				expansion.set(null);
 			})
 			// Reset z-index
-			.set(`.block.${blockSelector}`, {
+			.set(blockSelector, {
 				zIndex: 'unset'
 			});
 
@@ -279,6 +300,8 @@
 
 			grid = grid.setBreakpoint(breakpoint);
 			blocks = grid.blocks;
+
+			// TODO: if expansion is open, revert everything
 		}
 
 		// TODO: throttle this
@@ -355,6 +378,8 @@
 
 	div.block.expanded {
 		cursor: unset;
+		grid-column-start: var(--column-start-expanded);
+		grid-row-start: var(--row-start-expanded);
 		grid-column-end: var(--column-end-expanded);
 		grid-row-end: var(--row-end-expanded);
 	}
