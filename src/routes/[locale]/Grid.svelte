@@ -107,10 +107,6 @@
 			.set(blockNotSelector, {
 				pointerEvents: 'none'
 			})
-			// For expanded content
-			.set(`${blockSelector} .extra`, {
-				opacity: 1
-			})
 			// There seems to be a bit of flashing here
 			.to(
 				blockNotSelector,
@@ -123,11 +119,19 @@
 				`${blockSelector} .preview`,
 				{
 					autoAlpha: 0,
-					duration: 0.25
+					duration: 0.3
 				},
 				'start'
 			)
-			.addLabel('expand', 0.25)
+			.addLabel('expand', 0.3) // manually calculated hah
+			// To prep .extra element to be visible
+			.set(
+				`${blockSelector} .extra`,
+				{
+					autoAlpha: 1
+				},
+				'expand'
+			)
 			.call(
 				() => {
 					blockEl.classList.add('expanded');
@@ -207,13 +211,13 @@
 				{
 					autoAlpha: 1,
 					x: 0,
-					y: 0,
-					duration: 0.3
+					y: 0
 				},
 				{
 					autoAlpha: 0,
 					x: '-30%',
-					y: '30%'
+					y: '30%',
+					duration: 0.3
 				},
 				'start'
 			)
@@ -221,15 +225,16 @@
 				`${blockSelector} .extra-content`,
 				{
 					autoAlpha: 1,
-					y: 0,
-					duration: 0.5
+					y: 0
 				},
 				{
 					autoAlpha: 0,
-					y: '20%'
+					y: '20%',
+					duration: 0.8
 				},
-				'-=0.6'
+				'start'
 			)
+			.addLabel('revert', 0.6)
 			.call(
 				() => {
 					blockEl.classList.remove('expanded');
@@ -238,15 +243,18 @@
 					});
 				},
 				undefined,
-				'<0.5'
+				'revert'
 			)
-			// There seems to be a bit of flashing here
+			.set(`${blockSelector} .extra`, {
+				autoAlpha: 0
+			})
+			// There seems to be a bit of flashing here??
 			.to(
 				blockNotSelector,
 				{
 					opacity: 1
 				},
-				'<0.1'
+				'-=0.25'
 			)
 			.fromTo(
 				`${blockSelector} .preview`,
@@ -257,7 +265,7 @@
 					autoAlpha: 1,
 					duration: 1
 				},
-				'-=0.25'
+				'-=0.4'
 			)
 			.call(() => {
 				expansion.set(null);
