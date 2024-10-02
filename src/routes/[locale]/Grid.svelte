@@ -19,15 +19,17 @@
 	gsap.registerPlugin(Flip);
 
 	let grid: Grid;
+	let breakpoint: number;
 	let blocks: Block[];
 	let expandableBlocks = Object.keys(MAPPING_EXPANSION);
-	let previouslyExpanded: BlockExpanded;
 
 	// Returns the lower breakpoint in the range that width fits in
 	// Thanks ChatGPT
-	function getBreakpoint(width: number) {
-		return breakpoints.find(
-			(val, i) => width >= val && (i === breakpoints.length - 1 || width < breakpoints[i + 1])
+	function getBreakpoint(width: number): number {
+		return (
+			breakpoints.find(
+				(val, i) => width >= val && (i === breakpoints.length - 1 || width < breakpoints[i + 1])
+			) ?? -1
 		);
 	}
 
@@ -37,19 +39,35 @@
 			return;
 		}
 
+		if (block.content === $expansion?.content) {
+			// Nothing else needs to be done now move along...
+			return;
+		}
+
 		// Honestly this definition stuff is getting me winded trying to silence it so imma just leave it
 		const expandedBlock = { ...block, ...MAPPING_EXPANSION[block.content] };
-		expansion.set(expandedBlock);
+
+		timeline.clear();
+		timeline.add(getBlockExpansion(expandedBlock));
 	}
 
-	function getBlockExpansion(expandingBlock: BlockExpanded): gsap.core.Timeline {
-		const blockSelector = expandingBlock.content.toLowerCase();
+	function revert(block: BlockExpanded): void {
+		if (block.content !== $expansion?.content) {
+			throw new Error(
+				`You've just tried to revert ${block.content} even though ${$expansion?.content} was expanded. How..?`
+			);
+		}
 
-		// TODO: HMR doesn't load with this, so make sure $expansion is set to null before HMR
+		timeline.clear();
+		timeline.add(getBlockReversion(block));
+	}
+
+	function getBlockExpansion(blockToExpand: BlockExpanded): gsap.core.Timeline {
+		const blockSelector = blockToExpand.content.toLowerCase();
+
 		const blockEl = document.querySelector(`.block.${blockSelector}`);
-
 		if (!blockEl) {
-			throw new Error(`Can't query block ${expandingBlock.content} to expand`);
+			throw new Error(`Can't query block ${blockToExpand.content} to expand`);
 		}
 
 		const blockTl = gsap.timeline({
@@ -59,14 +77,16 @@
 			}
 		});
 
-		console.log(`.block.${blockSelector} .arrow-close`);
-		console.log(document.querySelector(`.block.${blockSelector} .arrow-close`));
+		let state = Flip.getState(gsap.utils.toArray('section.grid, div.block'));
 
 		blockTl
 			.addLabel('start', 0)
+			.call(() => {
+				expansion.set(blockToExpand);
+			})
 			.set(`.block.${blockSelector}`, {
-				'--row-end-expanded': `span ${expandingBlock.expandedWidth}`,
-				'--column-end-expanded': `span ${expandingBlock.expandedHeight}`,
+				'--row-end-expanded': `span ${blockToExpand.expandedHeight}`,
+				'--column-end-expanded': `span ${blockToExpand.expandedWidth}`,
 				zIndex: 10
 			})
 			.set(`.block:not(.${blockSelector})`, {
@@ -75,13 +95,6 @@
 			// For expanded content
 			.set(`.block.${blockSelector} .extra`, {
 				opacity: 1
-			})
-			.call(() => {
-				let state = Flip.getState(gsap.utils.toArray('section.grid, div.block'));
-				blockEl.classList.add('expanded');
-				Flip.from(state, {
-					absolute: true
-				});
 			})
 			// There seems to be a bit of flashing here
 			.to(
@@ -99,6 +112,16 @@
 				},
 				'start'
 			)
+			.call(
+				() => {
+					blockEl.classList.add('expanded');
+					Flip.from(state, {
+						absolute: true
+					});
+				},
+				undefined,
+				'0.25'
+			)
 			.fromTo(
 				`.block.${blockSelector} .extra-content`,
 				{
@@ -111,7 +134,7 @@
 					y: 0,
 					duration: 0.9
 				},
-				'-=0.5'
+				'-=0.25'
 			)
 			.fromTo(
 				`.block.${blockSelector} .extra-close`,
@@ -127,20 +150,24 @@
 					y: 0,
 					duration: 0.9
 				}
-			);
+			)
+			.call(() => {
+				function closeExpandedBlock() {
+					revert(blockToExpand);
+					blockEl?.removeEventListener('click', closeExpandedBlock);
+				}
+				blockEl?.addEventListener('click', closeExpandedBlock);
+			});
 
-		// TODO: add event listener on grid to close block
-
-		return timeline;
+		return blockTl;
 	}
 
-	function getBlockReversion(revertingBlock: BlockExpanded): gsap.core.Timeline {
-		const blockSelector = revertingBlock.content.toLowerCase();
+	function getBlockReversion(blockToRevert: BlockExpanded): gsap.core.Timeline {
+		const blockSelector = blockToRevert.content.toLowerCase();
 
 		const blockEl = document.querySelector(`.block.${blockSelector}`);
-
 		if (!blockEl) {
-			throw new Error(`Can't query block ${revertingBlock.content} to revert`);
+			throw new Error(`Can't query block ${blockToRevert.content} to expand`);
 		}
 
 		const blockTl = gsap.timeline({
@@ -150,57 +177,98 @@
 			}
 		});
 
+		let state = Flip.getState(gsap.utils.toArray('section.grid, div.block'));
+
 		blockTl
 			.addLabel('start', 0)
-			// Reset
-			.set(`.block.${blockSelector}`, {
-				'--row-end-expanded': 'span 1',
-				'--column-end-expanded': 'span 1',
-				zIndex: 1
-			})
 			.set(`.block:not(.${blockSelector})`, {
 				pointerEvents: 'initial'
 			})
-			.call(() => {
-				let state = Flip.getState(gsap.utils.toArray('section.grid, div.block'));
-				blockEl.classList.toggle('expanded');
-				Flip.from(state, {
-					absolute: true
-				});
-			})
+			.to(
+				`.block.${blockSelector} .extra-content`,
+				{
+					autoAlpha: 0,
+					y: '20%',
+					duration: 0.5
+				},
+				'start'
+			)
+			.fromTo(
+				`.block.${blockSelector} .extra-close`,
+				{
+					autoAlpha: 1,
+					x: 0,
+					y: 0,
+					duration: 0.5
+				},
+				{
+					autoAlpha: 0,
+					x: '100%',
+					y: '-100%'
+				},
+				'<0.4'
+			)
+			.call(
+				() => {
+					blockEl.classList.remove('expanded');
+					Flip.from(state, {
+						absolute: true
+					});
+				},
+				undefined,
+				'<0.1'
+			)
 			// There seems to be a bit of flashing here
 			.to(
 				`.block:not(.${blockSelector})`,
 				{
 					opacity: 1
 				},
-				'start'
-			);
+				'-=0.5'
+			)
+			.fromTo(
+				`.block.${blockSelector} .preview`,
+				{
+					autoAlpha: 0,
+					duration: 0.9
+				},
+				{
+					autoAlpha: 1
+				},
+				'-=0.9'
+			)
+			.call(() => {
+				expansion.set(null);
+			})
+			// Reset z-index
+			.set(`.block.${blockSelector}`, {
+				zIndex: 'unset'
+			});
 
-		return timeline;
+		return blockTl;
 	}
 
 	onMount(() => {
-		const bp = getBreakpoint(window.innerWidth);
-		if (typeof bp !== 'number') {
+		breakpoint = getBreakpoint(window.innerWidth);
+		if (breakpoint === -1) {
 			throw new Error('Grid init: breakpoint is undefined');
 		}
 
-		grid = new Grid(bp);
+		grid = new Grid(breakpoint);
 		blocks = grid.blocks;
 		expansion.set(null);
 
 		function resizeHandler() {
-			const bp = getBreakpoint(window.innerWidth);
-			if (typeof bp !== 'number') {
+			breakpoint = getBreakpoint(window.innerWidth);
+			if (breakpoint === -1) {
 				throw new Error('resizeHandler: breakpoint is undefined');
 			}
 
-			if (grid.getCurrentBreakpoint() === bp) {
+			if (grid.getCurrentBreakpoint() === breakpoint) {
 				return;
 			}
 
-			grid = grid.setBreakpoint(bp);
+			grid = grid.setBreakpoint(breakpoint);
 			blocks = grid.blocks;
 		}
 
@@ -211,17 +279,6 @@
 			window.removeEventListener('resize', resizeHandler);
 		};
 	});
-
-	$: {
-		timeline.clear();
-
-		console.log($expansion?.content);
-		if ($expansion) {
-			timeline.clear();
-			timeline.add(getBlockExpansion($expansion));
-			previouslyExpanded = $expansion;
-		}
-	}
 </script>
 
 {#if blocks}
@@ -236,11 +293,14 @@
 				style="--column-start: {block.x}; --row-start: {block.y}; --column-end: span {block.width}; --row-end-expanded: span {block.height}; --column-end-expanded: span {block.width}; --row-end: span {block.height};"
 			>
 				{#if $isDebugMode}
-					content: {block.content}<br />
-					width: {block.width}<br />
-					height: {block.height}<br />
-					x: {block.x}<br />
-					y: {block.y}<br />
+					<div class="debug">
+						{block.content}<br />
+						width: {block.width}<br />
+						height: {block.height}<br />
+						x: {block.x}<br />
+						y: {block.y}<br />
+						{block.occupiedIndices}
+					</div>
 				{:else}
 					{#await import(`$lib/blocks/${block.content}.svelte`) then { default: component }}
 						<svelte:component
@@ -285,8 +345,21 @@
 	}
 
 	div.block.expanded {
-		cursor: zoom-out;
+		cursor: unset;
 		grid-column-end: var(--column-end-expanded);
 		grid-row-end: var(--row-end-expanded);
+	}
+
+	div.debug {
+		font-family:
+			ui-monospace,
+			SFMono-Regular,
+			Menlo,
+			Monaco,
+			Consolas,
+			Liberation Mono,
+			Courier New,
+			monospace;
+		font-size: 12px;
 	}
 </style>

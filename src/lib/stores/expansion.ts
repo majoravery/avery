@@ -1,3 +1,4 @@
+import { CANVAS_TYPES } from '$lib/constants';
 import { writable } from 'svelte/store';
 
 /**
@@ -6,7 +7,7 @@ import { writable } from 'svelte/store';
  * with this option.
  */
 export const MAPPING_EXPANSION: Expansions = {
-	Recently: { expandedWidth: 2, expandedHeight: 4 },
+	Recently: { expandedWidth: 2, expandedHeight: 3 },
 	ProjectShowcase: { expandedWidth: 2, expandedHeight: 4 },
 	Cooking: { expandedWidth: 2, expandedHeight: 2 },
 	ListeningTo: { expandedWidth: 2, expandedHeight: 2 },
@@ -16,9 +17,29 @@ export const MAPPING_EXPANSION: Expansions = {
 export const expansion = writable<BlockExpanded | null>(undefined);
 
 expansion.subscribe((block: BlockExpanded | null) => {
-	if (!block) {
-		return;
+	console.log('currently setting...', block);
+});
+
+export function canBlockExpand(block: BlockExpanded, breakpoint: number): boolean {
+	// get canvas dimensions via breakpoint
+	const canvas = CANVAS_TYPES[breakpoint];
+
+	// get max block x after expansion
+	// get max block y after expansion
+	const { x, y, expandedWidth, expandedHeight } = block;
+	const maxX = x + expandedWidth;
+	const maxY = y + expandedHeight;
+
+	const deltaX = maxX - canvas.width;
+	const deltaY = maxY - canvas.height;
+
+	if (deltaX > 0) {
+		// if yes, expand inwards (this should work for now as max expansion is only width 2)
 	}
 
-	console.log(`currently expanded block`, block);
-});
+	if (deltaY > 0) {
+		// if yes, move up by delta and expand
+	}
+
+	return false;
+}

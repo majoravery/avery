@@ -140,7 +140,8 @@ export class Grid {
 		return {
 			x: gridPosition[0] + 1,
 			y: gridPosition[1] + 1,
-			order: Array.isArray(occupiedIndices) ? occupiedIndices.sort((a, b) => a - b)[0] : -1
+			order: Array.isArray(occupiedIndices) ? occupiedIndices.sort((a, b) => a - b)[0] : -1,
+			occupiedIndices // not adding typing for this as it's for debugging purposes only
 		};
 	}
 

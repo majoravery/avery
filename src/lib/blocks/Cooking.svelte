@@ -2,7 +2,7 @@
 	import { t } from '$lib/stores/locale';
 	import Eyebrows from '$lib/components/Eyebrows.svelte';
 	import cooking from '$lib/images/cooking.png';
-	import arrowDownLeft from '$lib/svg/arrow-down-left.svg';
+	import ExtraContent from '$lib/components/ExtraContent.svelte';
 
 	export let expand: () => void;
 	export let expanded: boolean;
@@ -15,19 +15,19 @@
 		<div class="title">{$t('cooking.alt')}</div>
 		<img src={cooking} alt={$t('cooking.alt')} />
 	</div>
-	<div class="extra" class:visible={expanded}>
-		<span class="extra-close">
-			<img src={arrowDownLeft} alt={$t('site.closePopUp')} />
-		</span>
-		<div class="extra-content">
+	<ExtraContent {expanded}>
+		<img src={cooking} alt={$t('cooking.alt')} />
+		<p>
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla aliquam massa pharetra massa
 			porta pulvinar. Nunc eget massa turpis. Mauris vehicula nisl in nunc imperdiet, at convallis
-			eros scelerisque. Nulla luctus nulla sapien. Proin vestibulum in justo eu condimentum. Quisque
-			dui quam, vestibulum at justo vel, hendrerit molestie eros. Ut augue lectus, pretium id
-			elementum quis, egestas in odio. Nam malesuada tincidunt mattis. Nulla dictum erat varius
-			condimentum semper.
-		</div>
-	</div>
+			eros scelerisque.
+		</p>
+		<p>
+			Nulla luctus nulla sapien. Proin vestibulum in justo eu condimentum. Quisque dui quam,
+			vestibulum at justo vel, hendrerit molestie eros. Ut augue lectus, pretium id elementum quis,
+			egestas in odio. Nam malesuada tincidunt mattis. Nulla dictum erat varius condimentum semper.
+		</p>
+	</ExtraContent>
 </article>
 
 <style>

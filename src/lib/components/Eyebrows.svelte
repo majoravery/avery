@@ -16,9 +16,11 @@
 </div>
 
 <style>
-	div.header {
-		--dimension: 14px;
+	:root {
+		--eyebrow-height: 14px;
+	}
 
+	div.header {
 		display: flex;
 		justify-content: space-between;
 		position: relative;
@@ -52,12 +54,12 @@
 
 	span.arrow-external {
 		display: inline-block;
-		line-height: var(--dimension);
+		line-height: var(--eyebrow-height);
 	}
 
 	span.arrow-external img {
 		transform-origin: center;
-		width: var(--dimension);
+		width: var(--eyebrow-height);
 	}
 
 	div.header.hover img {
