@@ -108,15 +108,21 @@
 				pointerEvents: 'none'
 			})
 			// There seems to be a bit of flashing here
-			.to(
+			.fromTo(
 				blockNotSelector,
+				{
+					opacity: 1
+				},
 				{
 					opacity: 0.4
 				},
 				'start'
 			)
-			.to(
+			.fromTo(
 				`${blockSelector} .preview`,
+				{
+					autoAlpha: 1
+				},
 				{
 					autoAlpha: 0,
 					duration: 0.3
@@ -124,11 +130,19 @@
 				'start'
 			)
 			.addLabel('expand', 0.3) // manually calculated hah
-			// To prep .extra element to be visible
 			.set(
-				`${blockSelector} .extra`,
+				`${blockSelector} .extra-header-bg`,
 				{
 					autoAlpha: 1
+				},
+				'expand'
+			)
+			// To prep .extra-content element to be visible
+			.set(
+				`${blockSelector} .extra-content`,
+				{
+					autoAlpha: 1,
+					yPercent: 0
 				},
 				'expand'
 			)
@@ -146,11 +160,11 @@
 				extraContentEls,
 				{
 					autoAlpha: 0,
-					y: '25%'
+					yPercent: 25
 				},
 				{
 					autoAlpha: 1,
-					y: 0,
+					yPercent: 0,
 					duration: 1,
 					stagger: 0.15
 				},
@@ -160,13 +174,13 @@
 				`${blockSelector} .extra-close`,
 				{
 					autoAlpha: 0,
-					x: '100%',
-					y: '-100%'
+					xPercent: 100,
+					yPercent: -100
 				},
 				{
 					autoAlpha: 1,
-					x: 0,
-					y: 0,
+					xPercent: 0,
+					yPercent: 0,
 					duration: 1
 				}
 			)
@@ -210,13 +224,13 @@
 				`${blockSelector} .extra-close`,
 				{
 					autoAlpha: 1,
-					x: 0,
-					y: 0
+					xPercent: 0,
+					yPercent: 0
 				},
 				{
 					autoAlpha: 0,
-					x: '-30%',
-					y: '30%',
+					xPercent: -30,
+					yPercent: 30,
 					duration: 0.3
 				},
 				'start'
@@ -225,11 +239,11 @@
 				`${blockSelector} .extra-content`,
 				{
 					autoAlpha: 1,
-					y: 0
+					yPercent: 0
 				},
 				{
 					autoAlpha: 0,
-					y: '20%',
+					yPercent: 20,
 					duration: 0.8
 				},
 				'start'
@@ -245,12 +259,19 @@
 				undefined,
 				'revert'
 			)
-			.set(`${blockSelector} .extra`, {
-				autoAlpha: 0
-			})
+			.set(
+				`${blockSelector} .extra-header-bg`,
+				{
+					autoAlpha: 0
+				},
+				'revert'
+			)
 			// There seems to be a bit of flashing here??
-			.to(
+			.fromTo(
 				blockNotSelector,
+				{
+					opacity: 0.4
+				},
 				{
 					opacity: 1
 				},

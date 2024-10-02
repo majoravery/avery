@@ -9,59 +9,18 @@
 	export let standout: boolean = false;
 </script>
 
-<div class="extra" class:standout>
-	<div class="extra-content">
-		<slot />
-	</div>
+<div class="extra-header-bg" class:standout />
+<div class="extra-content" class:standout>
+	<slot />
 </div>
 <span class="extra-close" class:visible={expanded} class:standout>
 	<img src={arrowDownLeft} alt={$t('site.closePopUp')} />
 </span>
 
 <style>
-	div.extra {
-		--extra-padding-top: calc(var(--eyebrow-height) + (var(--block-padding) / 2));
-
-		align-items: flex-end;
-		box-sizing: border-box;
-		display: flex;
-		height: calc(100% + var(--extra-padding-top));
-		margin-bottom: calc(var(--block-padding) * -1);
-		opacity: 0;
-		overflow: hidden;
-		padding-top: var(--extra-padding-top);
-		position: absolute;
-		width: 100%;
-		z-index: 5;
-	}
-
-	div.extra.standout {
-		--extra-padding-top: calc(var(--eyebrow-height) + var(--block-padding));
-	}
-
-	div.extra:before {
-		content: '';
-		background: linear-gradient(
-			180deg,
-			rgba(255, 255, 255, 1) 0%,
-			rgba(255, 255, 255, 1) 75%,
-			rgba(255, 255, 255, 0) 100%
-		);
-		width: 100%;
-		top: 0;
-		left: 0;
-		height: calc(var(--eyebrow-height) + var(--block-padding));
-		position: absolute;
-		z-index: 2;
-	}
-
-	div.extra.standout:before {
-		height: calc(
-			var(--eyebrow-height) + var(--block-padding) + (var(--eyebrow-standout-padding-x) * 2)
-		);
-	}
-
 	div.extra-content {
+		--extra-padding-top: calc(var(--eyebrow-height) + var(--block-padding));
+
 		box-sizing: border-box;
 		color: var(--color-accent);
 		font-family: var(--bodyFontFamily);
@@ -69,17 +28,47 @@
 		font-size: var(--bodyFontSize);
 		font-style: var(--bodyFontStyle);
 		font-weight: var(--bodyFontWeight);
-		height: 100%;
+		height: calc(100% + var(--extra-padding-top));
 		letter-spacing: var(--bodyLetterSpacing);
 		line-height: var(--bodyLineHeight);
-		padding-bottom: var(--block-padding);
 		overflow-x: hidden;
 		overflow-y: scroll;
+		padding-bottom: calc(var(--block-padding) * 1.5);
+		padding-top: var(--extra-padding-top);
+		position: absolute;
 		width: 100%;
+		visibility: hidden;
+		z-index: 5;
 	}
 
-	div.extra.standout div.extra-content {
-		padding-top: 0.5rem;
+	div.extra-content.standout {
+		--extra-padding-top: calc(
+			var(--eyebrow-height) + var(--block-padding) + var(--eyebrow-standout-padding-x) * 2
+		);
+	}
+
+	div.extra-header-bg {
+		--extra-header-bg-height: calc(var(--eyebrow-height) + var(--block-padding) * 2);
+
+		background: linear-gradient(
+			180deg,
+			rgba(255, 255, 255, 1) 0%,
+			rgba(255, 255, 255, 1) 80%,
+			rgba(255, 255, 255, 0) 100%
+		);
+		height: var(--extra-header-bg-height);
+		left: 0;
+		position: fixed;
+		top: 0;
+		visibility: hidden;
+		width: 100%;
+		z-index: 9;
+	}
+
+	div.extra-header-bg.standout {
+		--extra-header-bg-height: calc(
+			var(--eyebrow-height) + var(--eyebrow-standout-padding-x) * 2 + var(--block-padding) * 2
+		);
 	}
 
 	div.extra-content :global(a) {
@@ -123,6 +112,10 @@
 		animation-timing-function: ease-in-out;
 		animation-fill-mode: forwards;
 		animation-iteration-count: 1;
+	}
+
+	span.extra-close:active img {
+		animation-name: none;
 	}
 
 	@keyframes wheee {

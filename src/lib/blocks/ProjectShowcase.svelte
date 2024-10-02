@@ -32,6 +32,7 @@
 				<span class="arrow"><img src={arrowTopRight} alt="{$t('projectShowcase.cta')}}" /></span>
 			</a>
 		</div>
+		<p></p>
 	</ExtraContent>
 </article>
 

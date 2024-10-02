@@ -26,6 +26,7 @@
 			Courier New,
 			monospace;
 		font-size: 12px;
+		line-height: var(--eyebrow-height);
 		position: relative;
 		text-transform: uppercase;
 		z-index: 10;
