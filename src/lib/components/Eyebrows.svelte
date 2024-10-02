@@ -24,6 +24,7 @@
 		display: flex;
 		justify-content: space-between;
 		position: relative;
+		z-index: 10;
 	}
 
 	div.eyebrow {

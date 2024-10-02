@@ -8,10 +8,10 @@ import { writable } from 'svelte/store';
  */
 export const MAPPING_EXPANSION: Expansions = {
 	Recently: { expandedWidth: 2, expandedHeight: 3 },
-	ProjectShowcase: { expandedWidth: 2, expandedHeight: 4 },
-	Cooking: { expandedWidth: 2, expandedHeight: 2 },
-	ListeningTo: { expandedWidth: 2, expandedHeight: 2 },
-	Reading: { expandedWidth: 2, expandedHeight: 2 }
+	ProjectShowcase: { expandedWidth: 2, expandedHeight: 3 }
+	// Cooking: { expandedWidth: 2, expandedHeight: 2 }
+	// ListeningTo: { expandedWidth: 2, expandedHeight: 2 },
+	// Reading: { expandedWidth: 2, expandedHeight: 2 }
 };
 
 export const expansion = writable<BlockExpanded | null>(undefined);

@@ -19,7 +19,6 @@
 
 <style>
 	article {
-		cursor: zoom-in;
 		display: flex;
 		height: 100%;
 		flex-direction: column;

@@ -42,6 +42,7 @@ All
 - [ ] think about mobile entrance animation–how to make sure averylim is always displayed first
 - [ ] footer during animation makes site vertically scrollable
 - [ ] output a printable version of the site
+- [ ] wheee is defined several times, DRY
 
 Animations
 

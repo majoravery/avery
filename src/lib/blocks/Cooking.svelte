@@ -2,10 +2,10 @@
 	import { t } from '$lib/stores/locale';
 	import Eyebrows from '$lib/components/Eyebrows.svelte';
 	import cooking from '$lib/images/cooking.png';
-	import ExtraContent from '$lib/components/ExtraContent.svelte';
+	// import ExtraContent from '$lib/components/ExtraContent.svelte';
 
 	export let expand: () => void;
-	export let expanded: boolean;
+	// export let expanded: boolean;
 </script>
 
 <!-- svelte-ignore a11y-no-noninteractive-element-interactions a11y-click-events-have-key-events -->
@@ -15,7 +15,7 @@
 		<div class="title">{$t('cooking.alt')}</div>
 		<img src={cooking} alt={$t('cooking.alt')} />
 	</div>
-	<ExtraContent {expanded}>
+	<!-- <ExtraContent {expanded}>
 		<img src={cooking} alt={$t('cooking.alt')} />
 		<p>
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla aliquam massa pharetra massa
@@ -27,7 +27,7 @@
 			vestibulum at justo vel, hendrerit molestie eros. Ut augue lectus, pretium id elementum quis,
 			egestas in odio. Nam malesuada tincidunt mattis. Nulla dictum erat varius condimentum semper.
 		</p>
-	</ExtraContent>
+	</ExtraContent> -->
 </article>
 
 <style>
@@ -35,25 +35,31 @@
 		display: flex;
 		flex-direction: column;
 		height: 100%;
+		position: relative;
+		width: 100%;
 	}
 
 	article:after {
 		content: '';
 		background-image: linear-gradient(to top, rgb(250, 250, 250), rgba(250, 250, 250, 0));
-		bottom: 0;
+		bottom: calc(var(--block-padding) * -1);
 		height: 40%;
-		left: 0;
+		left: calc(var(--block-padding) * -1);
 		position: absolute;
-		width: 100%;
+		width: calc(100% + var(--block-padding) * 2);
 		z-index: 1;
 	}
 
 	div.dish {
+		bottom: 0;
 		display: flex;
 		flex-direction: column;
 		height: 100%;
 		justify-content: flex-end;
-		position: relative;
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
 		width: 100%;
 	}
 

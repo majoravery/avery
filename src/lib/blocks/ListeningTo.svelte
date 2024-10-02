@@ -44,7 +44,6 @@
 
 <style>
 	article {
-		cursor: zoom-in;
 		display: flex;
 		flex-direction: column;
 		height: 100%;
