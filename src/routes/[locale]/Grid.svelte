@@ -18,10 +18,10 @@
 	});
 	gsap.registerPlugin(Flip);
 
-	let grid: Grid;
 	let breakpoint: number;
 	let blocks: Block[];
 	let expandableBlocks = Object.keys(MAPPING_EXPANSION);
+	let grid: Grid;
 
 	// Returns the lower breakpoint in the range that width fits in
 	// Thanks ChatGPT
@@ -34,13 +34,12 @@
 	}
 
 	function expand(block: Block): void {
-		// Blocks not defined in MAPPING_EXPANSION does not get to expand :-)
-		if (!expandableBlocks.includes(block.content)) {
-			return;
-		}
-
-		if (block.content === $expansion?.content) {
+		if (
+			// Blocks not defined in MAPPING_EXPANSION does not get to expand :-)
+			!expandableBlocks.includes(block.content) ||
 			// Nothing else needs to be done now move along...
+			block.content === $expansion?.content
+		) {
 			return;
 		}
 
@@ -64,14 +63,49 @@
 		timeline.add(getBlockReversion(block));
 	}
 
-	/**
-	 *
-	 * @param blockToExpand
-	 * @param posAdj Position adjustment. Amount to shift block by in a { x: n, y: n } object if its expanded version exceeds grid.
-	 */
+	function revertImmediately(block: BlockExpanded, callback: () => void): void {
+		if (block.content !== $expansion?.content) {
+			throw new Error(
+				`You've just tried to revert ${block.content} even though ${$expansion?.content} was expanded. How..?`
+			);
+		}
+
+		const blockSelector = `.block.${block.content.toLowerCase()}`;
+		const blockNotSelector = `.block:not(.${block.content.toLowerCase()})`;
+
+		const blockEl = document.querySelector(blockSelector);
+		if (!blockEl) throw new Error(`Can't query block ${block.content} to expand`);
+
+		timeline
+			.clear()
+			.set(blockSelector, {
+				zIndex: 'unset'
+			})
+			.set(blockNotSelector, {
+				opacity: 1,
+				pointerEvents: 'initial'
+			})
+			.set(`${blockSelector} .preview`, {
+				autoAlpha: 1
+			})
+			.set(
+				`${blockSelector} .extra-header-bg,
+				${blockSelector} .extra-close,
+				${blockSelector} .extra-content`,
+				{
+					autoAlpha: 0
+				}
+			)
+			.call(() => {
+				blockEl.classList.remove('expanded');
+				expansion.set(null);
+				callback();
+			});
+	}
+
 	function getBlockExpansion(
 		blockToExpand: BlockExpanded,
-		posAdj: { x: number; y: number }
+		posAdj: { x: number; y: number } // position adjustment - amount to shift block by in a { x: n, y: n } object if its expanded version exceeds grid.
 	): gsap.core.Timeline {
 		const blockSelector = `.block.${blockToExpand.content.toLowerCase()}`;
 		const blockNotSelector = `.block:not(.${blockToExpand.content.toLowerCase()})`;
@@ -97,15 +131,13 @@
 			.call(() => {
 				expansion.set(blockToExpand);
 			})
+			.set(blockNotSelector, { pointerEvents: 'none' })
 			.set(blockSelector, {
 				'--row-start-expanded': blockToExpand.y + posAdj.y,
 				'--column-start-expanded': blockToExpand.x + posAdj.x,
 				'--row-end-expanded': `span ${blockToExpand.expandedHeight}`,
 				'--column-end-expanded': `span ${blockToExpand.expandedWidth}`,
 				zIndex: 10
-			})
-			.set(blockNotSelector, {
-				pointerEvents: 'none'
 			})
 			// There seems to be a bit of flashing here
 			.fromTo(
@@ -217,9 +249,6 @@
 
 		blockTl
 			.addLabel('start', 0)
-			.set(blockNotSelector, {
-				pointerEvents: 'initial'
-			})
 			.fromTo(
 				`${blockSelector} .extra-close`,
 				{
@@ -294,7 +323,8 @@
 			// Reset z-index
 			.set(blockSelector, {
 				zIndex: 'unset'
-			});
+			})
+			.set('div.block', { pointerEvents: 'initial' });
 
 		return blockTl;
 	}
@@ -319,13 +349,19 @@
 				return;
 			}
 
-			grid = grid.setBreakpoint(breakpoint);
-			blocks = grid.blocks;
-
-			// TODO: if expansion is open, revert everything
+			if ($expansion !== null) {
+				revertImmediately($expansion, () => {
+					// Setting of breakpoint needs to happen after GSAP is done reverting
+					grid = grid.setBreakpoint(breakpoint);
+					blocks = grid.blocks;
+				});
+			} else {
+				grid = grid.setBreakpoint(breakpoint);
+				blocks = grid.blocks;
+			}
 		}
 
-		// TODO: throttle this
+		// TODO: throttle this (so far it doesn't seem like I need to...)
 		window.addEventListener('resize', resizeHandler);
 
 		return () => {

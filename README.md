@@ -36,7 +36,6 @@ This app is deployed to averylim.com via [Render](todo-add-url), so simply pushi
 Prio
 
 - [ ] Sort out mobile layout
-- [ ] Make sure you can click on expandable block only AFTER everything has loaded, similar to when a block is reverting
 
 If there's time
 

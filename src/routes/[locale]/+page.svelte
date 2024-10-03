@@ -29,13 +29,15 @@
 	async function playEntranceAnimation() {
 		await tick();
 		timeline
+			.set('div.block', { pointerEvents: 'none' })
 			.from('div.block.name', { scale: 0.8, autoAlpha: 0, duration: 1 })
 			// Hiding this here because I set visibility: hidden otherwise it'll flash at the
 			// top before the grid loads
-			.set('footer', { visibility: 'visible' })
+			// .set('footer', { visibility: 'visible' })
 			.delay(0.2)
 			.from('div.block:not(.name)', { scale: 0.8, autoAlpha: 0, duration: 1, stagger: 0.1 })
-			.from('footer', { autoAlpha: 0, y: '500%' });
+			// .from('footer', { autoAlpha: 0, y: '500%' })
+			.set('div.block', { pointerEvents: 'initial' }, '-=0.5');
 	}
 
 	onMount(() => {
