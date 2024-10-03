@@ -69,10 +69,6 @@
 		Draggable.create('.proxy', {
 			type: 'x',
 			trigger: '.container.lang',
-			// bounds: {
-			// 	minX: width / 2,
-			// 	maxX: width
-			// },
 			dragResistance: 0.55,
 			onDrag: function () {
 				displayTutorial.set(false);
@@ -198,12 +194,6 @@
 
 	div.proxy {
 		display: none;
-		/* opacity: 0.7;
-		background: var(--color-filler);
-		height: 100%;
-		position: absolute;
-		width: 100%;
-		left: 0; */
 	}
 
 	div.tutorial {
@@ -218,11 +208,33 @@
 		animation-delay: 100ms;
 		animation-duration: 1000ms;
 		animation-fill-mode: forwards;
-		animation-name: swipe;
+		animation-name: swipe-mobile;
 		animation-timing-function: ease-in-out;
-		transform: translate3d(calc(var(--block-size) * 0.15), calc(var(--block-size) * 0.6), 0)
-			rotate(-15deg);
-		width: calc(var(--block-size) * 0.2);
+		transform: translate3d(80%, 300%, 0) rotate(-15deg);
+		width: 20%;
+	}
+
+	@media (min-width: 480px) {
+		div.tutorial img {
+			animation-name: swipe;
+			transform: translate3d(calc(var(--block-size) * 0.15), calc(var(--block-size) * 0.6), 0)
+				rotate(-15deg);
+			width: calc(var(--block-size) * 0.2);
+		}
+	}
+
+	@keyframes swipe-mobile {
+		0% {
+			transform: translate3d(80%, 300%, 0) rotate(-15deg);
+		}
+
+		98% {
+			transform: translate3d(310%, 250%, 0) rotate(-15deg);
+		}
+
+		100% {
+			transform: translate3d(310%, 250%, 0) rotate(-15deg);
+		}
 	}
 
 	@keyframes swipe {

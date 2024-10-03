@@ -167,7 +167,7 @@ export const translations = {
 		'cooking.alt': 'チャイトウクエイ',
 		'description.title': '私について',
 		'description.writeup':
-			'ウェブエンジニアでクリエイティブな開発者。最近、新加坡から日本の福岡に引っ越しして、1年間のキャリアブレイクを楽しんでいます。以前はドイツのベルリンに住んでいました。いろいろな料理を作るの、山登り、音楽フェスに行くの、クリエイティブなプロジェクトに取り組むことが大好きです。一緒に何かを作りたい方は、ぜひご連絡ください💌',
+			'ウェブエンジニアでクリエイティブな開発者。最近、新加坡から日本の福岡に引っ越しして、1年間のキャリアブレイクを楽しんでいます。以前はドイツのベルリンに住んでいました。料理、山登り、音楽フェス、クリエイティブなプロジェクトが大好きです。何か一緒に作りたい方は、ぜひご連絡ください💌',
 		'info.title': '情報',
 		'info.lastUpdated': '最終更新',
 		'info.todaysDate': '今日の日付',
@@ -177,7 +177,7 @@ export const translations = {
 		'language.tutorialAlt': 'ドラッグして言語を変更',
 		'listeningTo.title': '聴いてる音楽',
 		'listeningTo.linkAlt': '{{platform}} で聴いて',
-		name: 'エブリ リム',
+		name: 'エブリー<br/>リム',
 		'projectShowcase.title': 'プロジェクトショーケース',
 		'projectShowcase.extraContent':
 			'仕事を辞めて日本に引っ越しするまでの間に、<a href="https://mayicestudio.com/" target="_blank">Mayice Studioのウェブサイト</a>のトランジションに感化されて、GSAPのスキルを磨きながらSanity CMSを試してみるために<a href="https://photos.averylim.com" target="_blank">photos.averylim.com</a>を作りました。',

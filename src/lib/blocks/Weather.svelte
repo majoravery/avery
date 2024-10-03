@@ -47,12 +47,20 @@
 
 	/* TODO: improve */
 	img {
-		left: -64px;
+		left: -20%;
 		opacity: 0.5;
 		position: absolute;
-		top: -48px;
-		width: calc(var(--block-size) * 1.5);
+		top: -5%;
+		width: 120%;
 		z-index: 1;
+	}
+
+	@media (min-width: 480px) {
+		img {
+			left: -64px;
+			top: -48px;
+			width: calc(var(--block-size) * 1.5);
+		}
 	}
 
 	div.forecasts {

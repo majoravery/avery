@@ -3,7 +3,7 @@
 </script>
 
 <article>
-	<h1 class={$locale}>{$t('name')}</h1>
+	<h1 class={$locale}>{@html $t('name')}</h1>
 </article>
 
 <style>
