@@ -25,6 +25,8 @@ export const translations = {
 		'listeningTo.title': 'Listening to',
 		'listeningTo.linkAlt': 'Listen on {{platform}}',
 		name: 'Avery Lim',
+		noscript:
+			'I’m not quite sure how you’ve landed on this view, but you should probably upgrade your browser or enable JavaScript because you’re missin out on all the fun.',
 		'projectShowcase.title': 'Project Showcase',
 		'projectShowcase.extraContent':
 			'In the break between leaving my job and moving to Japan, I was inspired by the fluid transitions from <a href="https://mayicestudio.com/" target="_blank">Mayice Studio’s website</a> and built <a href="https://photos.averylim.com" target="_blank">photos.averylim.com</a> as a playground to sharpen my GSAP skills and trial Sanity CMS.',
@@ -76,6 +78,8 @@ export const translations = {
 		'listeningTo.title': '正在收听',
 		'listeningTo.linkAlt': '在 {{platform}} 上收听',
 		name: '林佳仪',
+		noscript:
+			'不太了解你怎么掉来了这个页面，但你可能需要升级你的web browser或启用JavaScript，因为你错过了所有的乐趣～',
 		'projectShowcase.title': '项目展示',
 		'projectShowcase.extraContent':
 			'在辞职和搬到日本之间的空档期，我在受到了<a href="https://mayicestudio.com/" target="_blank">Mayice Studio网站</a>的启发时，建立了<a href="https://photos.averylim.com" target="_blank">photos.averylim.com</a>作为一个平台，用来磨练我的GSAP技能，同时后测试Sanity CMS。',
@@ -127,6 +131,8 @@ export const translations = {
 		'listeningTo.title': 'Hört gerade',
 		'listeningTo.linkAlt': 'Hör auf {{platform}}',
 		name: 'Avery Lim',
+		noscript:
+			'Keine Ahnung wie du auf dieser Ansicht gelandet bist, aber du solltest deinen Browser upgraden oder JavaScript aktivieren, weil du sonst den ganzen Spaß verpasst.',
 		'projectShowcase.title': 'Projektvorführung',
 		'projectShowcase.extraContent':
 			'In der Zeit zwischen meinen Job kündigen und dem Umzug nach Japan wurde ich von den fließenden Übergängen auf der <a href="https://mayicestudio.com/" target="_blank">Website von Mayice Studio</a> inspiriert und habe <a href="https://photos.averylim.com" target="_blank">photos.averylim.com</a> als Spielwiese gebaut, um meine GSAP-Fähigkeiten zu verbessern und Sanity CMS auszuprobieren.',
@@ -178,6 +184,8 @@ export const translations = {
 		'listeningTo.title': '聴いてる音楽',
 		'listeningTo.linkAlt': '{{platform}} で聴いて',
 		name: 'エブリー<br/>リム',
+		noscript:
+			'どうやってこのページにたどり着いたのかよく分からないが、ブラウザをアップグレードするか、JavaScriptを有効にした方がいいよ。楽しいところ全部見逃してるよ！',
 		'projectShowcase.title': 'プロジェクトショーケース',
 		'projectShowcase.extraContent':
 			'仕事を辞めて日本に引っ越しするまでの間に、<a href="https://mayicestudio.com/" target="_blank">Mayice Studioのウェブサイト</a>のトランジションに感化されて、GSAPのスキルを磨きながらSanity CMSを試してみるために<a href="https://photos.averylim.com" target="_blank">photos.averylim.com</a>を作りました。',

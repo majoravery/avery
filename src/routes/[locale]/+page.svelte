@@ -50,14 +50,9 @@
 <svelte:head>
 	<title>{$t('site.title')}</title>
 	<meta name="description" content={$t('site.description')} />
-
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
 	<meta charset="UTF-8" />
-
 	<meta name="robots" content="index, follow" />
-
-	<link rel="canonical" href={url} />
 
 	<meta property="og:title" content={$t('site.title')} />
 	<meta property="og:description" content={$t('site.description')} />
@@ -70,8 +65,7 @@
 	<meta name="twitter:description" content={$t('site.description')} />
 	<meta name="twitter:image" content="https://averylim.com/seo.png" />
 
-	<!-- TODO: something to do with language? -->
-	<!-- <link rel="alternate" href="https://www.example.com/" hreflang="en-us" /> -->
+	<link rel="canonical" href={url} />
 </svelte:head>
 
 <main
@@ -81,12 +75,9 @@
 	<Grid />
 
 	<noscript>
-		<p>{$t('name')}</p>
+		<p><b>{@html $t('name')}</b></p>
 		<p>{$t('description.writeup')}</p>
-		<p>
-			I'm not quite sure how you've landed on this view, but you should probably upgrade your
-			browser or enable JavaScript because you're missin out on all the fun.
-		</p>
+		<p>{$t('noscript')}</p>
 	</noscript>
 
 	<footer>
@@ -111,8 +102,7 @@
 		width: 100%;
 	}
 
-	noscript p,
-	footer {
+	noscript p {
 		color: var(--color-filler);
 		font-family: var(--bodyFontFamily);
 		font-optical-sizing: var(--bodyFontOpticalSizing);
@@ -121,6 +111,22 @@
 		font-weight: var(--bodyFontWeight);
 		letter-spacing: var(--bodyLetterSpacing);
 		line-height: var(--bodyLineHeight);
+		width: 40%;
+	}
+
+	/* footer {
+		color: var(--color-accent);
+		font-family: var(--bodyFontFamily);
+		font-optical-sizing: var(--bodyFontOpticalSizing);
+		font-size: var(--bodyFontSize);
+		font-style: var(--bodyFontStyle);
+		font-weight: var(--bodyFontWeight);
+		letter-spacing: var(--bodyLetterSpacing);
+		line-height: var(--bodyLineHeight);
+		margin-left: auto;
+		margin-right: auto;
+		padding-top: var(--grid-margin);
+		visibility: hidden;
 		width: 100%;
 	}
 
@@ -129,15 +135,7 @@
 		cursor: ne-resize;
 	}
 
-	footer {
-		padding-top: var(--grid-margin);
-		margin-left: auto;
-		margin-right: auto;
-		visibility: hidden;
-	}
-
 	@media (min-width: 480px) {
-		noscript p,
 		footer {
 			padding-top: 0;
 			margin-top: calc(var(--grid-margin) * 0.5);
@@ -145,5 +143,5 @@
 				(var(--columns) * var(--block-size)) + (var(--columns) - 1) * var(--grid-gap)
 			);
 		}
-	}
+	} */
 </style>
