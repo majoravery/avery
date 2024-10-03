@@ -7,6 +7,32 @@
 </article>
 
 <style>
+	:root {
+		--nameFontFamily: 'Bricolage Grotesque', sans-serif;
+		--nameFontOpticalSizing: auto;
+		--nameFontSize: 3.5rem;
+		--nameFontStyle: normal;
+		--nameFontWeight: 600;
+		--nameLineHeight: 60%;
+		--marginBottom: 5px;
+
+		--zhNameFontFamily: var(--zhFontFamily);
+		--zhNameFontOpticalSizing: auto;
+		--zhNameFontSize: 4rem;
+		--zhNameFontStyle: normal;
+		--zhNameFontWeight: 600;
+		--zhNameLineHeight: 100%;
+		--zhMarginBottom: 3px;
+
+		--jpNameFontFamily: var(--jpFontFamily);
+		--jpNameFontOpticalSizing: auto;
+		--jpNameFontSize: 3.8rem;
+		--jpNameFontStyle: normal;
+		--jpNameFontWeight: 600;
+		--jpNameLineHeight: 90%;
+		--jpMarginBottom: 0;
+	}
+
 	article {
 		align-items: flex-end;
 		display: flex;
@@ -14,14 +40,14 @@
 	}
 
 	h1 {
-		color: var(--colouraccent);
+		color: var(--colour-accent);
 		font-family: var(--nameFontFamily);
 		font-optical-sizing: var(--nameFontOpticalSizing);
 		font-size: var(--nameFontSize);
 		font-style: var(--nameFontStyle);
 		font-weight: var(--nameFontWeight);
 		line-height: var(--nameLineHeight);
-		margin-bottom: 5.232px;
+		margin-bottom: var(--marginBottom);
 	}
 
 	h1.zh {
@@ -31,7 +57,7 @@
 		font-style: var(--zhNameFontStyle);
 		font-weight: var(--zhNameFontWeight);
 		line-height: var(--zhNameLineHeight);
-		margin-bottom: 3.2px;
+		margin-bottom: var(--zhMarginBottom);
 	}
 
 	h1.jp {
@@ -41,6 +67,30 @@
 		font-style: var(--jpNameFontStyle);
 		font-weight: var(--jpNameFontWeight);
 		line-height: var(--jpNameLineHeight);
-		margin-bottom: 0;
+		margin-bottom: var(--jpMarginBottom);
+	}
+
+	@media (min-width: 1400px) {
+		:root {
+			--nameFontSize: 4rem;
+			--marginBottom: 7.5px;
+
+			--zhNameFontSize: 4rem;
+			--zhMarginBottom: 4px;
+
+			--jpNameFontSize: 3.8rem;
+		}
+	}
+
+	@media (min-width: 1680px) {
+		:root {
+			--nameFontSize: 4.8rem;
+			--marginBottom: 10px;
+
+			--zhNameFontSize: 4rem;
+			--zhMarginBottom: 5px;
+
+			--jpNameFontSize: 3.8rem;
+		}
 	}
 </style>

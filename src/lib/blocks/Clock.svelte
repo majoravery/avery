@@ -233,6 +233,23 @@
 		}
 	}
 
+	@media (min-width: 1400px) {
+		div.hour,
+		div.minute,
+		div.second {
+			align-items: center;
+			font-size: 4rem;
+		}
+	}
+
+	@media (min-width: 1680px) {
+		div.hour,
+		div.minute,
+		div.second {
+			font-size: 4.4rem;
+		}
+	}
+
 	/* Middle line */
 	div.hour:before,
 	div.minute:before,
@@ -276,6 +293,16 @@
 		div.bottom-flip {
 			align-items: flex-end; /* dunno why this works and not center */
 			height: 100%;
+		}
+	}
+
+	@media (min-width: 1400px) {
+		div.top,
+		div.bottom,
+		div.top-flip,
+		div.bottom-flip {
+			align-items: center; /* dunno why this works and not center */
+			height: 80%;
 		}
 	}
 
@@ -339,6 +366,20 @@
 
 		:nth-child(3 of div.flap) {
 			height: 90%;
+		}
+	}
+
+	@media (min-width: 1400px) {
+		:nth-child(1 of div.flap) {
+			height: 100%;
+		}
+
+		:nth-child(2 of div.flap) {
+			height: 92%;
+		}
+
+		:nth-child(3 of div.flap) {
+			height: 84%;
 		}
 	}
 

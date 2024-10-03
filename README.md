@@ -30,6 +30,7 @@ This app is deployed to averylim.com via [Render](todo-add-url), so simply pushi
 ## Credits
 
 - Weather forecast by https://www.weatherapi.com/
+- Flip clock animation inspired by Jan Kohlbach https://codepen.io/jankohlbach/pen/zYGaKLO?editors=0100
 
 ## Roadmap
 
@@ -40,6 +41,7 @@ Prio
 
 If there's time
 
+- [ ] Clock styling is actually fucked between 480 and 1400, redo it (because before 480 and after 1400 are using the same values)
 - [ ] Implement skeleton when changing locale
 - [ ] Add footer and make sure it works with GSAP animation
 - [ ] Limit the drag to 1 language at a time only because the radius isn't uniform
