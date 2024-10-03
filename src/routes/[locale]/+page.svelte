@@ -33,6 +33,7 @@
 			.from('div.block.name', { scale: 0.8, autoAlpha: 0, duration: 1 })
 			// Hiding this here because I set visibility: hidden otherwise it'll flash at the
 			// top before the grid loads
+			// Temporarily commenting this out bc I'm not working on the footer yet!
 			// .set('footer', { visibility: 'visible' })
 			.delay(0.2)
 			.from('div.block:not(.name)', { scale: 0.8, autoAlpha: 0, duration: 1, stagger: 0.1 })
@@ -60,14 +61,14 @@
 
 	<meta property="og:title" content={$t('site.title')} />
 	<meta property="og:description" content={$t('site.description')} />
-	<meta property="og:image" content="https://www.example.com/image.jpg" />
+	<meta property="og:image" content="https://averylim.com/seo.png" />
 	<meta property="og:url" content={url} />
 	<meta property="og:type" content="website" />
 
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content={$t('site.title')} />
 	<meta name="twitter:description" content={$t('site.description')} />
-	<meta name="twitter:image" content="https://www.example.com/image.jpg" />
+	<meta name="twitter:image" content="https://averylim.com/seo.png" />
 
 	<!-- TODO: something to do with language? -->
 	<!-- <link rel="alternate" href="https://www.example.com/" hreflang="en-us" /> -->
