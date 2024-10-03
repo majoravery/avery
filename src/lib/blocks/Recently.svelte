@@ -17,13 +17,7 @@
 
 	<ExtraContent {expanded} standout>
 		<img src={recently} alt={$t('recently.title')} />
-		<p>
-			Last week I packed up my life in Singapore and moved to Fukuoka with the intention of taking a
-			year long career break while living abroad again- some days I feel silly for quitting my job
-			amidst layoff szn but other days I know this is prolly the best time for such an experience
-			given the minimal commitments I’ve got in life rn, and I’m brimming with excitement and
-			curiosity about what this upcoming year will bring 🌟
-		</p>
+		<p>{@html $t('recently.extraContent')}</p>
 	</ExtraContent>
 </article>
 
@@ -76,11 +70,11 @@
 	div.photo img {
 		border-radius: var(--border-radius-s);
 		filter: brightness(100%);
+		height: 100%;
 		mix-blend-mode: multiply;
 		position: absolute;
 		transform: scale(100%);
 		transition: transform 180ms ease-in-out;
 		width: 100%;
-		height: 100%;
 	}
 </style>

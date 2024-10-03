@@ -20,11 +20,7 @@
 	<ExtraContent {expanded}>
 		<img src={photos} alt={$t('projectShowcase.imageAlt', { website: 'photos.averylim.com' })} />
 		<p>
-			In the break between leaving my job and moving to Japan, I was inspired by the fluid
-			transitions from
-			<a href="https://mayicestudio.com/" target="_blank">Mayice Studio's website</a>
-			and built <a href="https://photos.averylim.com" target="_blank">photos.averylim.com</a>
-			as a playground to sharpen my GSAP skills and trial Sanity CMS.
+			{@html $t('projectShowcase.extraContent')}
 		</p>
 		<div class="cta">
 			<a href="https://photos.averylim.com" target="_blank">
