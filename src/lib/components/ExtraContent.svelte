@@ -85,9 +85,9 @@
 		cursor: zoom-out;
 		display: none;
 		line-height: var(--eyebrow-height);
-		padding: 1rem;
+		padding: 16px;
 		position: absolute;
-		right: -1rem;
+		right: -16px;
 		top: calc(var(--block-padding) * -1);
 		z-index: 15;
 	}

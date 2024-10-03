@@ -414,7 +414,6 @@
 		background: rgb(255, 255, 255);
 		border-radius: var(--border-radius-m);
 		box-sizing: border-box;
-		font-size: 1rem;
 		grid-column-end: var(--column-end);
 		grid-column-start: var(--column-start);
 		grid-row-end: var(--row-end);

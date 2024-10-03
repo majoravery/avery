@@ -32,11 +32,11 @@
 
 	div.contact {
 		border-bottom: 1px solid var(--color-accent);
-		padding-bottom: 0.2rem;
+		padding-bottom: 3.2px;
 	}
 
 	div.contact + div.contact {
-		margin-top: 0.2rem;
+		margin-top: 3.2px;
 	}
 
 	div.contact a {

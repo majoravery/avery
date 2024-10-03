@@ -62,11 +62,11 @@
 		border-bottom: 1px solid var(--color-accent);
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
-		padding-bottom: 0.2rem;
+		padding-bottom: 3.2px;
 	}
 
 	div.row + div.row {
-		margin-top: 0.2rem;
+		margin-top: 3.2px;
 	}
 
 	span.label {
@@ -84,7 +84,7 @@
 		color: var(--color-accent);
 		font-family: var(--monoFontFamily);
 		font-optical-sizing: var(--monoFontOpticalSizing);
-		font-size: 0.85rem;
+		font-size: var(--monoFontSize);
 		font-style: var(--monoFontStyle);
 		font-weight: var(--monoFontWeight);
 		line-height: var(--monoLineHeight);

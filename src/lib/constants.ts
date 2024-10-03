@@ -20,8 +20,8 @@ export const CANVAS_TYPES: CanvasTypes = {
 		blocks: [
 			{ ...BLOCKS.square, content: 'Recently' },
 			{ ...BLOCKS.square, content: 'ProjectShowcase' },
+			{ ...BLOCKS.square, content: 'Description' },
 			{ ...BLOCKS.tall, content: 'Weather' },
-			{ ...BLOCKS.long, content: 'Description' },
 			{ ...BLOCKS.long, content: 'Name' },
 			{ ...BLOCKS.long, content: 'Clock' },
 			{ ...BLOCKS.long, content: 'Info' },
@@ -33,8 +33,6 @@ export const CANVAS_TYPES: CanvasTypes = {
 			{ ...BLOCKS.single, content: 'Pattern' }, // was Watching. Switch back when ready?
 			{ ...BLOCKS.single, content: 'Cooking' },
 			{ ...BLOCKS.single, content: 'Wave' },
-			{ ...BLOCKS.single, content: 'Pattern' },
-			{ ...BLOCKS.single, content: 'Filler' },
 			{ ...BLOCKS.single, content: 'Pattern' },
 			{ ...BLOCKS.single, content: 'Filler' }
 		]

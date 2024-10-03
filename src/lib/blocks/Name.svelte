@@ -21,7 +21,7 @@
 		font-style: var(--nameFontStyle);
 		font-weight: var(--nameFontWeight);
 		line-height: var(--nameLineHeight);
-		margin-bottom: 0.327rem;
+		margin-bottom: 5.232px;
 	}
 
 	h1.zh {
@@ -31,7 +31,7 @@
 		font-style: var(--zhNameFontStyle);
 		font-weight: var(--zhNameFontWeight);
 		line-height: var(--zhNameLineHeight);
-		margin-bottom: 0.2rem;
+		margin-bottom: 3.2px;
 	}
 
 	h1.jp {
@@ -41,6 +41,6 @@
 		font-style: var(--jpNameFontStyle);
 		font-weight: var(--jpNameFontWeight);
 		line-height: var(--jpNameLineHeight);
-		margin-bottom: 0rem;
+		margin-bottom: 0;
 	}
 </style>

@@ -65,7 +65,7 @@
 
 	div.cta {
 		border-bottom: 1px solid var(--color-accent);
-		padding-bottom: 0.2rem;
+		padding-bottom: 3.2px;
 	}
 
 	div.cta a {

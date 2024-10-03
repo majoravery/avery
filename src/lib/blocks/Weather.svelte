@@ -47,10 +47,10 @@
 
 	/* TODO: improve */
 	img {
-		left: -4rem;
+		left: -64px;
 		opacity: 0.5;
 		position: absolute;
-		top: -3rem;
+		top: -48px;
 		width: calc(var(--block-size) * 1.5);
 		z-index: 1;
 	}
@@ -69,7 +69,7 @@
 	div.forecast.large {
 		grid-template-columns: 1fr;
 		grid-template-rows: repeat(2, min-content);
-		margin-bottom: 1rem;
+		margin-bottom: 16px;
 	}
 
 	div.forecast.large span.day {

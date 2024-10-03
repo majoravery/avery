@@ -36,6 +36,8 @@ This app is deployed to averylim.com via [Render](todo-add-url), so simply pushi
 Prio
 
 - [ ] Sort out mobile layout
+- [ ] Avery Lim font takes a while to load
+- [ ] Make sure page is scrolled to where the Avery Lim block is when loading on mobile (otherwise the page looks like it's not displaying anything for a while)
 
 If there's time
 

@@ -75,7 +75,7 @@
 	<div class="clock" class:day={ampm === 'am'} class:night={ampm === 'pm'}>
 		<div class="hours">
 			<span class="ampm">{ampm}</span>
-			<div class="card hour" class:flip={hourFlip}>
+			<div class="hour" class:flip={hourFlip}>
 				<div class="card top">{hourPrev}</div>
 				<div class="card bottom">{hourPrev}</div>
 				{#if hourFlip}
@@ -100,6 +100,7 @@
 			<div class="card flap" />
 			<div class="card flap" />
 		</div>
+
 		<div class="seconds">
 			<div class="second" class:flip={secondFlip}>
 				<div class="card top">{secondNew}</div>
@@ -125,7 +126,8 @@
 	}
 
 	div.clock {
-		--card-height: 85%;
+		--card-height: 88%;
+
 		align-items: center;
 		color: var(--color);
 		display: flex;
@@ -134,10 +136,16 @@
 		font-style: var(--clockNameFontStyle);
 		font-weight: var(--clockNameFontWeight);
 		line-height: var(--clockNameLineHeight);
-		gap: 0.5rem;
+		gap: 8px;
 		justify-content: center;
-		padding-top: 1rem;
+		padding-top: 16px;
 		transition: color 200ms ease-in-out;
+	}
+
+	@media (min-width: 480px) {
+		div.clock {
+			--card-height: 85%;
+		}
 	}
 
 	div.clock.day {
@@ -157,17 +165,32 @@
 
 	span.ampm {
 		font-size: 0.6rem;
-		left: 0.4rem;
+		font-weight: 400;
+		left: 10px;
 		position: absolute;
 		z-index: 11;
 	}
 
 	div.clock.day span.ampm {
-		top: 0.4rem;
+		top: 10%;
 	}
 
 	div.clock.night span.ampm {
-		bottom: 25%;
+		bottom: 40%;
+	}
+
+	@media (min-width: 480px) {
+		span.ampm {
+			left: 6.4px;
+		}
+
+		div.clock.day span.ampm {
+			top: 6.4px;
+		}
+
+		div.clock.night span.ampm {
+			bottom: 25%;
+		}
 	}
 
 	div.hours,
@@ -191,7 +214,7 @@
 	div.hour,
 	div.minute,
 	div.second {
-		align-items: flex-end; /* dunno why this works and not center */
+		align-items: flex-start;
 		font-size: 3.7rem;
 		display: flex;
 		height: var(--card-height);
@@ -202,6 +225,14 @@
 		z-index: 10;
 	}
 
+	@media (min-width: 480px) {
+		div.hour,
+		div.minute,
+		div.second {
+			align-items: flex-end; /* dunno why this works and not center */
+		}
+	}
+
 	/* Middle line */
 	div.hour:before,
 	div.minute:before,
@@ -209,10 +240,18 @@
 		content: '';
 		background: rgb(255, 255, 255);
 		width: 100%;
-		height: 0.07rem;
-		top: 50%;
+		height: 1.12px;
+		top: calc(var(--card-height) / 2.2);
 		position: absolute;
 		z-index: 10;
+	}
+
+	@media (min-width: 480px) {
+		div.hour:before,
+		div.minute:before,
+		div.second:before {
+			top: 50%;
+		}
 	}
 
 	/*
@@ -223,11 +262,21 @@
 	div.bottom,
 	div.top-flip,
 	div.bottom-flip {
-		align-items: flex-end; /* dunno why this works and not center */
+		align-items: center;
 		display: flex;
-		height: 100%;
+		height: 80%;
 		justify-content: center;
 		position: absolute;
+	}
+
+	@media (min-width: 480px) {
+		div.top,
+		div.bottom,
+		div.top-flip,
+		div.bottom-flip {
+			align-items: flex-end; /* dunno why this works and not center */
+			height: 100%;
+		}
 	}
 
 	div.bottom {
@@ -272,11 +321,25 @@
 	}
 
 	:nth-child(2 of div.flap) {
-		height: 95%;
+		height: 90%;
 	}
 
 	:nth-child(3 of div.flap) {
-		height: 90%;
+		height: 80%;
+	}
+
+	@media (min-width: 480px) {
+		:nth-child(1 of div.flap) {
+			height: 100%;
+		}
+
+		:nth-child(2 of div.flap) {
+			height: 95%;
+		}
+
+		:nth-child(3 of div.flap) {
+			height: 90%;
+		}
 	}
 
 	@keyframes flip-down-top {
