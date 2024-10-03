@@ -124,14 +124,13 @@
 			}
 		});
 
-		let state = Flip.getState(gsap.utils.toArray('section.grid, div.block'));
+		let state = Flip.getState(gsap.utils.toArray('section.grid, div.block, div.gate'));
 
 		blockTl
 			.addLabel('start', 0)
 			.call(() => {
 				expansion.set(blockToExpand);
 			})
-			.set(blockNotSelector, { pointerEvents: 'none' })
 			.set(blockSelector, {
 				'--row-start-expanded': blockToExpand.y + posAdj.y,
 				'--column-start-expanded': blockToExpand.x + posAdj.x,
@@ -139,11 +138,11 @@
 				'--column-end-expanded': `span ${blockToExpand.expandedWidth}`,
 				zIndex: 10
 			})
-			// There seems to be a bit of flashing here
+			.set('div.gate', { zIndex: 3 })
 			.fromTo(
-				blockNotSelector,
+				'div.gate',
 				{
-					opacity: 1
+					opacity: 0
 				},
 				{
 					opacity: 0.4
@@ -245,7 +244,9 @@
 			}
 		});
 
-		let state = Flip.getState(gsap.utils.toArray('section.grid, div.block'));
+		let state = Flip.getState(gsap.utils.toArray('section.grid, div.block, div.gate'), {
+			props: 'opacity,borderRadius'
+		});
 
 		blockTl
 			.addLabel('start', 0)
@@ -277,7 +278,7 @@
 				},
 				'start'
 			)
-			.addLabel('revert', 0.6)
+			.addLabel('revert', 'start+=0.5')
 			.call(
 				() => {
 					blockEl.classList.remove('expanded');
@@ -295,17 +296,6 @@
 				},
 				'revert'
 			)
-			// There seems to be a bit of flashing here??
-			.fromTo(
-				blockNotSelector,
-				{
-					opacity: 0.4
-				},
-				{
-					opacity: 1
-				},
-				'-=0.25'
-			)
 			.fromTo(
 				`${blockSelector} .preview`,
 				{
@@ -315,16 +305,21 @@
 					autoAlpha: 1,
 					duration: 1
 				},
-				'-=0.4'
+				'<0.5'
 			)
+			.to(
+				'div.gate',
+				{
+					opacity: 0,
+					duration: 1
+				},
+				'<'
+			)
+			.set('div.gate', { zIndex: -1 })
+			.set(blockSelector, { zIndex: 'unset' })
 			.call(() => {
 				expansion.set(null);
-			})
-			// Reset z-index
-			.set(blockSelector, {
-				zIndex: 'unset'
-			})
-			.set('div.block', { pointerEvents: 'initial' });
+			});
 
 		return blockTl;
 	}
@@ -442,8 +437,16 @@
 	}
 
 	div.gate {
-		position: absolute;
 		background-color: var(--colourbackground);
+		bottom: 0;
+		height: 100vh;
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+		width: 100vw;
+		opacity: 0;
+		z-index: -1;
 	}
 
 	div.debug {
