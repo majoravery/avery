@@ -9,16 +9,16 @@ export const LOCALES: { name: string; id: Locale }[] = [
 		id: 'en'
 	},
 	{
-		name: '日本語',
-		id: 'jp'
+		name: '中文',
+		id: 'zh'
 	},
 	{
 		name: 'Deutsch',
 		id: 'de'
 	},
 	{
-		name: '中文',
-		id: 'zh'
+		name: '日本語',
+		id: 'jp'
 	}
 ];
 export const VALID_LOCALES = Object.values(LOCALES).map((locale) => locale.id);

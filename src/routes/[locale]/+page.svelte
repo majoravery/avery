@@ -87,7 +87,10 @@
 	</noscript>
 
 	<footer>
-		<!-- &copy; avery 2024 and all, will be adding credits in this area -->
+		<!-- Built in my little apartment in Yakuin, Fukuoka. Weather forecast by <a
+			href="https://www.weatherapi.com/"
+			target="_blank">weatherapi</a
+		>. -->
 	</footer>
 </main>
 
@@ -116,6 +119,11 @@
 		letter-spacing: var(--bodyLetterSpacing);
 		line-height: var(--bodyLineHeight);
 		width: 100%;
+	}
+
+	footer a {
+		color: inherit;
+		cursor: ne-resize;
 	}
 
 	footer {

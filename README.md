@@ -33,34 +33,23 @@ This app is deployed to averylim.com via [Render](todo-add-url), so simply pushi
 
 ## Roadmap
 
-All
+Prio
+
+- [ ] Sort out mobile layout
+- [ ] Make sure you can click on expandable block only AFTER everything has loaded, similar to when a block is reverting
+
+If there's time
+
+- [ ] Refine gsap draggable, make sure it's smooth
+- [ ] Implement skeleton when changing locale
+- [ ] Add footer and make sure it works with GSAP animation
+- [ ] Limit the drag to 1 language at a time only because the radius isn't uniform
+
+Good to have
 
 - [ ] When going from smallest breakpoint to 480, the weather app seems to become the wide tile
 - [ ] Supabase insert is currently open to public, find a way to restrict
-- [ ] footer during animation makes site vertically scrollable
-- [ ] output a printable version of the site
+- [ ] Output a printable version of the site
 - [ ] wheee is defined several times, DRY
-
-Animations
-
-- [ ] gsap opening and closing of blocks cause flashes in the opacity of the bg
-- [ ] Make sure you can click on expandable block only AFTER everything has loaded, similar to when a block is reverting
-
-Clock
-
-- [ ] implement skeleton when changing locale
-- [ ] looks weird on mobile
-
-Language switcher
-
-- [ ] refine gsap draggable, make sure it's smooth
-- [ ] limit the drag to 1 language at a time only because the radius isn't uniform
-- [ ] looks weird on mobile
-
-ProjectShowcase
-
-- [ ] use an animated gif of scrolling down the page
-
-Info
 
 - [ ] Increase page view real time (not sure if poss because it's a static site. maybe a web worker might be helpful here?)
