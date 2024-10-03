@@ -68,11 +68,12 @@
 	<meta name="twitter:image" content="https://www.example.com/image.jpg" />
 
 	<!-- TODO: something to do with language? -->
-	<link rel="alternate" href="https://www.example.com/" hreflang="en-us" />
+	<!-- <link rel="alternate" href="https://www.example.com/" hreflang="en-us" /> -->
 </svelte:head>
 
 <main
 	style="--color-background: {$theme[0]}; --color-filler: {$theme[1]}; --color-accent: {$theme[2]}"
+	class={$locale}
 >
 	<Grid />
 
@@ -108,7 +109,7 @@
 	footer {
 		color: var(--color-filler);
 		font-family: var(--bodyFontFamily);
-		font-optical-sizing: var(--bodyFontOptical);
+		font-optical-sizing: var(--bodyFontOpticalSizing);
 		font-size: var(--bodyFontSize);
 		font-style: var(--bodyFontStyle);
 		font-weight: var(--bodyFontWeight);

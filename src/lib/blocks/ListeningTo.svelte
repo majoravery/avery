@@ -123,8 +123,8 @@
 
 	div.title {
 		color: var(--color-accent);
-		font-family: var(--bodyFontFamily);
-		font-optical-sizing: var(--bodyFontOptical);
+		font-family: var(--enFontFamily);
+		font-optical-sizing: var(--bodyFontOpticalSizing);
 		font-size: var(--bodyFontSize);
 		font-style: var(--bodyFontStyle);
 		font-weight: var(--bodyFontWeight);
@@ -140,12 +140,12 @@
 	div.artist {
 		/* TODO: delay the initial animation so it only plays after block appears */
 		animation: scroll 15s 2s linear infinite;
-		font-family: 'JetBrains Mono', monospace;
-		font-optical-sizing: auto;
-		font-size: 0.7rem;
-		font-style: normal;
-		font-weight: 400;
-		line-height: 1.1rem;
+		font-family: var(--monoFontFamily);
+		font-optical-sizing: var(--monoFontOpticalSizing);
+		font-size: var(--monoFontSizeSmall);
+		font-style: var(--monoFontStyle);
+		font-weight: var(--monoFontWeight);
+		line-height: var(--monoLineHeight);
 		transform: translate3d(0, 0, 0);
 		white-space: nowrap;
 		position: relative;

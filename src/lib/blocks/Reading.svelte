@@ -3,7 +3,6 @@
 	import Eyebrows from '$lib/components/Eyebrows.svelte';
 
 	export let expand: () => void;
-	export let expanded: boolean;
 </script>
 
 <!-- svelte-ignore a11y-no-noninteractive-element-interactions a11y-click-events-have-key-events -->
@@ -26,8 +25,8 @@
 	}
 
 	div.title {
-		font-family: var(--bodyFontFamily);
-		font-optical-sizing: var(--bodyFontOptical);
+		font-family: var(--enFontFamily);
+		font-optical-sizing: var(--bodyFontOpticalSizing);
 		font-size: var(--bodyFontSize);
 		font-style: var(--bodyFontStyle);
 		font-weight: var(--bodyFontWeight);
@@ -37,11 +36,11 @@
 	}
 
 	div.author {
-		font-family: 'JetBrains Mono', monospace;
-		font-optical-sizing: auto;
-		font-weight: 400;
-		font-style: normal;
-		font-size: 0.7rem;
-		line-height: 1.1rem;
+		font-family: var(--monoFontFamily);
+		font-optical-sizing: var(--monoFontOpticalSizing);
+		font-size: var(--monoFontSizeSmall);
+		font-style: var(--monoFontStyle);
+		font-weight: var(--monoFontWeight);
+		line-height: var(--monoLineHeight);
 	}
 </style>

@@ -116,7 +116,7 @@
 		<div class="scroller" style:height={`${height}px`}>
 			{#each LOCALES as language, index}
 				<div
-					class="language"
+					class={`language ${language.name}`}
 					class:active={activeLanguageIndex === index}
 					style:height={`${height}px`}
 					style:transform={`rotateY(${step * index}deg) translateZ(${radius}px)`}
@@ -172,8 +172,8 @@
 		box-sizing: border-box;
 		display: flex;
 		color: var(--color-background);
-		font-family: var(--bodyFontFamily);
-		font-optical-sizing: var(--bodyFontOptical);
+		font-family: var(--enFontFamily);
+		font-optical-sizing: var(--bodyFontOpticalSizing);
 		font-size: 1.2rem;
 		font-style: var(--bodyFontStyle);
 		font-weight: var(--bodyFontWeight);
@@ -181,6 +181,12 @@
 		position: absolute;
 		width: 100%;
 		transition: color 100ms eaes-in-out;
+	}
+	div.language.zh {
+		font-family: var(--zhFontFamily);
+	}
+	div.language.jp {
+		font-family: var(--jpFontFamily);
 	}
 
 	div.container.debug div.language-selector {

@@ -1,9 +1,9 @@
 <!-- Flip clock animation inspired by Jan Kohlbach https://codepen.io/jankohlbach/pen/zYGaKLO?editors=0100 -->
 <script lang="ts">
 	import { locale, t } from '$lib/stores/locale';
+	import { onMount } from 'svelte';
 	import { time } from '$lib/stores/time';
 	import Eyebrows from '$lib/components/Eyebrows.svelte';
-	import { onMount } from 'svelte';
 
 	let hourNew: string, minuteNew: string, secondNew: string, ampm: string;
 	let hourPrev: string, minutePrev: string, secondPrev: string;
@@ -129,9 +129,11 @@
 		align-items: center;
 		color: var(--color);
 		display: flex;
-		font-family: 'Inter Tight', sans-serif;
-		font-optical-sizing: auto;
-		font-style: normal;
+		font-family: var(--clockNameFontFamily);
+		font-optical-sizing: var(--clockNameFontOpticalSizing);
+		font-style: var(--clockNameFontStyle);
+		font-weight: var(--clockNameFontWeight);
+		line-height: var(--clockNameLineHeight);
 		gap: 0.5rem;
 		justify-content: center;
 		padding-top: 1rem;
@@ -155,9 +157,7 @@
 
 	span.ampm {
 		font-size: 0.6rem;
-		font-weight: 500;
 		left: 0.4rem;
-		line-height: normal;
 		position: absolute;
 		z-index: 11;
 	}
@@ -192,9 +192,7 @@
 	div.minute,
 	div.second {
 		align-items: flex-end; /* dunno why this works and not center */
-		line-height: normal;
 		font-size: 3.7rem;
-		font-weight: 500;
 		display: flex;
 		height: var(--card-height);
 		justify-content: center;

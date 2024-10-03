@@ -1,56 +1,24 @@
-/* Note: if you change any of the fonts here, remember to update getTextWidth in utils.ts */
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+/* For monospace */
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
-/* for name */
+/* For name */
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap');
 
-/* for clock */
+/* For clock */
 @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
 
-/* japanese */
-@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@100..700&display=swap');
-/* 
-  font-family: "M PLUS 1 Code", monospace;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
-*/
+/* Chinese*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300..400&display=swap');
 
-/* chinese */
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100..900&display=swap');
+/* Japanese*/
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1+Code:wght@300..400&display=swap');
 
-/* 
-  font-family: "Noto Sans SC", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: <weight>;
-  font-style: normal;
-
-*/
+/* For body text */
 @font-face {
-    font-family: 'saans';
+    font-family: 'Saans';
     src: url('/fonts/Saans-TRIAL-Regular.woff2') format('woff2'),
         url('/fonts/Saans-TRIAL-Regular.woff') format('woff'),
         url('/fonts/Saans-TRIAL-Regular.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'RecklessNeue';
-    src: url('/fonts/RecklessNeueTRIAL-Thin.woff2') format('woff2'),
-        url('/fonts/RecklessNeueTRIAL-Thin.woff') format('woff');
-}
-
-@font-face {
-    font-family: 'DenimINK Light';
-    src: url('/fonts/DenimINKTRIAL-Light.woff2') format('woff2'),
-        url('/fonts/DenimINKTRIAL-Light.woff') format('woff');
-}
-
-@font-face {
-    font-family: 'DenimINK Regular';
-    src: url('/fonts/DenimINKTRIAL-Regular.woff2') format('woff2'),
-        url('/fonts/DenimINKTRIAL-Regular.woff') format('woff');
 }
 
 :root {
@@ -58,17 +26,68 @@
     --border-radius-m: 0.5rem;
     --border-radius-l: 0.75rem;
 
-    --bodyFontFamily: 'Saans', sans-serif;
-    --bodyFontOptical-sizing: auto;
+    --enFontFamily: 'Saans', sans-serif;
+    --zhFontFamily: 'Noto Sans SC', sans-serif;
+    --jpFontFamily: 'M PLUS 1 Code', monospace;
+
+    --bodyFontOpticalSizing: auto;
     --bodyFontSize: 0.85rem;
     --bodyFontStyle: normal;
     --bodyFontWeight: 400;
     --bodyLetterSpacing: 0.02rem;
     --bodyLineHeight: 1.1rem;
+
+    --monoFontFamily: 'JetBrains Mono', monospace;
+    --monoFontOpticalSizing: auto;
+    --monoFontSize: 0.85rem;
+    --monoFontSizeSmall: 0.7rem;
+    --monoFontStyle: normal;
+    --monoFontWeight: 400;
+    --monoLineHeight: 1.1rem;
+
+    --nameFontFamily: 'Bricolage Grotesque', sans-serif;
+    --nameFontOpticalSizing: auto;
+    --nameFontSize: 3.5rem;
+    --nameFontStyle: normal;
+    --nameFontWeight: 600;
+    --nameLineHeight: 60%;
+
+    --zhNameFontFamily: var(--zhFontFamily);
+    --zhNameFontOpticalSizing: auto;
+    --zhNameFontSize: 4rem;
+    --zhNameFontStyle: normal;
+    --zhNameFontWeight: 600;
+    --zhNameLineHeight: 100%;
+
+    --jpNameFontFamily: var(--jpFontFamily);
+    --jpNameFontOpticalSizing: auto;
+    --jpNameFontSize: 3.8rem;
+    --jpNameFontStyle: normal;
+    --jpNameFontWeight: 600;
+    --jpNameLineHeight: 90%;
+
+    --clockNameFontFamily: 'Inter Tight', sans-serif;
+    --clockNameFontOpticalSizing: auto;
+    --clockNameFontStyle: normal;
+    --clockNameFontWeight: 500;
+    --clockNameLineHeight: normal;
 }
 
 body {
     margin: 0;
     padding: 0;
     width: 100vw;
+}
+
+main.en,
+main.de {
+    --bodyFontFamily: var(--enFontFamily);
+}
+
+main.zh {
+    --bodyFontFamily: var(--zhFontFamily);
+}
+
+main.jp {
+    --bodyFontFamily: var(--jpFontFamily);
 }
