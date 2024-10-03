@@ -36,7 +36,6 @@ This app is deployed to averylim.com via [Render](todo-add-url), so simply pushi
 Prio
 
 - [ ] Avery Lim font takes a while to load on fresh devices
-- [ ] Make sure page is scrolled to where the Avery Lim block is when loading on mobile (otherwise the page looks like it's not displaying anything for a while)
 - [ ] Refine gsap draggable, make sure it's smooth, seems like being on any other language and dragging always turns it into english
 
 If there's time

@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { CANVAS_TYPES } from '$lib/constants';
-	import { getExpansionAdj, expansion, MAPPING_EXPANSION } from '$lib/stores/expansion';
+	import { expansion, getExpansionAdj, MAPPING_EXPANSION } from '$lib/stores/expansion';
 	import { Flip } from 'gsap/dist/Flip';
 	import { Grid } from '$lib/grid';
 	import { gsap } from 'gsap';
 	import { isDebugMode } from '$lib/stores/debugMode';
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
+	import { ScrollToPlugin } from 'gsap/dist/ScrollToPlugin';
 
 	import '$lib/grid.css';
 
@@ -17,6 +18,7 @@
 		}
 	});
 	gsap.registerPlugin(Flip);
+	gsap.registerPlugin(ScrollToPlugin);
 
 	let breakpoint: number;
 	let blocks: Block[];
@@ -31,6 +33,27 @@
 				(val, i) => width >= val && (i === breakpoints.length - 1 || width < breakpoints[i + 1])
 			) ?? -1
 		);
+	}
+
+	function shouldScrollToName(): number | boolean {
+		const nameBlock = blocks.find((obj) => obj.content === 'Name');
+		if (!nameBlock) throw new Error("Can't find name block to scroll to");
+
+		const mainEl = document.querySelector('main');
+		if (!mainEl) throw new Error("Can't query <main> block to get CSS variables from");
+
+		// which row?
+		const nameRow = Math.ceil((nameBlock.occupiedIndices[0] + 1) / grid.canvas.width);
+
+		const style = window.getComputedStyle(mainEl, null);
+		const marginTop = parseInt(style.getPropertyValue('--grid-margin'), 10);
+		const blockSize = parseInt(style.getPropertyValue('--block-size'), 10);
+		const gridGap = parseInt(style.getPropertyValue('--grid-gap'), 10);
+
+		const nameStartY = marginTop + (nameRow - 1) * blockSize + (nameRow - 1) * gridGap;
+		const nameEndY = nameStartY + blockSize;
+
+		return nameEndY > window.innerHeight ? nameStartY : false;
 	}
 
 	function expand(block: Block): void {
@@ -48,8 +71,7 @@
 
 		const posAdj = getExpansionAdj(expandedBlock, breakpoint);
 
-		timeline.clear();
-		timeline.add(getBlockExpansion(expandedBlock, posAdj));
+		timeline.clear().add(getBlockExpansion(expandedBlock, posAdj));
 	}
 
 	function revert(block: BlockExpanded): void {
@@ -59,8 +81,7 @@
 			);
 		}
 
-		timeline.clear();
-		timeline.add(getBlockReversion(block));
+		timeline.clear().add(getBlockReversion(block));
 	}
 
 	function revertImmediately(block: BlockExpanded, callback: () => void): void {
@@ -101,6 +122,31 @@
 				expansion.set(null);
 				callback();
 			});
+	}
+
+	/**
+	 * GSAP animations
+	 */
+
+	async function playEntranceAnimation() {
+		await tick();
+		const scrollTo = shouldScrollToName();
+		if (typeof scrollTo === 'number') {
+			gsap.to(window, { duration: 0.8, scrollTo });
+		}
+
+		timeline
+			.clear()
+			.set('div.block', { pointerEvents: 'none' })
+			.from('div.block.name', { scale: 0.8, autoAlpha: 0, duration: 1 })
+			// Hiding this here because I set visibility: hidden otherwise it'll flash at the
+			// top before the grid loads
+			// Temporarily commenting this out bc I'm not working on the footer yet!
+			// .set('footer', { visibility: 'visible' })
+			.delay(0.2)
+			.from('div.block:not(.name)', { scale: 0.8, autoAlpha: 0, duration: 1, stagger: 0.1 })
+			// .from('footer', { autoAlpha: 0, y: '500%' })
+			.set('div.block', { pointerEvents: 'initial' }, '-=0.5');
 	}
 
 	function getBlockExpansion(
@@ -333,6 +379,7 @@
 		grid = new Grid(breakpoint);
 		blocks = grid.blocks;
 		expansion.set(null);
+		playEntranceAnimation();
 
 		function resizeHandler() {
 			breakpoint = getBreakpoint(window.innerWidth);
@@ -367,6 +414,7 @@
 
 {#if blocks}
 	<section class="grid">
+		<!-- 3 Oct 2024: wow I have no idea what the fuck I wrote here now -->
 		<!-- The 3rem subtracted from min-height accounts for the vertical block padding -->
 		{#each blocks as block}
 			<div

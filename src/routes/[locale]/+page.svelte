@@ -1,22 +1,15 @@
 <script lang="ts">
-	import { gsap } from 'gsap';
 	import { locale, t } from '$lib/stores/locale';
+	import { onMount } from 'svelte';
 	import { pageviews, visitors } from '$lib/stores/pageview';
-	import { theme } from '$lib/stores/theme';
-	import { onMount, tick } from 'svelte';
 	import { printThinkingFace } from '$lib/utils';
+	import { theme } from '$lib/stores/theme';
 	import { weathers } from '$lib/stores/weathers';
 	import Grid from './Grid.svelte';
 
 	import '$lib/styles.css';
 
 	export let data: MainPageData;
-	const timeline = gsap.timeline({
-		defaults: {
-			duration: 1.1,
-			ease: 'power4.out'
-		}
-	});
 
 	weathers.set(data.weathers);
 	locale.set(data.locale);
@@ -26,24 +19,8 @@
 
 	const url = 'https://averylim.com';
 
-	async function playEntranceAnimation() {
-		await tick();
-		timeline
-			.set('div.block', { pointerEvents: 'none' })
-			.from('div.block.name', { scale: 0.8, autoAlpha: 0, duration: 1 })
-			// Hiding this here because I set visibility: hidden otherwise it'll flash at the
-			// top before the grid loads
-			// Temporarily commenting this out bc I'm not working on the footer yet!
-			// .set('footer', { visibility: 'visible' })
-			.delay(0.2)
-			.from('div.block:not(.name)', { scale: 0.8, autoAlpha: 0, duration: 1, stagger: 0.1 })
-			// .from('footer', { autoAlpha: 0, y: '500%' })
-			.set('div.block', { pointerEvents: 'initial' }, '-=0.5');
-	}
-
 	onMount(() => {
 		printThinkingFace();
-		playEntranceAnimation();
 	});
 </script>
 

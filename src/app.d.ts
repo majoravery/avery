@@ -54,6 +54,7 @@ declare global {
 
 	interface Block extends Dimensions, Position {
 		content: BlockContent | string; // defining this as string for that initial definition... ugh
+		occupiedIndices: number[];
 		type: BlockType;
 	}
 

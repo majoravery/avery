@@ -1,4 +1,4 @@
-:root {
+main {
     /* Take note if you change this to update the JS equivalent in constants.ts */
     --block-size: 150px;
     --block-padding: 16px;
@@ -16,19 +16,19 @@ section.grid {
 }
 
 @media (min-width: 380px) {
-    :root {
+    main {
         font-size: 18px;
     }
 }
 
 @media (min-width: 430px) {
-    :root {
+    main {
         font-size: 20px;
     }
 }
 
 @media (min-width: 480px) {
-    :root {
+    main {
         --columns: 3;
         --rows: 10;
         --grid-margin: 24px;
@@ -43,7 +43,7 @@ section.grid {
 }
 
 @media (min-width: 768px) {
-    :root {
+    main {
         --columns: 4;
         --rows: 8;
         --grid-margin: 36px;
@@ -51,21 +51,21 @@ section.grid {
 }
 
 @media (min-width: 1024px) {
-    :root {
+    main {
         --columns: 6;
         --rows: 5;
     }
 }
 
 @media (min-width: 1280px) {
-    :root {
+    main {
         --columns: 8;
         --rows: 4;
     }
 }
 
 @media (min-width: 1400px) {
-    :root {
+    main {
         --block-size: 170px;
         --columns: 8;
         --rows: 4;
@@ -74,7 +74,7 @@ section.grid {
 }
 
 @media (min-width: 1680px) {
-    :root {
+    main {
         --block-size: 190px;
         --columns: 8;
         --rows: 4;
