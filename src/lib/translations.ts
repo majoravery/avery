@@ -1,7 +1,8 @@
 export const translations = {
 	en: {
-		'site.title': "Avery's dotcom",
-		'site.description': 'to be added',
+		'site.title': "Hiya, it's Avery!",
+		'site.description':
+			"You're on Avery's digital garden–enjoy your stay and check out any time you like x",
 		'site.closePopUp': 'Close pop up',
 		'clock.title': 'Clock',
 		'clock.location': 'Singapore',
@@ -53,9 +54,9 @@ export const translations = {
 		'weather.sun': 'Sun'
 	},
 	zh: {
-		'site.title': 'Avery 的网站',
-		'site.description': 'to be added',
-		'site.closePopUp': 'to be added',
+		'site.title': '嘿嘿，是我Avery！',
+		'site.description': '你正在Avery的数码花园–慢慢享受享受一下，随时都可以退房哦～',
+		'site.closePopUp': '关闭弹窗',
 		'clock.title': '时钟',
 		'clock.location': '新加坡',
 		'contact.title': '联系',
@@ -106,9 +107,10 @@ export const translations = {
 		'weather.sun': '拜日'
 	},
 	de: {
-		'site.title': "Avery's Seite",
-		'site.description': 'to be added',
-		'site.closePopUp': 'to be added',
+		'site.title': 'Hallöchen, ich bin Avery!',
+		'site.description':
+			'Du bist im digitalen Garten von Avery—viel Spaß und check jederzeit aus, wie du magst x',
+		'site.closePopUp': 'Popup schließen',
 		'clock.title': 'Die Uhr',
 		'clock.location': 'Deutschland',
 		'contact.title': 'Kontakt',
@@ -159,16 +161,17 @@ export const translations = {
 		'weather.sun': 'So'
 	},
 	jp: {
-		'site.title': 'エブリのウェブサイト',
-		'site.description': 'to be added',
-		'site.closePopUp': 'to be added',
+		'site.title': 'やっほー、エブリーだよ！',
+		'site.description':
+			'エブリーのデジタル庭園へようこそ—ゆっくり楽しんで、いつでもチェックアウトすることが可能だよ',
+		'site.closePopUp': 'ポップアップを閉じる',
 		'clock.title': '時計',
 		'clock.location': '日本',
 		'contact.title': '連絡先',
 		'contact.email': 'メール',
 		'contact.emailAlt': 'メールで連絡して',
 		'contact.linkedIn': 'LinkedIn',
-		'contact.linkedInAlt': '私の職歴をチェックしてね',
+		'contact.linkedInAlt': '私の職歴をチェックする',
 		'cooking.title': '作ってる料理',
 		'cooking.alt': 'チャイトウクエイ',
 		'description.title': '私について',
