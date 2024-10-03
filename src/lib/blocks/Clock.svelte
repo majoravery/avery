@@ -149,14 +149,14 @@
 	}
 
 	div.clock.day {
-		--background-color: var(--color-filler);
+		--background-color: var(--colourfiller);
 		--box-shadow: rgba(0, 0, 0, 0) 0 0 0 0, rgba(0, 0, 0, 0) 0 0 0 0,
 			rgba(0, 0, 0, 0.1) 0 2px 2px -1px, rgba(0, 0, 0, 0.1) 0 2px 2px -1px;
-		--color: var(--color-accent);
+		--color: var(--colouraccent);
 	}
 
 	div.clock.night {
-		--background-color: var(--color-accent);
+		--background-color: var(--colouraccent);
 		--box-shadow: rgba(0, 0, 0, 0) 0 0 0 0, rgba(0, 0, 0, 0) 0 0 0 0,
 			rgba(0, 0, 0, 0.5) 0 1.5px 1.5px -1px, rgba(0, 0, 0, 0.5) 0 1.5px 1.5px -1px;
 		--color: rgb(255, 255, 255);

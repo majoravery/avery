@@ -401,6 +401,7 @@
 				{/if}
 			</div>
 		{/each}
+		<div class="gate" />
 	</section>
 {/if}
 
@@ -438,6 +439,11 @@
 		grid-row-start: var(--row-start-expanded);
 		grid-column-end: var(--column-end-expanded);
 		grid-row-end: var(--row-end-expanded);
+	}
+
+	div.gate {
+		position: absolute;
+		background-color: var(--colourbackground);
 	}
 
 	div.debug {

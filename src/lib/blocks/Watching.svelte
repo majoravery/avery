@@ -26,6 +26,6 @@
 		font-weight: var(--bodyFontWeight);
 		letter-spacing: var(--bodyLetterSpacing);
 		line-height: var(--bodyLineHeight);
-		color: var(--color-accent);
+		color: var(--colouraccent);
 	}
 </style>

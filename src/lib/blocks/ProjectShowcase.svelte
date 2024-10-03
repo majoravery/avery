@@ -64,7 +64,7 @@
 	}
 
 	div.cta {
-		border-bottom: 1px solid var(--color-accent);
+		border-bottom: 1px solid var(--colouraccent);
 		padding-bottom: 3.2px;
 	}
 
@@ -85,7 +85,7 @@
 	}
 
 	span.method {
-		color: var(--color-accent);
+		color: var(--colouraccent);
 	}
 
 	span.arrow {

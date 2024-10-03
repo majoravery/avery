@@ -22,7 +22,7 @@
 		--extra-padding-top: calc(var(--eyebrow-height) + var(--block-padding));
 
 		box-sizing: border-box;
-		color: var(--color-accent);
+		color: var(--colouraccent);
 		font-family: var(--bodyFontFamily);
 		font-optical-sizing: var(--bodyFontOpticalSizing);
 		font-size: var(--bodyFontSize);
@@ -73,7 +73,7 @@
 
 	div.extra-content :global(a) {
 		cursor: ne-resize;
-		color: var(--color-accent);
+		color: var(--colouraccent);
 	}
 
 	div.extra-content :global(img) {

@@ -85,13 +85,13 @@
 	}
 
 	div.forecast.large span.temp {
-		color: var(--color-accent);
+		color: var(--colouraccent);
 		font-size: 1.8rem;
 		line-height: normal;
 	}
 
 	span.day {
-		color: var(--color-accent);
+		color: var(--colouraccent);
 		font-family: var(--bodyFontFamily);
 		font-optical-sizing: var(--bodyFontOpticalSizing);
 		font-size: var(--bodyFontSize);
@@ -102,7 +102,7 @@
 	}
 
 	span.temp {
-		color: var(--color-accent);
+		color: var(--colouraccent);
 		font-family: var(--monoFontFamily);
 		font-optical-sizing: var(--monoFontOpticalSizing);
 		font-size: var(--monoFontSize);

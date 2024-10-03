@@ -59,7 +59,7 @@
 
 	div.row {
 		align-items: center;
-		border-bottom: 1px solid var(--color-accent);
+		border-bottom: 1px solid var(--colouraccent);
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 		padding-bottom: 3.2px;
@@ -70,7 +70,7 @@
 	}
 
 	span.label {
-		color: var(--color-accent);
+		color: var(--colouraccent);
 		font-family: var(--bodyFontFamily);
 		font-optical-sizing: var(--bodyFontOpticalSizing);
 		font-size: var(--bodyFontSize);
@@ -81,7 +81,7 @@
 	}
 
 	span.value {
-		color: var(--color-accent);
+		color: var(--colouraccent);
 		font-family: var(--monoFontFamily);
 		font-optical-sizing: var(--monoFontOpticalSizing);
 		font-size: var(--monoFontSize);

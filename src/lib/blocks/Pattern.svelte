@@ -6,8 +6,8 @@
 			37deg,
 			rgb(255, 255, 255),
 			rgb(255, 255, 255) 12px,
-			var(--color-accent) 13px,
-			var(--color-accent) 26px
+			var(--colouraccent) 13px,
+			var(--colouraccent) 26px
 		);
 		display: block;
 		height: 100%;

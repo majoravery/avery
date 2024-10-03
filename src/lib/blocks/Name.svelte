@@ -14,7 +14,7 @@
 	}
 
 	h1 {
-		color: var(--color-accent);
+		color: var(--colouraccent);
 		font-family: var(--nameFontFamily);
 		font-optical-sizing: var(--nameFontOpticalSizing);
 		font-size: var(--nameFontSize);

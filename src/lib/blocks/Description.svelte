@@ -20,7 +20,7 @@
 	}
 
 	span {
-		color: var(--color-accent);
+		color: var(--colouraccent);
 		font-family: var(--bodyFontFamily);
 		font-optical-sizing: var(--bodyFontOpticalSizing);
 		font-size: var(--bodyFontSize);

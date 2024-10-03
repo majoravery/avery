@@ -167,7 +167,7 @@
 		backface-visibility: hidden;
 		box-sizing: border-box;
 		display: flex;
-		color: var(--color-background);
+		color: var(--colourbackground);
 		font-family: var(--enFontFamily);
 		font-optical-sizing: var(--bodyFontOpticalSizing);
 		font-size: 1.2rem;

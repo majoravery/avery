@@ -69,7 +69,7 @@
 </svelte:head>
 
 <main
-	style="--color-background: {$theme[0]}; --color-filler: {$theme[1]}; --color-accent: {$theme[2]}"
+	style="--colourbackground: {$theme[0]}; --colourfiller: {$theme[1]}; --colouraccent: {$theme[2]}"
 	class={$locale}
 >
 	<Grid />
@@ -90,7 +90,7 @@
 
 <style>
 	main {
-		background-color: var(--color-background);
+		background-color: var(--colourbackground);
 		box-sizing: border-box;
 		display: flex;
 		flex-direction: column;
@@ -103,7 +103,7 @@
 	}
 
 	noscript p {
-		color: var(--color-filler);
+		color: var(--colourfiller);
 		font-family: var(--bodyFontFamily);
 		font-optical-sizing: var(--bodyFontOpticalSizing);
 		font-size: var(--bodyFontSize);
@@ -115,7 +115,7 @@
 	}
 
 	/* footer {
-		color: var(--color-accent);
+		color: var(--colouraccent);
 		font-family: var(--bodyFontFamily);
 		font-optical-sizing: var(--bodyFontOpticalSizing);
 		font-size: var(--bodyFontSize);
