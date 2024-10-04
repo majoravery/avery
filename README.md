@@ -37,7 +37,6 @@ This app is deployed to averylim.com via [Render](todo-add-url), so simply pushi
 Prio
 
 - [ ] Fonts take a while to load on fresh devices
-- [ ] ExtraContent expansion fucks up mobiel layout a little
 - [ ] Refine gsap draggable, make sure it's smooth, seems like being on any other language and dragging always turns it into english
 
 If there's time
