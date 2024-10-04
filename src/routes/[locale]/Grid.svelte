@@ -396,7 +396,7 @@
 				class:expandable={expandableBlocks.includes(block.content)}
 				style:padding-bottom="({block.height} / {block.width} * 100)%"
 				style:min-height="calc({block.height} * var(--block-size) - 3rem)"
-				style="--column-start: {block.x}; --row-start: {block.y}; --column-end: span {block.width}; --row-end-expanded: span {block.height}; --column-end-expanded: span {block.width}; --row-end: span {block.height};"
+				style="--column-start: {block.x}; --row-start: {block.y}; --column-end: span {block.width}; --row-end-expanded: span {block.height}; --column-end-expanded: span {block.width}; --row-end: span {block.height}; --aspect-ratio: {block.width} / {block.height};"
 			>
 				{#if $isDebugMode}
 					<div class="debug">
@@ -444,6 +444,8 @@
 			grid-column-end 200ms ease-in-out,
 			grid-row-end 200ms ease-in-out;
 		width: 100%;
+
+		aspect-ratio: var(--aspect-ratio);
 	}
 
 	div.block.expandable {
