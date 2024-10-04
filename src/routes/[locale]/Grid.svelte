@@ -35,27 +35,6 @@
 		);
 	}
 
-	function shouldScrollToName(): number | boolean {
-		const nameBlock = blocks.find((obj) => obj.content === 'Name');
-		if (!nameBlock) throw new Error("Can't find name block to scroll to");
-
-		const mainEl = document.querySelector('main');
-		if (!mainEl) throw new Error("Can't query <main> block to get CSS variables from");
-
-		// which row?
-		const nameRow = Math.ceil((nameBlock.occupiedIndices[0] + 1) / grid.canvas.width);
-
-		const style = window.getComputedStyle(mainEl, null);
-		const marginTop = parseInt(style.getPropertyValue('--grid-margin'), 10);
-		const blockSize = parseInt(style.getPropertyValue('--block-size'), 10);
-		const gridGap = parseInt(style.getPropertyValue('--grid-gap'), 10);
-
-		const nameStartY = marginTop + (nameRow - 1) * blockSize + (nameRow - 1) * gridGap;
-		const nameEndY = nameStartY + blockSize;
-
-		return nameEndY > window.innerHeight ? nameStartY : false;
-	}
-
 	function expand(block: Block): void {
 		if (
 			// Blocks not defined in MAPPING_EXPANSION does not get to expand :-)
@@ -130,11 +109,6 @@
 
 	async function playEntranceAnimation() {
 		await tick();
-		const scrollTo = shouldScrollToName();
-		if (typeof scrollTo === 'number') {
-			gsap.to(window, { duration: 0.8, scrollTo });
-		}
-
 		timeline
 			.clear()
 			.set('div.block', { pointerEvents: 'none' })

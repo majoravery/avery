@@ -54,16 +54,33 @@ export class Grid {
 	}
 
 	placeBlocks(blocks: Block[]): Block[] {
-		return blocks.map((block) => {
-			const position =
-				block.width * block.height !== 1
-					? this.getGridPositionForMultiCellBlock(block)
-					: this.getGridPositionForSingleCellBlock();
-			return {
-				...block, // type, content, width and height
-				...position // x and y
-			};
-		});
+		let blocksToPlace: Block[] = blocks;
+		const blocksPlaced: Block[] = [];
+
+		// If in first breakpoint (mobile)
+		if (this.breakpoint === 0) {
+			const nameContent = 'Name';
+			const nameBlock = blocks.find((block) => block.content === nameContent);
+			if (!nameBlock) throw new Error('Could not find Name block');
+			const namePosition = this.getGridPositionForMultiCellBlock(nameBlock, { x: 0, y: 0 });
+			blocksPlaced.push({ ...nameBlock, ...namePosition });
+			blocksToPlace = blocks.filter((block) => block.content !== nameContent);
+		}
+
+		blocksPlaced.push(
+			...blocksToPlace.map((block) => {
+				const position =
+					block.width * block.height !== 1
+						? this.getGridPositionForMultiCellBlock(block)
+						: this.getGridPositionForSingleCellBlock();
+				return {
+					...block, // type, content, width and height
+					...position // x and y
+				};
+			})
+		);
+
+		return blocksPlaced;
 	}
 
 	get blocks() {
@@ -91,7 +108,7 @@ export class Grid {
 		return [index % this.canvas.width, Math.floor(index / this.canvas.width)];
 	}
 
-	getGridPositionForMultiCellBlock(block: Block): Position {
+	getGridPositionForMultiCellBlock(block: Block, overwritePos?: Position): Position {
 		let occupiedIndices: boolean | number[] = [],
 			gridPosition: [number, number] = [0, 0],
 			canBlockFit,
@@ -102,7 +119,9 @@ export class Grid {
 			// TODO: account for impossible placements (doesn't happen now bc tall block are applied first)
 			n++;
 
-			gridPosition = this.getRandomPositionOnGrid();
+			gridPosition = overwritePos
+				? [overwritePos.x, overwritePos.y]
+				: this.getRandomPositionOnGrid();
 			// if (isDebugMode) {
 			// 	console.log(
 			// 		`Trying to place ${block.width}x${block.height} block at ${gridPosition[0]}, ${gridPosition[0]}...`
