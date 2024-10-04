@@ -72,6 +72,7 @@
 		filter: brightness(100%);
 		height: 100%;
 		mix-blend-mode: multiply;
+		object-fit: cover;
 		position: absolute;
 		transform: scale(100%);
 		transition: transform 180ms ease-in-out;

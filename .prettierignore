@@ -2,3 +2,6 @@
 package-lock.json
 pnpm-lock.yaml
 yarn.lock
+
+# Don't want prettier to mess up console.log output
+src/lib/ascii.ts

@@ -2,7 +2,7 @@
 	import { locale, t } from '$lib/stores/locale';
 	import { onMount } from 'svelte';
 	import { pageviews, visitors } from '$lib/stores/pageview';
-	import { printThinkingFace } from '$lib/utils';
+	import { printThinkingFace } from '$lib/ascii';
 	import { theme } from '$lib/stores/theme';
 	import { weathers } from '$lib/stores/weathers';
 	import Grid from './Grid.svelte';
