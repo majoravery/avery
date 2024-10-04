@@ -58,7 +58,7 @@
 	}
 
 	div.screenshot img {
-		bottom: -30%;
+		top: 10%;
 		position: absolute;
 		width: 100%;
 	}
