@@ -49,7 +49,7 @@
 	}
 
 	div.dish:before {
-		background-color: var(--colourbackground);
+		background-color: var(--colour-background);
 		bottom: 0;
 		content: '';
 		height: 100%;
@@ -95,7 +95,7 @@
 	}
 
 	div.title {
-		color: var(--colouraccent);
+		color: var(--colour-accent);
 		font-family: var(--bodyFontFamily);
 		font-optical-sizing: var(--bodyFontOpticalSizing);
 		font-size: var(--bodyFontSize);
@@ -104,8 +104,8 @@
 		letter-spacing: var(--bodyLetterSpacing);
 		line-height: var(--bodyLineHeight);
 		text-shadow:
-			1px 0px 5px var(--colourfiller),
-			0px 1px 5px var(--colourfiller);
+			1px 0px 5px var(--colour-filler),
+			0px 1px 5px var(--colour-filler);
 		position: relative;
 		z-index: 2;
 	}

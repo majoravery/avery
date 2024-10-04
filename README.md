@@ -36,6 +36,7 @@ This app is deployed to averylim.com via [Render](todo-add-url), so simply pushi
 
 Prio
 
+- [ ] Site is so broken on insta browser lol
 - [ ] Avery Lim font takes a while to load on fresh devices
 - [ ] Refine gsap draggable, make sure it's smooth, seems like being on any other language and dragging always turns it into english
 

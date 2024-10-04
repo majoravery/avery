@@ -2,7 +2,7 @@
 
 <style>
 	div {
-		background-color: var(--colourfiller);
+		background-color: var(--colour-filler);
 		bottom: 0;
 		left: 0;
 		position: absolute;

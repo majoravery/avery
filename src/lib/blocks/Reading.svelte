@@ -32,7 +32,7 @@
 		font-weight: var(--bodyFontWeight);
 		letter-spacing: var(--bodyLetterSpacing);
 		line-height: var(--bodyLineHeight);
-		color: var(--colouraccent);
+		color: var(--colour-accent);
 	}
 
 	div.author {

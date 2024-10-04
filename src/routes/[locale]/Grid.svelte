@@ -485,7 +485,7 @@
 	}
 
 	div.gate {
-		background-color: var(--colourbackground);
+		background-color: var(--colour-background);
 		bottom: 0;
 		height: 100vh;
 		left: 0;

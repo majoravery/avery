@@ -14,7 +14,7 @@
 
 	div.eyebrow {
 		align-self: flex-start;
-		color: var(--colouraccent);
+		color: var(--colour-accent);
 		display: inline;
 		font-family:
 			ui-monospace,
@@ -33,8 +33,8 @@
 	}
 
 	div.eyebrow.standout {
-		background: var(--colourfiller);
-		border: 1px solid var(--colourfiller);
+		background: var(--colour-filler);
+		border: 1px solid var(--colour-filler);
 		border-radius: var(--border-radius-s);
 		padding: var(--eyebrow-standout-padding-x) 4.8px;
 	}

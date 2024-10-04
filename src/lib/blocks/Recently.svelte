@@ -31,7 +31,7 @@
 	}
 
 	div.photo {
-		background-color: var(--colourfiller);
+		background-color: var(--colour-filler);
 		border-radius: var(--border-radius-s);
 		bottom: -8px;
 		height: calc(100% + 16px);
@@ -48,7 +48,7 @@
 	}
 
 	div.photo:before {
-		background-color: var(--colourbackground);
+		background-color: var(--colour-background);
 		bottom: 0;
 		content: '';
 		height: 100%;

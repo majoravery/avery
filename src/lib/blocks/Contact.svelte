@@ -31,7 +31,7 @@
 	}
 
 	div.contact {
-		border-bottom: 1px solid var(--colouraccent);
+		border-bottom: 1px solid var(--colour-accent);
 		padding-bottom: 3.2px;
 	}
 
@@ -56,7 +56,7 @@
 	}
 
 	span.method {
-		color: var(--colouraccent);
+		color: var(--colour-accent);
 	}
 
 	span.arrow {

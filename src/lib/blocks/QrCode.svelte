@@ -34,7 +34,7 @@
 
 	article:before {
 		content: '';
-		background: var(--colouraccent);
+		background: var(--colour-accent);
 		filter: brightness(90%);
 		height: calc(100% - var(--block-padding) - var(--block-padding));
 		left: var(--block-padding);
