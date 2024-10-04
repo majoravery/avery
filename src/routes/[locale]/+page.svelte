@@ -25,18 +25,6 @@
 </script>
 
 <svelte:head>
-	<!-- Google tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y8DZPPYGWY"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag() {
-			dataLayer.push(arguments);
-		}
-		gtag('js', new Date());
-
-		gtag('config', 'G-Y8DZPPYGWY');
-	</script>
-
 	<title>{$t('site.title')}</title>
 	<meta name="description" content={$t('site.description')} />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
