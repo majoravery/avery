@@ -144,7 +144,7 @@
 			}
 		});
 
-		let state = Flip.getState(gsap.utils.toArray('section.grid, div.block, div.gate'));
+		let state = Flip.getState(gsap.utils.toArray('main, section.grid, div.block, div.gate'));
 
 		blockTl
 			.addLabel('start', 0)
@@ -264,8 +264,8 @@
 			}
 		});
 
-		let state = Flip.getState(gsap.utils.toArray('section.grid, div.block, div.gate'), {
-			props: 'opacity,borderRadius'
+		let state = Flip.getState(gsap.utils.toArray('main, section.grid, div.block, div.gate'), {
+			props: 'opacity'
 		});
 
 		blockTl
