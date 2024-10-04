@@ -11,8 +11,8 @@ main {
 
 section.grid {
     /* Might come in handy for responsive font size: 150 < x < 222 */
-    grid-template-rows: repeat(var(--rows), minmax(var(--block-size), calc((100vw - var(--grid-margin) - var(--grid-margin)) / 2)));
-    grid-template-columns: repeat(var(--columns), minmax(var(--block-size), calc((100vw - var(--grid-margin) - var(--grid-margin)) / 2)));
+    grid-template-rows: repeat(var(--rows), minmax(var(--block-size), calc((100vw - var(--grid-margin) - var(--grid-margin) - var(--grid-gap)) / 2)));
+    grid-template-columns: repeat(var(--columns), minmax(var(--block-size), calc((100vw - var(--grid-margin) - var(--grid-margin) - var(--grid-gap)) / 2)));
 }
 
 @media (min-width: 380px) {
