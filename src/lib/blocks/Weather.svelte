@@ -18,7 +18,7 @@
 
 <article>
 	<Eyebrows>{$t('weather.title')} ({$t('weather.location')})</Eyebrows>
-	<div class="sun">
+	<div>
 		{#await import(`$lib/images/weather/${condition.code}.png`) then { default: src }}
 			<img {src} alt={condition.text} />
 		{/await}
@@ -45,7 +45,6 @@
 		height: 100%;
 	}
 
-	/* TODO: improve */
 	img {
 		left: -20%;
 		opacity: 0.5;

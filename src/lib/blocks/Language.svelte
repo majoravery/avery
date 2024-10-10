@@ -74,11 +74,11 @@
 				displayTutorial.set(false);
 				interacted.set(true);
 				gsap.set('.language-selector', { rotationY: this.x + step * activeLanguageIndex });
-				console.log(this.x, step * activeLanguageIndex, this.x + step * activeLanguageIndex);
+				// console.log(this.x, step * activeLanguageIndex, this.x + step * activeLanguageIndex);
 			},
 			onDragEnd: function () {
 				const rotationY = gsap.utils.snap(step, this.x + step * activeLanguageIndex);
-				console.log(this.x, step * activeLanguageIndex, this.x + step * activeLanguageIndex);
+				// console.log(this.x, step * activeLanguageIndex, this.x + step * activeLanguageIndex);
 				gsap.to('.language-selector', {
 					rotationY
 				});
