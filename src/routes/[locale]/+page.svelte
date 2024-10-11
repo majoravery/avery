@@ -2,7 +2,9 @@
 	import { locale, t } from '$lib/stores/locale';
 	import { onMount } from 'svelte';
 	import { pageviews, visitors } from '$lib/stores/pageview';
+	import { PALETTES } from '$lib/stores/theme';
 	import { printThinkingFace } from '$lib/ascii';
+	import { random } from '$lib/utils';
 	import { theme } from '$lib/stores/theme';
 	import { weathers } from '$lib/stores/weathers';
 	import Grid from './Grid.svelte';
@@ -14,7 +16,7 @@
 	weathers.set(data.weathers);
 	locale.set(data.locale);
 	pageviews.set(data.pageViewCount);
-	theme.set(data.palette);
+	theme.set(random.pick(PALETTES));
 	visitors.set(data.visitorCount);
 
 	const url = 'https://averylim.com';
