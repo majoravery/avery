@@ -91,9 +91,10 @@ declare global {
 		temp: number;
 	}
 
+	// Weather report of one locale
 	interface Weather {
-		condition: Condition;
-		forecasts: Forecast[];
+		condition: Condition; // Current day's weather condition
+		forecasts: Forecast[]; // Weather forecasts
 	}
 
 	/**
