@@ -5,14 +5,14 @@
 	export let expand: () => void;
 </script>
 
-<!-- svelte-ignore a11y-no-noninteractive-element-interactions a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y_no_noninteractive_element_interactions a11y-click-events-have-key-events -->
 <article on:click={expand}>
 	<Eyebrows>
 		{$t('reading.title')}
 	</Eyebrows>
 	<div class="book">
-		<div class="title">Let's Pretend This Never Happened</div>
-		<div class="author">{$t('reading.author', { author: 'Jenny Lawson' })}</div>
+		<div class="title">I Never Thought of It That Way</div>
+		<div class="author">{$t('reading.author', { author: 'Mónica Guzmán' })}</div>
 	</div>
 </article>
 

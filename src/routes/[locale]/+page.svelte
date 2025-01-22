@@ -10,6 +10,7 @@
 	import Grid from './Grid.svelte';
 
 	import '$lib/styles.css';
+	import Introductions from '$lib/components/Introductions.svelte';
 
 	export let data: MainPageData;
 
@@ -58,6 +59,8 @@
 		<p>{$t('description.writeup')}</p>
 		<p>{$t('noscript')}</p>
 	</noscript>
+
+	<!-- <Introductions /> -->
 
 	<footer>
 		<!-- Built in my little apartment in Yakuin, Fukuoka. Weather forecast by <a

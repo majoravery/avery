@@ -1,3 +1,5 @@
+import { MAPPING_LOCALE } from './constants';
+
 export function getRandomInt(min: number, max: number): number {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -83,4 +85,20 @@ export function convertDateToDdmmyyyy(date: Date) {
 	const year = date.getFullYear();
 
 	return `${day}${month}${year}`;
+}
+
+export function convertYyyymmddToDate(yyyymmdd: number) {
+	const year = Math.floor(yyyymmdd / 10000);
+	const month = Math.floor((yyyymmdd % 10000) / 100);
+	const day = yyyymmdd % 100;
+
+	return new Date(year, month, day);
+}
+
+export function getFormattedDate(date: Date, locale: Locale) {
+	return date.toLocaleString(MAPPING_LOCALE[locale], {
+		day: 'numeric',
+		month: 'long',
+		year: 'numeric'
+	});
 }

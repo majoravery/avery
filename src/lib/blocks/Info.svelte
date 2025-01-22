@@ -1,27 +1,14 @@
 <script lang="ts">
+	import { getFormattedDate } from '$lib/utils';
 	import { locale, t } from '$lib/stores/locale';
-	import Eyebrows from '$lib/components/Eyebrows.svelte';
 	import { pageviews, visitors } from '$lib/stores/pageview';
+	import Eyebrows from '$lib/components/Eyebrows.svelte';
 
-	const MAPPING_LOCALE: Record<string, string> = {
-		en: 'en-SG',
-		zh: 'zh-SG',
-		de: 'de',
-		jp: 'ja-JP'
-	};
-	const LAST_UPDATED = new Date('2 Oct 2024');
+	const LAST_UPDATED = new Date('19 Jan 2025');
 	const TODAY = new Date();
 
 	function pad(number: number) {
 		return String(number).padStart(4, '0');
-	}
-
-	function getFormattedDate(date: Date, locale: Locale) {
-		return date.toLocaleString(MAPPING_LOCALE[locale], {
-			day: 'numeric',
-			month: 'long',
-			year: 'numeric'
-		});
 	}
 
 	$: date = getFormattedDate(TODAY, $locale);

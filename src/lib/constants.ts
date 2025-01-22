@@ -138,3 +138,11 @@ export const CANVAS_TYPES: CanvasTypes = {
 		]
 	}
 };
+
+// TODO: move this into locale.ts? I have a feeling you can't bc locale is not client side
+export const MAPPING_LOCALE: Record<Locale, string> = {
+	en: 'en-SG',
+	zh: 'zh-SG',
+	de: 'de',
+	jp: 'ja-JP'
+};

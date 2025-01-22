@@ -5,10 +5,6 @@
 	import { time } from '$lib/stores/time';
 	import Eyebrows from '$lib/components/Eyebrows.svelte';
 
-	let hourNew: string, minuteNew: string, secondNew: string, ampm: string;
-	let hourPrev: string, minutePrev: string, secondPrev: string;
-	let hourFlip: boolean, minuteFlip: boolean, secondFlip: boolean;
-
 	const MAPPING_TIMEZONE: Record<string, string> = {
 		en: 'Asia/Singapore',
 		zh: 'Asia/Singapore',
@@ -16,7 +12,28 @@
 		jp: 'Asia/Tokyo'
 	};
 
-	$: {
+	/**
+	 * 22 Jan 2025: Did so much revamping because of the stupid runes now I'm not sure
+	 * what my code really does anymore hm
+	 */
+	let ampm = $state('');
+	const clockPrev = $state({
+		hour: '',
+		minute: '',
+		second: ''
+	});
+	const clockNew = $state({
+		hour: '',
+		minute: '',
+		second: ''
+	});
+	const clockFlip = $state({
+		hour: false,
+		minute: false,
+		second: false
+	});
+
+	const currentTime = $derived.by(() => {
 		function getTimeInTimeZone(timeZone: string): string[] {
 			return new Intl.DateTimeFormat('en', {
 				timeZone,
@@ -28,45 +45,46 @@
 				.split(':');
 		}
 
-		const time = getTimeInTimeZone(MAPPING_TIMEZONE[$locale]);
-		hourNew = time[0];
-		minuteNew = time[1];
-		secondNew = time[2].slice(0, 2); // removes "am" or "pm"
-		ampm = time[2].slice(3).toLowerCase(); // gets "am" or "pm"
-	}
+		return getTimeInTimeZone(MAPPING_TIMEZONE[$locale]);
+	});
 
-	// Thank you comma operator https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comma_operator
-	$: hourNew, minuteNew, secondNew, next();
+	$effect(() => {
+		clockNew.hour = currentTime[0];
+		clockNew.minute = currentTime[1];
+		clockNew.second = currentTime[2].slice(0, 2); // removes "am" or "pm"
+		ampm = currentTime[2].slice(3).toLowerCase(); // gets "am" or "pm"
+		next();
+	});
 
 	function next() {
-		const hourChange = hourPrev !== hourNew;
-		const minuteChange = minutePrev !== minuteNew;
-		const secondChange = secondPrev !== secondNew;
+		const hourChange = clockPrev.hour !== clockNew.hour;
+		const minuteChange = clockPrev.minute !== clockNew.minute;
+		const secondChange = clockPrev.second !== clockNew.second;
 
-		hourFlip = hourChange;
-		minuteFlip = minuteChange;
-		secondFlip = secondChange;
+		clockFlip.hour = hourChange;
+		clockFlip.minute = minuteChange;
+		clockFlip.second = secondChange;
 
 		setTimeout(() => {
-			if (hourFlip) {
-				hourFlip = false;
-				hourPrev = hourNew;
+			if (clockFlip.hour) {
+				clockFlip.hour = false;
+				clockPrev.hour = clockNew.hour;
 			}
-			if (minuteFlip) {
-				minuteFlip = false;
-				minutePrev = minuteNew;
+			if (clockFlip.minute) {
+				clockFlip.minute = false;
+				clockPrev.minute = clockNew.minute;
 			}
-			if (secondFlip) {
-				secondFlip = false;
-				secondPrev = secondNew;
+			if (clockFlip.second) {
+				clockFlip.second = false;
+				clockPrev.second = clockNew.second;
 			}
 		}, 600);
 	}
 
 	onMount(() => {
-		hourPrev = hourNew;
-		minutePrev = minuteNew;
-		secondPrev = secondNew;
+		clockPrev.hour = clockNew.hour;
+		clockPrev.minute = clockNew.minute;
+		clockPrev.second = clockNew.second;
 	});
 </script>
 
@@ -75,44 +93,44 @@
 	<div class="clock" class:day={ampm === 'am'} class:night={ampm === 'pm'}>
 		<div class="hours">
 			<span class="ampm">{ampm}</span>
-			<div class="hour" class:flip={hourFlip}>
-				<div class="card top">{hourPrev}</div>
-				<div class="card bottom">{hourPrev}</div>
-				{#if hourFlip}
-					<div class="card top-flip">{hourNew}</div>
-					<div class="card bottom-flip">{hourNew}</div>
+			<div class="hour" class:flip={clockFlip.hour}>
+				<div class="card top">{clockPrev.hour}</div>
+				<div class="card bottom">{clockPrev.hour}</div>
+				{#if clockFlip.hour}
+					<div class="card top-flip">{clockNew.hour}</div>
+					<div class="card bottom-flip">{clockNew.hour}</div>
 				{/if}
 			</div>
-			<div class="card flap" />
-			<div class="card flap" />
-			<div class="card flap" />
+			<div class="card flap"></div>
+			<div class="card flap"></div>
+			<div class="card flap"></div>
 		</div>
 		<div class="minutes">
-			<div class="minute" class:flip={minuteFlip}>
-				<div class="card top">{minutePrev}</div>
-				<div class="card bottom">{minutePrev}</div>
-				{#if minuteFlip}
-					<div class="card top-flip">{minuteNew}</div>
-					<div class="card bottom-flip">{minuteNew}</div>
+			<div class="minute" class:flip={clockFlip.minute}>
+				<div class="card top">{clockPrev.minute}</div>
+				<div class="card bottom">{clockPrev.minute}</div>
+				{#if clockFlip.minute}
+					<div class="card top-flip">{clockNew.minute}</div>
+					<div class="card bottom-flip">{clockNew.minute}</div>
 				{/if}
 			</div>
-			<div class="card flap" />
-			<div class="card flap" />
-			<div class="card flap" />
+			<div class="card flap"></div>
+			<div class="card flap"></div>
+			<div class="card flap"></div>
 		</div>
 
 		<div class="seconds">
-			<div class="second" class:flip={secondFlip}>
-				<div class="card top">{secondNew}</div>
-				<div class="card bottom">{secondPrev}</div>
-				{#if secondFlip}
-					<div class="card top-flip">{secondPrev}</div>
-					<div class="card bottom-flip">{secondNew}</div>
+			<div class="second" class:flip={clockFlip.second}>
+				<div class="card top">{clockNew.second}</div>
+				<div class="card bottom">{clockPrev.second}</div>
+				{#if clockFlip.second}
+					<div class="card top-flip">{clockPrev.second}</div>
+					<div class="card bottom-flip">{clockNew.second}</div>
 				{/if}
 			</div>
-			<div class="card flap" />
-			<div class="card flap" />
-			<div class="card flap" />
+			<div class="card flap"></div>
+			<div class="card flap"></div>
+			<div class="card flap"></div>
 		</div>
 	</div>
 </article>

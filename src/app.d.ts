@@ -1,4 +1,7 @@
 // See https://kit.svelte.dev/docs/types#app
+
+import type { LOCALES } from '$lib/stores/locale';
+
 // for information about these interfaces
 declare global {
 	namespace App {
@@ -14,7 +17,6 @@ declare global {
 	interface MainPageData {
 		locale: Locale;
 		pageViewCount: number;
-		palette: Palette;
 		visitorCount: number;
 		weathers: Record<Locale, Weather>;
 	}
@@ -104,6 +106,14 @@ declare global {
 		id: string;
 		created_at: string;
 		weather: string;
+	}
+
+	/**
+	 * Example:
+	 * { en: { 'recently.title': 'Recently' } }
+	 */
+	interface Translations {
+		[k: Locale]: Record<string, string>;
 	}
 }
 

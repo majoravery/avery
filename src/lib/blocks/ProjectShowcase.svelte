@@ -9,7 +9,7 @@
 	export let expanded: boolean;
 </script>
 
-<!-- svelte-ignore a11y-no-noninteractive-element-interactions a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y_no_noninteractive_element_interactions a11y-click-events-have-key-events -->
 <article on:click={expand}>
 	<Eyebrows>{$t('projectShowcase.title')}</Eyebrows>
 
