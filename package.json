@@ -17,7 +17,7 @@
 		"@sveltejs/vite-plugin-svelte": "^5.0.3",
 		"@types/eslint": "^9.6.1",
 		"eslint": "^9.18.0",
-		"eslint-config-prettier": "^9.1.0",
+		"eslint-config-prettier": "^10.0.0",
 		"eslint-plugin-svelte": "^2.46.1",
 		"globals": "^15.14.0",
 		"prettier": "^3.4.2",
@@ -32,6 +32,6 @@
 	"dependencies": {
 		"@supabase/supabase-js": "^2.48.0",
 		"gsap": "^3.12.7",
-		"nice-color-palettes": "^3.0.0"
+		"nice-color-palettes": "^4.0.0"
 	}
 }

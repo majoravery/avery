@@ -418,7 +418,7 @@
 				{/if}
 			</div>
 		{/each}
-		<div class="gate" />
+		<div class="gate"></div>
 	</section>
 {/if}
 
