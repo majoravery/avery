@@ -9,7 +9,7 @@
 	export let standout: boolean = false;
 </script>
 
-<div class="extra-header-bg" class:standout />
+<div class="extra-header-bg" class:standout></div>
 <div class="extra-content" class:standout>
 	<slot />
 </div>

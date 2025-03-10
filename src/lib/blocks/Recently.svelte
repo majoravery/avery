@@ -4,7 +4,7 @@
 	import { translationsRecently } from '$lib/translations';
 	import ExtraContent from '$lib/components/ExtraContent.svelte';
 	import Eyebrows from '$lib/components/Eyebrows.svelte';
-	import recently from '$lib/images/recently.jpg';
+	// import recently from '$lib/images/recently.jpg';
 
 	// export let expand: () => void;
 	// export let expanded: boolean;
@@ -22,6 +22,21 @@
 	let source = $derived(translationsRecently[currentIndex][currentVersion]);
 	let extraContent = $derived($t('recently.extraContent', undefined, source));
 
+	const imageModules: any = import.meta.glob(['$lib/images/recently/**.jpg'], {
+		eager: true,
+		query: {
+			enhanced: true
+		}
+	});
+
+	// [0] to get the only item from the .filter() results and
+	// [1] to access the module object from [path, module] of each entry
+	let recentlyModule = $derived(
+		Object.entries(imageModules).filter(
+			([path]) => path === '/src/lib/images/recently/recently-' + currentVersion + '.jpg'
+		)[0][1]
+	);
+
 	function earlier() {
 		if (currentIndex === versions.length - 1) return;
 		currentIndex = currentIndex + 1;
@@ -33,15 +48,16 @@
 	}
 </script>
 
-<!-- svelte-ignore a11y_no_noninteractive_element_interactions a11y-click-events-have-key-events -->
-<article on:click={expand} class:expanded>
+<!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
+<!-- svelte-ignore a11y_click_events_have_key_events -->
+<article onclick={expand} class:expanded>
 	<Eyebrows standout>{$t('recently.title')}</Eyebrows>
 	<div class="photo preview">
-		<img src={recently} alt={$t('recently.title')} />
+		<enhanced:img src={recentlyModule.default} alt={$t('recently.title')} />
 	</div>
 
 	<ExtraContent {expanded} standout>
-		<img src={recently} alt={$t('recently.title')} />
+		<enhanced:img src={recentlyModule.default} alt={$t('recently.title')} />
 		<p class="date">{formattedDate}</p>
 		<p>{@html extraContent}</p>
 		<div class="navigation">
@@ -49,7 +65,7 @@
 				aria-disabled={currentIndex === versions.length - 1}
 				class:disabled={currentIndex === versions.length - 1}
 				class="earlier"
-				on:click={earlier}
+				onclick={earlier}
 				role="button"
 				tabindex="0"
 			>
@@ -59,7 +75,7 @@
 				aria-disabled={currentIndex === 0}
 				class:disabled={currentIndex === 0}
 				class="recent"
-				on:click={recent}
+				onclick={recent}
 				role="button"
 				tabindex="0"
 			>

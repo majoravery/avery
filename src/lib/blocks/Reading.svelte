@@ -6,7 +6,7 @@
 </script>
 
 <!-- svelte-ignore a11y_no_noninteractive_element_interactions a11y-click-events-have-key-events -->
-<article on:click={expand}>
+<article onclick={expand}>
 	<Eyebrows>
 		{$t('reading.title')}
 	</Eyebrows>
