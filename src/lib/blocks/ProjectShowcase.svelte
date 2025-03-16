@@ -25,7 +25,7 @@
 		<div class="cta">
 			<a href="https://photos.averylim.com" target="_blank">
 				<span class="method">{$t('projectShowcase.cta')}</span>
-				<span class="arrow"><img src={arrowTopRight} alt="{$t('projectShowcase.cta')}}" /></span>
+				<span class="arrow"><img src={arrowTopRight} alt={$t('projectShowcase.cta')} /></span>
 			</a>
 		</div>
 		<p></p>
@@ -95,7 +95,8 @@
 
 	span.arrow img {
 		transform-origin: center;
-		width: var(--bodyFontSize);
+		/* Important otherwise it gets overwritten by :global(img) in ExtraContent */
+		width: var(--bodyFontSize) !important;
 	}
 
 	div.cta:hover span.arrow img {

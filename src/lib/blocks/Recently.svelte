@@ -53,11 +53,11 @@
 <article onclick={expand} class:expanded>
 	<Eyebrows standout>{$t('recently.title')}</Eyebrows>
 	<div class="photo preview">
-		<enhanced:img src={recentlyModule.default} alt={$t('recently.title')} />
+		<enhanced:img class="image" src={recentlyModule.default} alt={$t('recently.title')} />
 	</div>
 
 	<ExtraContent {expanded} standout>
-		<enhanced:img src={recentlyModule.default} alt={$t('recently.title')} />
+		<enhanced:img class="image" src={recentlyModule.default} alt={$t('recently.title')} />
 		<p class="date">{formattedDate}</p>
 		<p>{@html extraContent}</p>
 		<div class="navigation">
@@ -131,7 +131,7 @@
 		opacity: 0;
 	}
 
-	div.photo img {
+	div.photo .image {
 		border-radius: var(--border-radius-s);
 		filter: brightness(100%);
 		height: 100%;
