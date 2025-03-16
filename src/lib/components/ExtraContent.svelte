@@ -78,6 +78,7 @@
 
 	div.extra-content :global(img) {
 		border-radius: var(--border-radius-s);
+		height: auto;
 		width: 100%;
 	}
 
