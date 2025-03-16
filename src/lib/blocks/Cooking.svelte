@@ -6,12 +6,14 @@
 
 <article>
 	<Eyebrows>{$t('cooking.title')}</Eyebrows>
-	<div class="dish">
-		<div class="dish-inner">
-			<div class="title">{$t('cooking.alt')}</div>
-			<img src={cooking} alt={$t('cooking.alt')} />
+	<a class="link" href="https://www.instagram.com/shokudoclub" target="_blank">
+		<div class="dish">
+			<div class="dish-inner">
+				<div class="title">{$t('cooking.alt')}</div>
+				<img src={cooking} alt={$t('cooking.alt')} />
+			</div>
 		</div>
-	</div>
+	</a>
 </article>
 
 <style>
@@ -32,6 +34,10 @@
 		position: absolute;
 		width: calc(100% + var(--block-padding) * 2);
 		z-index: 1;
+	}
+
+	a.link {
+		display: block;
 	}
 
 	div.dish {

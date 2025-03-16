@@ -12,7 +12,7 @@ export const translations: Translations = {
 		'contact.linkedIn': 'LinkedIn',
 		'contact.linkedInAlt': 'Stalk my work history',
 		'cooking.title': 'Cooking',
-		'cooking.alt': 'Chai tow kway',
+		'cooking.alt': 'Grilled mackerel teishoku',
 		'description.title': 'About Me',
 		'description.writeup':
 			"Web engineer and creative developer, recently moved from Singapore to Fukuoka for a year-long career break. Previously living in Berlin, Germany. Big fan of cooking just about anything, hiking to high altitudes, going to music festivals, and working on creative projects. If you're keen to build something together, get in touch 💌",
@@ -65,7 +65,7 @@ export const translations: Translations = {
 		'contact.linkedIn': '领英',
 		'contact.linkedInAlt': '查看我的工作经历',
 		'cooking.title': '正在烧煮',
-		'cooking.alt': '菜头粿',
+		'cooking.alt': '烤鲭鱼定食',
 		'description.title': '关于我',
 		'description.writeup':
 			'网络工程师和创意开发者，最近从新加坡搬到日本福冈，享受为期一年的职业间歇。之前住在德国柏林。非常喜欢煮各种料理、徒步高山、参加音乐节以及进行创意项目。如果你也想一起合作，欢迎联系我💌',
@@ -119,7 +119,7 @@ export const translations: Translations = {
 		'contact.linkedIn': 'LinkedIn',
 		'contact.linkedInAlt': '私の職歴をチェックする',
 		'cooking.title': '作ってる料理',
-		'cooking.alt': 'チャイトウクエイ',
+		'cooking.alt': '焼き鯖定食',
 		'description.title': '私について',
 		'description.writeup':
 			'ウェブエンジニアでクリエイティブな開発者。最近、新加坡から日本の福岡に引っ越しして、1年間のキャリアブレイクを楽しんでいます。以前はドイツのベルリンに住んでいました。料理、山登り、音楽フェス、クリエイティブなプロジェクトが大好きです。何か一緒に作りたい方は、ぜひご連絡ください💌',
@@ -173,7 +173,7 @@ export const translations: Translations = {
 		'contact.linkedIn': 'LinkedIn',
 		'contact.linkedInAlt': 'Überprüfe meinen Werdegang',
 		'cooking.title': 'Kochen gerade',
-		'cooking.alt': 'Gebratener Rettichkuchen',
+		'cooking.alt': 'Gegrilltes Makrelen-Teishoku',
 		'description.title': 'Über mich',
 		'description.writeup':
 			'Web- und kreativer Entwickler, kürzlich von Singapur nach Fukuoka, Japan, für eines Sabbatical umgezogen. Zuvor lebte ich in Berlin, Deutschland. Ein großer Fan vom Kochen, Wandern in hohen Lagen, Musikfestivals und kreativen Projekten. Wenn du Lust hast, gemeinsam etwas zu bauen, melde dich gerne 💌',
