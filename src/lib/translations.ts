@@ -107,9 +107,9 @@ export const translations: Translations = {
 		'weather.sun': '拜日'
 	},
 	jp: {
-		'site.title': 'やっほー、エブリーだよ！',
+		'site.title': 'やっほー、エブリだよ！',
 		'site.description':
-			'エブリーのデジタル庭園へようこそ—ゆっくり楽しんで、いつでもチェックアウトすることが可能だよ',
+			'エブリのデジタル庭園へようこそ—ゆっくり楽しんで、いつでもチェックアウトすることが可能だよ',
 		'site.closePopUp': 'ポップアップを閉じる',
 		'clock.title': '時計',
 		'clock.location': '日本',
@@ -132,7 +132,7 @@ export const translations: Translations = {
 		'language.tutorialAlt': 'ドラッグして言語を変更',
 		'listeningTo.title': '聴いてる音楽',
 		'listeningTo.linkAlt': '{{platform}} で聴いて',
-		name: 'エブリー<br/>リム',
+		name: 'エブリ<br/>リム',
 		noscript:
 			'どうやってこのページにたどり着いたのかよく分からないが、ブラウザをアップグレードするか、JavaScriptを有効にした方がいいよ。楽しいところ全部見逃してるよ！',
 		'projectShowcase.title': 'プロジェクトショーケース',
