@@ -10,7 +10,6 @@
 	import Grid from './Grid.svelte';
 
 	import '$lib/styles.css';
-	import Introductions from '$lib/components/Introductions.svelte';
 
 	export let data: MainPageData;
 
