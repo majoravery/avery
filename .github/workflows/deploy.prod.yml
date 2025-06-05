@@ -40,33 +40,39 @@ jobs:
           WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
           SUPABASE_API_KEY: ${{ secrets.SUPABASE_API_KEY }}
 
-      - name: Deploy to live branch
+      - name: Configure Git
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
-          git fetch origin live
-          git checkout live
+      - name: Prepare live branch
+        run: |
+          # Create a temporary directory for the live branch
+          mkdir -p /tmp/live-branch
+          cd /tmp/live-branch
 
-          # Remove all files from live branch except .git directory
-          find . -mindepth 1 -maxdepth 1 -not -path "./.git" -exec rm -rf {} \;
+          # Initialize git and set remote
+          git init
+          git remote add origin https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
 
-          # Checkout build directory from main branch
-          git checkout main -- build
+          git checkout --orphan live
+          git rm -rf . || true  # Clean the working directory if needed
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-          # Move contents of build directory to root
-          mv build/* .
-          rm -rf build
+      - name: Copy build folder to live branch
+        run: |
+          # Remove all files in the live branch directory (except .git)
+          find /tmp/live-branch -mindepth 1 -maxdepth 1 -not -path "/tmp/live-branch/.git" -exec rm -rf {} \;
 
-          # Commit and push changes
+          # Copy build folder contents to live branch directory
+          cp -r $GITHUB_WORKSPACE/build/* /tmp/live-branch/
+
+      - name: Commit and push to live branch
+        run: |
+          cd /tmp/live-branch
           git add .
-          git commit -m "Deploy: $(git rev-parse --short main)" || echo "No changes to commit"
-          git push origin live
-
-          # from chatgpt
-          # git switch --orphan live-temp
-          # git rm -rf .
-          # cp -r build/* .
-          # git add .
-          # git commit -m "Deploy build output to `live` branch"
-          # git push -f origin live-temp:live
+          git commit -m "Deploy: $(git rev-parse --short $GITHUB_SHA)" || echo "No changes to commit"
+          git push origin HEAD:live
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
