@@ -35,6 +35,9 @@ jobs:
 
       - name: Build Svelte project
         run: pnpm build
+        env:
+          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+          SUPABASE_API_KEY: ${{ secrets.SUPABASE_API_KEY }}
 
       - name: Deploy to live branch
         run: |
