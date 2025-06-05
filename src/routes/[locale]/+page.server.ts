@@ -1,7 +1,6 @@
 import { getLocaleWeather } from '$lib/weather.js';
 import { redirect } from '@sveltejs/kit';
 import { VALID_LOCALES } from '$lib/stores/locale';
-import log4js from 'log4js';
 import * as supabase from '$lib/supabase.js';
 
 export const prerender = true;
@@ -13,9 +12,7 @@ export async function load({ cookies, params, request }): Promise<MainPageData> 
 		redirect(307, '/en');
 	}
 
-	const logger = log4js.getLogger();
-	logger.level = 'info';
-	logger.info('Starting up...');
+	console.info('Starting up in /en...');
 
 	/**
 	 * Info
@@ -28,14 +25,12 @@ export async function load({ cookies, params, request }): Promise<MainPageData> 
 			cookies.set('visitorid', visitorId, { path: '/' });
 		}
 		await supabase.addPageView(visitorId);
-		const logger = log4js.getLogger();
-		logger.level = 'info';
-		logger.info(`Logging page view for visitor ${visitorId}`);
+		console.info(`Logging page view for visitor ${visitorId}`);
 	}
 
 	const pageViewCount = await supabase.getPageView();
 	const visitorCount = await supabase.getVisitors();
-	logger.info(`Current pageview count: ${pageViewCount}, visitor count: ${visitorCount}`);
+	console.info(`Current pageview count: ${pageViewCount}, visitor count: ${visitorCount}`);
 
 	/**
 	 * Weather forecast

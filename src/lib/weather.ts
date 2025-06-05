@@ -1,6 +1,5 @@
 import { convertDateToDdmmyyyy } from './utils';
 import { WEATHER_API_KEY } from '$env/static/private';
-import log4js from 'log4js';
 import * as supabase from './supabase';
 
 const MAPPING_LOCATION: Record<string, string> = {
@@ -84,9 +83,6 @@ export async function getLocaleWeather(locale: Locale): Promise<Weather> {
 	if (weatherSbResponse) {
 		weather = JSON.parse(weatherSbResponse.weather);
 	} else {
-		const logger = log4js.getLogger();
-		logger.level = 'info';
-		logger.info(`No ${locale} weather for ${ddmmyyyy} cached, fetching new one...`);
 		console.info(`No ${locale} weather for ${ddmmyyyy} cached, fetching new one...`);
 		weather = await fetchWeather(locale);
 		await supabase.addWeather(weatherId, weather);
