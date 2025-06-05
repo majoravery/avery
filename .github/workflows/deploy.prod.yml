@@ -45,9 +45,28 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git switch --orphan live-temp
-          git rm -rf .
-          cp -r build/* .
+          git fetch origin live
+          git checkout live
+
+          # Remove all files from live branch except .git directory
+          find . -mindepth 1 -maxdepth 1 -not -path "./.git" -exec rm -rf {} \;
+
+          # Checkout build directory from main branch
+          git checkout main -- build
+
+          # Move contents of build directory to root
+          mv build/* .
+          rm -rf build
+
+          # Commit and push changes
           git add .
-          git commit -m "Deploy build output to `live` branch"
-          git push -f origin live-temp:live
+          git commit -m "Deploy: $(git rev-parse --short main)" || echo "No changes to commit"
+          git push origin live
+
+          # from chatgpt
+          # git switch --orphan live-temp
+          # git rm -rf .
+          # cp -r build/* .
+          # git add .
+          # git commit -m "Deploy build output to `live` branch"
+          # git push -f origin live-temp:live
