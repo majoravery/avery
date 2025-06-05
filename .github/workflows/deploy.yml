@@ -1,0 +1,39 @@
+name: Deploy to Github pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.20.5'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Svelte project
+        run: npm run build
+
+      - name: Deploy to live branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git switch --orphan live-temp
+          git rm -rf .
+          cp -r build/* .
+          git add .
+          git commit -m "Deploy build output to `live` branch"
+          git push -f origin live-temp:live

@@ -34,7 +34,6 @@
 	"dependencies": {
 		"@supabase/supabase-js": "^2.49.4",
 		"gsap": "^3.12.7",
-		"log4js": "^6.9.1",
 		"nice-color-palettes": "^4.0.0"
 	}
 }
