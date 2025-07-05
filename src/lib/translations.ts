@@ -231,6 +231,26 @@ export const translations: Translations = {
  */
 export const translationsRecently: Record<number, Translations>[] = [
 	{
+		20250412: {
+			en: {
+				'recently.extraContent':
+					"Capped off four fun weeks of spring break with a 3D2N solo cycling trip along the Shimanami Kaido, during which I truly questioned the purpose of life if not to enjoy activities like these in nature and just pure <i>freedom</i>? I'd be lying if I said that I'll have no trouble reintegrating into the corporate grind once this career break ends, but that'll be future Avery's problem–for now, I'll just enjoy this lovely salted ice cream with the exceptional views from Mt Kiro..."
+			},
+			zh: {
+				'recently.extraContent':
+					'结束了四周愉快的春假，我进行了一次3天2夜的独自骑行，沿着濑户内海道，一路上不禁思考，如果人生的意义不是为了在大自然中享受这样的活动和纯粹的<i>自由</i>，那又是什么？如果我说这段职业间歇结束后能轻松地重新融入职场，那我就撒谎了。但那是未来Avery要面对的问题——现在，我只想一边品尝这美妙的咸味冰淇淋，一边欣赏Mt Kiro绝佳的风景…'
+			},
+			jp: {
+				'recently.extraContent':
+					'春休みの充実した4週間を3日2夜のしまなみ海道ソロサイクリングで締めくくったんだけど、その間、大自然の中でこんなアクティビティと純粋な<i>自由</i>を味わうために生きてるんじゃないかって、本気で人生の目的を考えちゃった。キャリアブレイクが終わったらコーポレートの世界に再び溶け込むのが楽勝だなんて言ったら嘘になるけど、それは未来のAveryの問題――今はただ、この絶景が広がるMt Kiroで塩味のアイスクリームを楽しむだけ…'
+			},
+			de: {
+				'recently.extraContent':
+					'Ich habe vier großartige Wochen Frühjahrsferien mit einem 3T2N-Solo-Radtrip entlang des Shimanami Kaido abgeschlossen – dabei konnte ich nicht anders, als mich zu fragen, ob der Sinn des Lebens nicht einfach darin besteht, solche Aktivitäten in der Natur und pure <i>Freiheit</i> zu genießen. Ich würde lügen, wenn ich behauptete, später ohne Probleme wieder in den Corporate-Alltag zurückzufinden, aber das ist ein Problem für das zukünftige Avery–jetzt genieße ich erst mal dieses köstliche gesalzene Eis mit dem atemberaubenden Ausblick vom Mt Kiro…'
+			}
+		}
+	},
+	{
 		20250119: {
 			en: {
 				'recently.extraContent':
