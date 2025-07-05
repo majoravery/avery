@@ -5,8 +5,8 @@
 	import Eyebrows from '$lib/components/Eyebrows.svelte';
 	import listeningTo from '$lib/images/listening-to.png';
 
-	const title = 'Badonkadonk Podcast';
-	const artist = 'Daniel Y. Wilson & Yuuki';
+	const title = 'LONGINESS REMIX';
+	const artist = 'SugLawd Familiar, CHICO CARLITO, Awich';
 
 	let artistEl: HTMLElement;
 
