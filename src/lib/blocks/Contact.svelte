@@ -8,6 +8,12 @@
 	<Eyebrows>{$t('contact.title')}</Eyebrows>
 	<div class="contacts">
 		<div class="contact">
+			<a href="https://www.instagram.com/shokudoclub/" target="_blank">
+				<span class="method">{$t('contact.shokudoclub')}</span>
+				<span class="arrow"><img src={arrowTopRight} alt="{$t('contact.shokudoclubAlt')}}" /></span>
+			</a>
+		</div>
+		<div class="contact">
 			<a href="mailto:vivianaverylim@gmail.com">
 				<span class="method">{$t('contact.email')}</span>
 				<span class="arrow"><img src={arrowTopRight} alt="{$t('contact.emailAlt')}}" /></span>

@@ -4,7 +4,7 @@
 	import { pageviews, visitors } from '$lib/stores/pageview';
 	import Eyebrows from '$lib/components/Eyebrows.svelte';
 
-	const LAST_UPDATED = new Date('19 Jan 2025');
+	const LAST_UPDATED = new Date('5 Jul 2025');
 	const TODAY = new Date();
 
 	function pad(number: number) {

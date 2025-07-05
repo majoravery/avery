@@ -3,7 +3,7 @@
 	import arrowTopRight from '$lib/svg/arrow-up-right.svg';
 	import ExtraContent from '$lib/components/ExtraContent.svelte';
 	import Eyebrows from '$lib/components/Eyebrows.svelte';
-	import photos from '$lib/images/photos.png';
+	import whatsaltareyou from '$lib/images/whatsaltareyou.png';
 
 	export let expand: () => void;
 	export let expanded: boolean;
@@ -14,16 +14,22 @@
 	<Eyebrows>{$t('projectShowcase.title')}</Eyebrows>
 
 	<div class="screenshot preview">
-		<img src={photos} alt={$t('projectShowcase.imageAlt', { website: 'photos.averylim.com' })} />
+		<img
+			src={whatsaltareyou}
+			alt={$t('projectShowcase.imageAlt', { website: 'whatsaltareyou.com' })}
+		/>
 	</div>
 
 	<ExtraContent {expanded}>
-		<img src={photos} alt={$t('projectShowcase.imageAlt', { website: 'photos.averylim.com' })} />
+		<img
+			src={whatsaltareyou}
+			alt={$t('projectShowcase.imageAlt', { website: 'whatsaltareyou.com' })}
+		/>
 		<p>
 			{@html $t('projectShowcase.extraContent')}
 		</p>
 		<div class="cta">
-			<a href="https://photos.averylim.com" target="_blank">
+			<a href="https://whatsaltareyou.co?utm_source=averylim&utm_medium=referralm" target="_blank">
 				<span class="method">{$t('projectShowcase.cta')}</span>
 				<span class="arrow"><img src={arrowTopRight} alt={$t('projectShowcase.cta')} /></span>
 			</a>
